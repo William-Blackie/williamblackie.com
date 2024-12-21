@@ -10,9 +10,8 @@ export function SocialLink({
   }: {
     className?: string
     href: string
-    srLabel: string
+    srLabel?: string
     icon: React.ComponentType<{ className?: string }>
-    ariaLabel?: string
     children?: React.ReactNode
   }) {
     return (
