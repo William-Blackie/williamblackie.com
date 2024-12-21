@@ -12,9 +12,19 @@ import logoSamaritans from '@/images/logos/samaritans.png'
 
 const projects = [
   {
+    name: "Google - DeepMind",
+    description:
+      'Developed a Django/Wagtail CMS platform to streamline content management for the Google DeepMind team.',
+    link: {
+      href: 'https://deepmind.google/',
+      label: 'deepmind.google',
+    },
+    logo: logoGoogle,
+  },
+  {
     name: 'ValeurSport',
     description:
-      'A Django and Next.JS platform to empower women in sport to get fairer pay.',
+      'Built a Django and Next.js platform to advocate for fairer pay for women in sports.',
     link: {
       href: 'http://www.app.valeursport.com',
       label: 'app.valeursport.com',
@@ -24,7 +34,7 @@ const projects = [
   {
     name: "The Doc Society",
     description:
-      'A Django/Wagtail CMS platform to help The Doc Society team to manage their content.',
+      'Created a Django/Wagtail CMS platform to enhance content management for The Doc Society team.',
     link: {
       href: 'https://docsociety.org/',
       label: 'docsociety.org',
@@ -32,19 +42,9 @@ const projects = [
     logo: logoDocSoc,
   },
   {
-    name: "Google - Deepmind",
+    name: 'Torchbox - RFF.org',
     description:
-      'A Django/Wagtail CMS platform to help Google Deepmind team to manage their content.',
-    link: {
-      href: 'https://deepmind.google/',
-      label: 'deepmind.google',
-    },
-    logo: logoGoogle,
-  },
-  {
-    name: 'Torchbox - RFF.org ',
-    description:
-      'A Django/Wagtail CMS platform to help RFF.org team to manage their content.',
+      'Implemented a Django/Wagtail CMS platform to support content management for RFF.org.',
     link: {
       href: 'https://rff.org/',
       label: 'rff.org',
@@ -52,9 +52,9 @@ const projects = [
     logo: logoRff,
   },
   {
-    name: 'Torchbox - The National Archive',
+    name: 'Torchbox - The National Archives',
     description:
-      'A Django/Wagtail CMS platform to help RFF.org team to manage their content.',
+      'Developed a Django/Wagtail CMS platform to facilitate content management for The National Archives.',
     link: {
       href: 'https://www.nationalarchives.gov.uk/',
       label: 'www.nationalarchives.gov.uk',
@@ -62,9 +62,9 @@ const projects = [
     logo: logoTna,
   },
   {
-    name: 'Torchbox - Samaritans UK ',
+    name: 'Torchbox - Samaritans UK',
     description:
-      'A Django/Wagtail CMS platform to help samaritans.org team to manage their content.',
+      'Built a Django/Wagtail CMS platform to improve content management for Samaritans UK.',
     link: {
       href: 'https://www.samaritans.org/',
       label: 'www.samaritans.org',
@@ -86,14 +86,14 @@ function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 
 export const metadata: Metadata = {
   title: 'Projects',
-  description: 'Things I’ve made trying to put my dent in the universe.',
+  description: 'Showcasing my contributions to various impactful projects.',
 }
 
 export default function Projects() {
   return (
     <SimpleLayout
-      title="Things I’ve made trying to put my dent in the universe."
-      intro="I’ve worked on tons of projects over the years but these are the ones that I’m most proud of."
+      title="Showcasing my contributions to various impactful projects."
+      intro="Over the years, I've had the privilege to work on numerous projects. Here are some that stand out."
     >
       <ul
         role="list"

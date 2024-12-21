@@ -1,35 +1,10 @@
 import { type Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
-import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
 import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons'
 import portraitImage from '@/images/photos/image-3.jpg'
-
-function SocialLink({
-  className,
-  href,
-  children,
-  icon: Icon,
-}: {
-  className?: string
-  href: string
-  icon: React.ComponentType<{ className?: string }>
-  children: React.ReactNode
-}) {
-  return (
-    <li className={clsx(className, 'flex')}>
-      <Link
-        href={href}
-        className="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
-      >
-        <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500" />
-        <span className="ml-4">{children}</span>
-      </Link>
-    </li>
-  )
-}
+import { SocialLink } from '@/components/SocialLink'
 
 function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -68,18 +43,18 @@ export default function About() {
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
               I&apos;m a Software Engineer and Freelancer based in Manchester/Bristol, UK.
-              Before freelancing I received first class honours in BSc Computer Science from the University of
+              Before freelancing, I received first-class honours in BSc Computer Science from the University of
               the West of England.
             </p>
             <p>
-              After graduating I worked at Torchbox, a digital agency in Bristol, where I worked with some the of the UK&apos;s largest charities and non-profits.
-              I lead projects for the NHS, Samaritans and even ran incident response for the whole company on occasion.
+              After graduating, I worked at Torchbox, a digital agency in Bristol, where I worked with some of the UK&apos;s largest charities and non-profits.
+              I led projects for the NHS, Samaritans, and even ran incident response for the whole company on occasion.
             </p>
             <p>
-              I then moved to Manchester and started freelancing, working with clients like the the DocSociety, ValeurSport, and Google.
+              I then moved to Manchester and started freelancing, working with clients like the DocSociety, ValeurSport, and Google.
             </p>
             <p>
-              I have a strong background in creating fullstack web applications from the smallest non-profits and to the largest tech giants.
+              I have a strong background in creating full-stack web applications from the smallest non-profits to the largest tech giants.
               I&apos;m currently exploring the world of freelancing and contracting, so if you have a project you&apos;d like to discuss, feel free to reach
               out.
             </p>
@@ -88,17 +63,17 @@ export default function About() {
               and scale their products.
             </p>
             <p> 
-              Outside of work, I like to climb, ride my motorcyle and spend way too much money on nice food. Often
+              Outside of work, I like to climb, ride my motorcycle, and spend way too much money on nice food. Often
               found in nice coffee shops and hunting for vintage.
             </p>
           </div>
         </div>
         <div className="lg:pl-20">
           <ul role="list">
-            <SocialLink href="#" icon={GitHubIcon} className="mt-4">
+            <SocialLink href="https://github.com/William-Blackie" icon={GitHubIcon} className="mt-4">
               Follow on GitHub
             </SocialLink>
-            <SocialLink href="#" icon={LinkedInIcon} className="mt-4">
+            <SocialLink href="https://www.linkedin.com/in/william-blackie/" icon={LinkedInIcon} className="mt-4">
               Follow on LinkedIn
             </SocialLink>
             <SocialLink

@@ -1,9 +1,10 @@
 import Image, { type ImageProps } from 'next/image'
-import Link from 'next/link'
 import clsx from 'clsx'
 import React from 'react'
 import { Container } from '@/components/Container'
-import { GitHubIcon, LinkedInIcon, MailIcon } from '@/components/SocialIcons'
+import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons'
+import { BriefcaseIcon, MailIcon } from '@/components/GeneralIcons'
+import { SocialLink } from '@/components/SocialLink'
 import logoDeveloperfy from '@/images/logos/developerfy.svg'
 import logoGoogle from '@/images/logos/google.svg'
 import logoTorchbox from '@/images/logos/tbx.svg'
@@ -13,41 +14,6 @@ import image3 from '@/images/photos/image-3.jpg'
 import image4 from '@/images/photos/image-4.jpg'
 import image5 from '@/images/photos/image-5.jpg'
 
-function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        d="M2.75 9.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-      />
-      <path
-        d="M3 14.25h6.249c.484 0 .952-.002 1.316.319l.777.682a.996.996 0 0 0 1.316 0l.777-.682c.364-.32.832-.319 1.316-.319H21M8.75 6.5V4.75a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V6.5"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
-      />
-    </svg>
-  )
-}
-
-function SocialLink({
-  icon: Icon,
-  ...props
-}: React.ComponentPropsWithoutRef<typeof Link> & {
-  icon: React.ComponentType<{ className?: string }>
-}) {
-  return (
-    <Link className="group -m-1 p-1" {...props}>
-      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
-    </Link>
-  )
-}
 
 interface Role {
   company: string
@@ -82,7 +48,7 @@ function Role({ role }: { role: Role }) {
         </dd>
         <dt className="sr-only">Date</dt>
         <dd
-          className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
+          className="ml-auto text-xs text-zinc-500"
           aria-label={`${startLabel} until ${endLabel}`}
         >
           <time dateTime={startDate}>{startLabel}</time>{' '}
@@ -98,10 +64,10 @@ function Resume() {
   const resume: Array<Role> = [
     {
       company: 'Google',
-      title: 'Software Engineer- Contract',
+      title: 'Software Engineer - Contract',
       logo: logoGoogle,
       start: 'Jul 2024',
-      end:  'Dec 2024',
+      end: 'Dec 2024',
     },
     {
       company: 'Developerfy',
@@ -126,7 +92,7 @@ function Resume() {
     <div className="mx-auto max-w-2xl rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Work</span>
+        <span className="ml-3">Work Experience</span>
       </h2>
       <ol className="mt-6 space-y-4">
         {resume.map((role, roleIndex) => (
@@ -164,7 +130,7 @@ function Photos() {
   )
 }
 
-export default async function Home() {
+export default function Home() {
   return (
     <>
       <Container className="mt-9">
@@ -173,30 +139,32 @@ export default async function Home() {
             William Blackie
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            Hey I&apos;m William, a Software Engineer and Freelancer based in Manchester/Bristol,
-            UK. I have a strong background in creating fullstack web applications from the smallest non-profits and to the largest tech giants.
+            Hey, I&apos;m William, a Software Engineer and Freelancer based in Manchester/Bristol, UK. I specialize in creating full-stack web applications for a diverse range of clients, from small non-profits to large tech giants.
           </p>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I&apos;m currently exploring the world of freelancing and contracting, so if you have a project you&apos;d like to discuss, feel free to reach out.
+            I&apos;m currently exploring the world of freelancing and contracting. If you have a project you&apos;d like to discuss, feel free to reach out.
           </p>
-          <p className='mt-6 text-base text-zinc-600 dark:text-zinc-400'>
-            Currently available for work from January 2024. Say hello at <a href="mailto:will@developerfy.com">will@developerfy.com</a>.
+          <p className="mt-6 font-semibold text-zinc-600 dark:text-zinc-400">
+            Open for Work
           </p>
+          <p className="text-base text-zinc-600 dark:text-zinc-400">
+            Currently available for work from January 2024. Say hello at <a href="mailto:will@developerfy.com" className="font-medium text-zinc-500 underline hover:text-teal-500 dark:hover:text-teal-500">will@developerfy.com</a>.
+          </p>
+
           <div className="mt-6 flex gap-6">
-          <SocialLink
+            <SocialLink
               href="mailto:will@developerfy.com"
-              aria-label="Send William an email"
+              srLabel="Send me an email"
               icon={MailIcon}
-            >
-            </SocialLink>
+            />
             <SocialLink
               href="https://github.com/William-Blackie"
-              aria-label="Follow on GitHub"
+              srLabel="Follow me GitHub"
               icon={GitHubIcon}
             />
             <SocialLink
               href="https://www.linkedin.com/in/william-blackie/"
-              aria-label="Follow on LinkedIn"
+              srLabel="Follow me LinkedIn"
               icon={LinkedInIcon}
             />
           </div>
