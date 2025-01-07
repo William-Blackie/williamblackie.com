@@ -131,6 +131,11 @@ function Photos() {
 }
 
 export default function Home() {
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ]
+
   return (
     <>
       <Container className="mt-9">
@@ -148,7 +153,7 @@ export default function Home() {
             Open for Work
           </p>
           <p className="text-base text-zinc-600 dark:text-zinc-400">
-            Currently available for work from January 2024. Say hello at <a href="mailto:will@developerfy.com" className="font-medium text-zinc-500 underline hover:text-teal-500 dark:hover:text-teal-500">will@developerfy.com</a>.
+          Currently available for work from {`${monthNames[new Date().getMonth()]} ${new Date().getFullYear()}`}. Say hello at <a href="mailto:will@developerfy.com" className="font-medium text-zinc-500 underline hover:text-teal-500 dark:hover:text-teal-500">will@developerfy.com</a>.
           </p>
 
           <div className="mt-6 flex gap-6">
