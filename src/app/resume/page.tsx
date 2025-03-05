@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   },
 }
 
+export const dynamic = 'force-static'
+export const revalidate = 0
+
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <h2 className="mt-8 text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">

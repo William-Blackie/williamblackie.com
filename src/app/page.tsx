@@ -63,6 +63,13 @@ function Role({ role }: { role: Role }) {
 function Resume() {
   const resume: Array<Role> = [
     {
+      company: 'Torchbox',
+      title: 'Software Engineer - Contract',
+      logo: logoTorchbox,
+      start: 'Jan 2025',
+      end: 'April 2025',
+    },
+    {
       company: 'Google',
       title: 'Software Engineer - Contract',
       logo: logoGoogle,
