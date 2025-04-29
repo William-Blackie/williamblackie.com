@@ -86,6 +86,12 @@ export default function Resume() {
         <SectionTitle>Experience</SectionTitle>
         <div className="mt-4 space-y-4 text-base text-zinc-600 dark:text-zinc-400">
           <div>
+            <strong>MabyDuck</strong>, Bristol / London - Staff Engineer
+            <span className="block text-sm text-zinc-500 dark:text-zinc-400">
+              April 2025 – Current
+            </span>
+          </div>
+          <div>
             <strong>Developerfy</strong>, Bristol / Remote – Owner
             <span className="block text-sm text-zinc-500 dark:text-zinc-400">
               March 2024 – Current

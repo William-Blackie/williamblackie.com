@@ -8,6 +8,8 @@ import { SocialLink } from '@/components/SocialLink'
 import logoDeveloperfy from '@/images/logos/developerfy.svg'
 import logoGoogle from '@/images/logos/google.svg'
 import logoTorchbox from '@/images/logos/tbx.svg'
+import logoMabyDuck from '@/images/logos/mabyduck.png'
+
 import image1 from '@/images/photos/image-1.jpg'
 import image2 from '@/images/photos/image-2.jpg'
 import image3 from '@/images/photos/image-3.jpg'
@@ -62,6 +64,16 @@ function Role({ role }: { role: Role }) {
 
 function Resume() {
   const resume: Array<Role> = [
+    {
+      company: 'MabyDuck',
+      title: 'Staff Engineer - FTE',
+      logo: logoMabyDuck,
+      start: 'April 2025',
+      end: {
+        label: "Present",
+        dateTime: new Date().getFullYear().toString()
+      }
+    },
     {
       company: 'Torchbox',
       title: 'Software Engineer - Contract',
@@ -138,11 +150,6 @@ function Photos() {
 }
 
 export default function Home() {
-  const monthNames = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ]
-
   return (
     <>
       <Container className="mt-9">
@@ -151,16 +158,10 @@ export default function Home() {
             William Blackie
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            Hey, I&apos;m William, a Software Engineer and Freelancer based in Manchester/Bristol, UK. I specialize in creating full-stack web applications for a diverse range of clients, from small non-profits to large tech giants.
+            Hey, I&apos;m William, a Software Engineer and Freelancer based in Bristol, UK. I specialise in creating full-stack web applications for a diverse range of clients, from small non-profits to large tech giants.
           </p>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I&apos;m currently exploring the world of freelancing and contracting. If you have a project you&apos;d like to discuss, feel free to reach out.
-          </p>
-          <p className="mt-6 font-semibold text-zinc-600 dark:text-zinc-400">
-            Open for Work
-          </p>
-          <p className="text-base text-zinc-600 dark:text-zinc-400">
-          Currently available for work from {`${monthNames[new Date().getMonth()]} ${new Date().getFullYear()}`}. Say hello at <a href="mailto:will@developerfy.com" className="font-medium text-zinc-500 underline hover:text-teal-500 dark:hover:text-teal-500">will@developerfy.com</a>.
+            I&apos;m currently exploring start up life with <a href="https://mabyduck.com" rel='noopener noreferrer' target='_blank' className="text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500">MabyDuck</a>. If you have a project you&apos;d like to discuss, feel free to reach out.
           </p>
 
           <div className="mt-6 flex gap-6">
