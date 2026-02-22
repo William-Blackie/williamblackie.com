@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     default: 'William Blackie - Staff Engineer and Full-Stack Software Engineer',
   },
   description:
-    'I’m William, a Staff Engineer at MabyDuck based in Bristol, UK. I build full-stack products with a focus on accessibility, speed, and long-term maintainability.',
+    'I’m William, a Staff Engineer at MabyDuck based in London and Bristol, UK. I build full-stack products with a focus on accessibility, speed, and long-term maintainability.',
 }
 
 export default function RootLayout({

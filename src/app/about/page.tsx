@@ -20,7 +20,7 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'I’m William Blackie, a Staff Engineer in Bristol, UK. I build full-stack products and help teams ship with confidence.',
+    'I’m William Blackie, a Staff Engineer in London and Bristol, UK. I build full-stack products and help teams ship with confidence.',
 }
 
 export default function About() {
@@ -43,9 +43,10 @@ export default function About() {
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
-              I&apos;m a Staff Engineer at MabyDuck, based in Bristol, UK. I
-              work across product and platform engineering, helping teams ship
-              software that is reliable, maintainable, and fast to iterate on.
+              I&apos;m a Staff Engineer at MabyDuck, based in London and
+              Bristol, UK. I work across product and platform engineering,
+              helping teams ship software that is reliable, maintainable, and
+              fast to iterate on.
             </p>
             <p>
               I studied Computer Science at the University of the West of

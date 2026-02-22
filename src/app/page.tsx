@@ -158,9 +158,9 @@ export default function Home() {
             William Blackie
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I&apos;m William, a Staff Engineer based in Bristol, UK. I build
-            full-stack products and platforms, with a focus on delivering
-            reliable systems that teams can scale with confidence.
+            I&apos;m William, a Staff Engineer based in London and Bristol, UK.
+            I build full-stack products and platforms, with a focus on
+            delivering reliable systems that teams can scale with confidence.
           </p>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
             I&apos;m currently a Staff Engineer at{' '}

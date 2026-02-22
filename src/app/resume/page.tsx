@@ -29,7 +29,7 @@ export default function Resume() {
           William Blackie | Staff Engineer / Full-Stack Software Engineer
         </h1>
         <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-          Remote (Bristol, UK) | will@developerfy.com
+          Remote (London and Bristol, UK) | will@developerfy.com
         </p>
 
         <SectionTitle>About</SectionTitle>
