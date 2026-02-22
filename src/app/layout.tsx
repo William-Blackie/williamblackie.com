@@ -8,10 +8,10 @@ import '@/styles/tailwind.css'
 export const metadata: Metadata = {
   title: {
     template: '%s - William Blackie',
-    default: 'William Blackie - Software Engineer, Founder, and Freelancer',
+    default: 'William Blackie - Staff Engineer and Full-Stack Software Engineer',
   },
   description:
-    'I’m William, a FullStack Software Engineer and Freelancer based in the UK. I’m the founder of Developerfy my freelance company, where I develop accessible and ethical products.',
+    'I’m William, a Staff Engineer at MabyDuck based in Bristol, UK. I build full-stack products with a focus on accessibility, speed, and long-term maintainability.',
 }
 
 export default function RootLayout({

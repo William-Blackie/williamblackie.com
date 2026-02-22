@@ -80,6 +80,7 @@ function MobileNavigation(
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
                 <MobileNavItem href="/about">About</MobileNavItem>
                 <MobileNavItem href="/projects">Projects</MobileNavItem>
+                <MobileNavItem href="/articles">Blog</MobileNavItem>
                 <MobileNavItem href="/tech">Tech</MobileNavItem>
               </ul>
             </nav>
@@ -97,7 +98,8 @@ function NavItem({
   href: string
   children: React.ReactNode
 }) {
-  const isActive = usePathname() === href
+  const pathname = usePathname()
+  const isActive = pathname === href || pathname.startsWith(`${href}/`)
 
   return (
     <li>
@@ -125,6 +127,7 @@ function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
         <NavItem href="/about">About</NavItem>
         <NavItem href="/projects">Projects</NavItem>
+        <NavItem href="/articles">Blog</NavItem>
         <NavItem href="/tech">Tech</NavItem>
       </ul>
     </nav>

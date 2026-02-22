@@ -26,7 +26,7 @@ export default function Resume() {
     <Container className="mt-16 sm:mt-32">
       <div className="max-w-3xl">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-3xl">
-          William Blackie | Python / Django Full-Stack Software Engineer
+          William Blackie | Staff Engineer / Full-Stack Software Engineer
         </h1>
         <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
           Remote (Bristol, UK) | will@developerfy.com
@@ -34,11 +34,10 @@ export default function Resume() {
 
         <SectionTitle>About</SectionTitle>
         <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
-          Highly motivated Senior Software Developer with 5+ years of experience
-          working in fast-paced teams, designing, implementing, and
-          leading projects for high-profile UK and US clients (GOs, NGOs, large
-          enterprises). Key interests in testing (TDD, visual regression,
-          integration). Past clients include Google, Samaritans, Oxfam, and NHS.
+          Staff Engineer with experience across agency, contract, and product
+          environments. I design and deliver full-stack systems, improve
+          engineering practices, and help teams ship reliable software faster.
+          Past work includes projects for Google, NHS, and major UK charities.
         </p>
 
         <SectionTitle>Skills / Technologies</SectionTitle>
@@ -88,20 +87,18 @@ export default function Resume() {
           <div>
             <strong>MabyDuck</strong>, Bristol / London - Staff Engineer
             <span className="block text-sm text-zinc-500 dark:text-zinc-400">
-              April 2025 – Current
+              April 2025 – Present
             </span>
           </div>
           <div>
-            <strong>Developerfy</strong>, Bristol / Remote – Owner
+            <strong>Developerfy</strong>, Bristol / Remote – Founder
             <span className="block text-sm text-zinc-500 dark:text-zinc-400">
-              March 2024 – Current
+              March 2024 – Present
             </span>
             <ul className="list-disc list-inside mt-1">
-              <li>Leading/managing development projects with timely delivery</li>
-              <li>
-                Providing technical consultancy for enhanced digital presence
-              </li>
-              <li>Coordinating with clients for tailored solutions</li>
+              <li>Now focused on selective advisory and consulting engagements</li>
+              <li>Delivered full-stack product development for startup teams</li>
+              <li>Provided technical direction, architecture, and delivery support</li>
             </ul>
           </div>
           <div>

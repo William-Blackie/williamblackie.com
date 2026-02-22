@@ -35,7 +35,7 @@ function Tool({
 }
 
 export const metadata = {
-  title: "Tech'",
+  title: 'Tech',
   description: 'Software I use.',
 }
 
@@ -46,7 +46,7 @@ export default function Tech() {
       intro="I get asked a lot about the things I use to build software, stay productive. Here’s a big list of all of my favorite stuff."
     >
       <div className="space-y-20">
-      <ToolsSection title="Tech' stack">
+        <ToolsSection title="Tech stack">
           <Tool title="Python: Wagtail CMS, Django, FastAPI and Flask">
             I’ve been using Python for years and it’s my go-to language for
             building web applications, APIs, and data processing pipelines.
@@ -70,8 +70,9 @@ export default function Tech() {
         </ToolsSection>
         <ToolsSection title="Hardware">
           <Tool title="14” MacBook Pro, M3 Pro, 18GB RAM (2023)">
-            I recently transitioned to using a MacOS after being a Linux user for the last decade.
-            I still use Linux for my servers and development environments, but I’m enjoying the MacOS experience so far.
+            I recently transitioned to macOS after being a Linux user for the
+            last decade. I still use Linux for servers and development
+            environments, but I&apos;m enjoying the macOS experience so far.
           </Tool>
         </ToolsSection>
       </div>

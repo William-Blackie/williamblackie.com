@@ -19,7 +19,8 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'I’m William Blackie. I live in Bristol, UK, I code and stuff.',
+  description:
+    'I’m William Blackie, a Staff Engineer in Bristol, UK. I build full-stack products and help teams ship with confidence.',
 }
 
 export default function About() {
@@ -42,29 +43,34 @@ export default function About() {
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
-              I&apos;m a Software Engineer and Freelancer based in Manchester/Bristol, UK.
-              Before freelancing, I received first-class honours in BSc Computer Science from the University of
-              the West of England.
+              I&apos;m a Staff Engineer at MabyDuck, based in Bristol, UK. I
+              work across product and platform engineering, helping teams ship
+              software that is reliable, maintainable, and fast to iterate on.
             </p>
             <p>
-              After graduating, I worked at Torchbox, a digital agency in Bristol, where I worked with some of the UK&apos;s largest charities and non-profits.
-              I led projects for the NHS, Samaritans, and even ran incident response for the whole company on occasion.
+              I studied Computer Science at the University of the West of
+              England, graduating with first-class honours, then joined Torchbox
+              in Bristol where I delivered projects for charities and
+              public-sector organisations including NHS and Samaritans.
             </p>
             <p>
-              I then moved to Manchester and started freelancing, working with clients like the DocSociety, ValeurSport, and Google.
+              After Torchbox, I moved into freelance and contract work, building
+              products and platforms for organisations including Google,
+              Doc Society, and ValeurSport.
             </p>
             <p>
-              I have a strong background in creating full-stack web applications from the smallest non-profits to the largest tech giants.
-              I&apos;m currently exploring the world of freelancing and contracting, so if you have a project you&apos;d like to discuss, feel free to reach
-              out.
+              That path eventually led me to my current role at MabyDuck, where
+              I spend most of my time solving systems problems, improving
+              delivery practices, and mentoring engineers.
             </p>
             <p>
-              Today, I&apos;m the founder of Developerfy, my freelance agency where I help clients build
-              and scale their products.
+              I still run Developerfy for selective consulting and advisory work,
+              but my primary focus is now long-term product engineering inside
+              one team.
             </p>
-            <p> 
-              Outside of work, I like to climb, ride my motorcycle, and spend way too much money on nice food. Often
-              found in nice coffee shops and hunting for vintage.
+            <p>
+              Outside work, I climb, ride motorcycles, and spend too much money
+              on great food and coffee.
             </p>
           </div>
         </div>
