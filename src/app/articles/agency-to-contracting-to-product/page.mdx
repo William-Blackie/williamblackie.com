@@ -1,0 +1,120 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'William Blackie',
+  date: '2026-03-16',
+  title: 'Agency to contracting to product: the same engineer, different time horizon',
+  description:
+    'A practical reflection on moving from agency to contract work to product engineering, and what changed in real delivery terms.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+<ArticleLayout article={article}>
+If you compress my recent career path into a single line, it looks very neat:
+
+Torchbox agency years, then independent contracting via Developerfy, then product work at Mabyduck.
+
+Living through it felt much less like a neat staircase and much more like learning the same lessons at different speeds.
+
+The biggest change was not title. It was time horizon.
+
+## Agency years: pace, ambiguity, and communication discipline
+
+At Torchbox (2019 to 2024), I learned how to enter unfamiliar systems quickly, make progress under delivery pressure, and collaborate across design, content, strategy, and engineering without everyone melting down.
+
+Agency work forces a few useful habits:
+
+1. find constraints quickly;
+2. communicate decisions in plain English;
+3. scope for delivery, not for architectural theatre;
+4. leave projects in a better state than you found them.
+
+The most underrated skill from that period was communication under moving priorities. Agency timelines do not wait for perfect certainty. You learn to keep teams aligned while the ground shifts a bit every week.
+
+That training still shapes how I work today.
+
+## Contracting: value under uncertainty
+
+I started Developerfy in March 2024 and moved into freelance/contract delivery, including a Google contract later that year.
+
+Contracting sharpened a different muscle: creating value quickly in systems you did not design, with limited runway for long onboarding cycles.
+
+You need to reduce ambiguity fast:
+
+- what matters now;
+- what risk is acceptable;
+- what change is reversible;
+- what must be documented for handover.
+
+I became much stricter about keeping changes explicit and recoverable. If future engineers cannot understand intent in one pass, the work is not done, even if the ticket is "complete".
+
+Contracting also improved decision sharpness. You cannot afford months of "we’re still exploring" energy. You need pragmatic direction with incomplete information, plus honest trade-off communication.
+
+## Product work: compounding outcomes over months, not sprints
+
+Moving into full-time product engineering at Mabyduck in 2025 changed the scoring model.
+
+You still need pace. But you now live with the long tail of your own decisions. That changes what "good" looks like.
+
+The questions I ask now are different:
+
+1. does this decision reduce repeated incidents over the next quarter;
+2. does this make delivery easier for the whole team, not just this feature;
+3. can we reverse course safely if assumptions change;
+4. are we improving reliability and speed together.
+
+Earlier in my career, I measured progress mostly by direct output. I still love shipping, but now I care more about whether the team ships predictably without heroics.
+
+That has been the most valuable shift for me.
+
+## What stayed the same across every chapter
+
+Despite the context changes, a few principles never changed:
+
+1. Clarity beats cleverness.
+2. Accessible, reliable software is non-negotiable.
+3. Good scope is ambitious and controlled, not maximal.
+4. Most engineering pain is communication pain in technical clothing.
+
+Those principles worked in agency projects, in contracts, and in product ownership.
+
+## Why I’m enjoying product work more right now
+
+Product engineering has given me room to fix root causes instead of repeatedly treating symptoms. That is deeply satisfying if you care about long-term delivery quality.
+
+It also left me with more energy for side projects because less weekly energy gets burned on avoidable operational noise.
+
+Turns out calm systems are not just good for uptime; they are good for human energy as well.
+
+## Advice I’d give engineers making a similar move
+
+If you move from agency to contracting to product (or any variation), don’t discard earlier strengths just because the context changed.
+
+Keep:
+
+1. agency pace and collaboration discipline;
+2. contracting decisiveness and pragmatic scoping;
+3. product durability mindset and compounding quality focus.
+
+That blend has been the strongest version of engineering for me so far.
+
+## Final thought
+
+Career transitions are often framed as reinventions.
+
+Mine felt more like lens changes.
+
+Same core values, same enjoyment of building useful things, better understanding of where speed helps and where speed becomes expensive.
+
+And yes, I still enjoy a properly gnarly debugging session, provided it wraps before Friday dinner plans.
+
+## References
+
+- [DORA research](https://dora.dev/)
+- [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
+- [Architecture Decision Records](https://adr.github.io/)
+</ArticleLayout>
