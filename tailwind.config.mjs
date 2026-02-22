@@ -1,9 +1,7 @@
 import typographyPlugin from '@tailwindcss/typography'
-import { type Config } from 'tailwindcss'
+import typographyStyles from './typography.mjs'
 
-import typographyStyles from './typography'
-
-export default {
+const config = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: 'selector',
   plugins: [typographyPlugin],
@@ -25,4 +23,6 @@ export default {
     },
     typography: typographyStyles,
   },
-} satisfies Config
+}
+
+export default config
