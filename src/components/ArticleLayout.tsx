@@ -1,4 +1,5 @@
 import { Container } from '@/components/Container'
+import { Comments } from '@/components/Comments'
 import { Prose } from '@/components/Prose'
 import { formatDate } from '@/lib/formatDate'
 
@@ -30,6 +31,7 @@ export function ArticleLayout({
           </div>
         </header>
         <Prose className="mt-8">{children}</Prose>
+        <Comments />
       </article>
     </Container>
   )
