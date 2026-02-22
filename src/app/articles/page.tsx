@@ -8,7 +8,7 @@ import { getAllArticles } from '@/lib/articles'
 export const metadata: Metadata = {
   title: 'Blog',
   description:
-    'Writing about software engineering, product delivery, and lessons learned from agency, freelance, and startup work.',
+    'Practical notes on engineering, delivery, and building products over time.',
 }
 
 export default async function Articles() {
@@ -16,8 +16,8 @@ export default async function Articles() {
 
   return (
     <SimpleLayout
-      title="Writing about engineering and product work."
-      intro="Thoughts from shipping software across agencies, consulting, and startup teams."
+      title="Notes on engineering and delivery."
+      intro="Practical write-ups from agency, freelance, and product work."
     >
       <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
         <div className="flex max-w-3xl flex-col space-y-16">

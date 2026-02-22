@@ -6,12 +6,32 @@ import { Layout } from '@/components/Layout'
 import '@/styles/tailwind.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://williamblackie.com'),
   title: {
     template: '%s - William Blackie',
-    default: 'William Blackie - Staff Engineer and Full-Stack Software Engineer',
+    default: 'William Blackie - Full-stack Engineer',
   },
   description:
-    'I’m William, a Staff Engineer at MabyDuck based in London and Bristol, UK. I build full-stack products with a focus on accessibility, speed, and long-term maintainability.',
+    "I'm William Blackie, a Full-stack Engineer building product and platform software in London and Bristol, UK.",
+  openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    siteName: 'William Blackie',
+    title: 'William Blackie - Full-stack Engineer',
+    description:
+      'Full-stack engineer building product and platform software in London and Bristol, UK.',
+    url: 'https://williamblackie.com',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'William Blackie - Full-stack Engineer',
+    description:
+      'Full-stack engineer building product and platform software in London and Bristol, UK.',
+  },
+  icons: {
+    icon: [{ url: '/favicon.ico' }, { url: '/icon.jpg' }],
+    apple: '/apple-icon.jpg',
+  },
 }
 
 export default function RootLayout({
