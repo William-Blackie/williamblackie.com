@@ -16,7 +16,7 @@ import {
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
-import avatarImage from '@/images/portrait.png'
+import avatarImage from '@/images/photos/image-3.jpg'
 import { CloseIcon, ChevronDownIcon, MoonIcon, SunIcon } from '@/components/GeneralIcons'
 
 

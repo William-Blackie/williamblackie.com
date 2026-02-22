@@ -1,5 +1,6 @@
 import { type Metadata } from 'next'
 import Image from 'next/image'
+import { type ImageProps } from 'next/image'
 
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
@@ -9,12 +10,35 @@ import logoRff from '@/images/logos/rff.svg'
 import logoDocSoc from '@/images/logos/docsoc.png'
 import logoTna from '@/images/logos/tna.png'
 import logoSamaritans from '@/images/logos/samaritans.png'
+import logoMabyDuck from '@/images/logos/mabyduck.png'
+import { GitHubIcon } from '@/components/SocialIcons'
 
-const projects = [
+interface Project {
+  name: string
+  description: string
+  link: {
+    href: string
+    label: string
+  }
+  logo?: ImageProps['src']
+  icon?: React.ComponentType<React.ComponentPropsWithoutRef<'svg'>>
+}
+
+const clientProjects: Array<Project> = [
+  {
+    name: 'MabyDuck',
+    description:
+      'Staff Engineer focused on product and platform delivery, helping the team ship quickly without sacrificing reliability.',
+    link: {
+      href: 'https://mabyduck.com',
+      label: 'mabyduck.com',
+    },
+    logo: logoMabyDuck,
+  },
   {
     name: "Google - DeepMind",
     description:
-      'Developed a Django/Wagtail CMS platform to streamline content management for the Google DeepMind team.',
+      'Delivered backend and platform work on Django/Wagtail systems, including deployment and delivery improvements.',
     link: {
       href: 'https://deepmind.google/',
       label: 'deepmind.google',
@@ -24,7 +48,7 @@ const projects = [
   {
     name: 'ValeurSport',
     description:
-      'Built a Django and Next.js platform to advocate for fairer pay for women in sports.',
+      'Built a Django and Next.js platform supporting fair pay advocacy in women&apos;s sport.',
     link: {
       href: 'http://www.app.valeursport.com',
       label: 'app.valeursport.com',
@@ -32,9 +56,9 @@ const projects = [
     logo: logoValeurSport,
   },
   {
-    name: "The Doc Society",
+    name: 'The Doc Society',
     description:
-      'Created a Django/Wagtail CMS platform to enhance content management for The Doc Society team.',
+      'Built and delivered Django/Wagtail CMS work to improve publishing workflows for editorial teams.',
     link: {
       href: 'https://docsociety.org/',
       label: 'docsociety.org',
@@ -42,9 +66,9 @@ const projects = [
     logo: logoDocSoc,
   },
   {
-    name: 'Torchbox - RFF.org',
+    name: 'Resource for the Future',
     description:
-      'Implemented a Django/Wagtail CMS platform to support content management for RFF.org.',
+      'Led delivery work on Django/Wagtail architecture and implementation for a large policy/research platform.',
     link: {
       href: 'https://rff.org/',
       label: 'rff.org',
@@ -52,12 +76,12 @@ const projects = [
     logo: logoRff,
   },
   {
-    name: 'Torchbox - The National Archives',
+    name: 'The National Archives',
     description:
-      'Developed a Django/Wagtail CMS platform to facilitate content management for The National Archives.',
+      'Contributed to nationalarchives.gov.uk delivery through the `ds-wagtail` platform with broad frontend/backend changes.',
     link: {
-      href: 'https://www.nationalarchives.gov.uk/',
-      label: 'www.nationalarchives.gov.uk',
+      href: 'https://github.com/nationalarchives/ds-wagtail',
+      label: 'github.com/nationalarchives/ds-wagtail',
     },
     logo: logoTna,
   },
@@ -70,6 +94,79 @@ const projects = [
       label: 'www.samaritans.org',
     },
     logo: logoSamaritans,
+  },
+]
+
+const openSourceContributions: Array<Project> = [
+  {
+    name: 'lazydjango',
+    description:
+      'A keyboard-first TUI for Django projects to inspect state, run workflows, and manage data/snapshots.',
+    link: {
+      href: 'https://github.com/William-Blackie/lazydjango',
+      label: 'github.com/William-Blackie/lazydjango',
+    },
+    icon: GitHubIcon,
+  },
+  {
+    name: 'chromeappcap',
+    description:
+      'CLI for polished app-window screenshots with native macOS capture and Playwright fallback for cross-platform use.',
+    link: {
+      href: 'https://github.com/William-Blackie/chromeappcap',
+      label: 'github.com/William-Blackie/chromeappcap',
+    },
+    icon: GitHubIcon,
+  },
+  {
+    name: 'django-storybook',
+    description:
+      'Published package for integrating Storybook-style component workflows into Django projects.',
+    link: {
+      href: 'https://github.com/William-Blackie/django_storybook',
+      label: 'github.com/William-Blackie/django_storybook',
+    },
+    icon: GitHubIcon,
+  },
+  {
+    name: 'wagtail/wagtail.org',
+    description:
+      'Contributed feature and frontend work via PRs to Wagtail&apos;s official website repository.',
+    link: {
+      href: 'https://github.com/wagtail/wagtail.org/pulls?q=is%3Apr+author%3AWilliam-Blackie',
+      label: 'PRs by William-Blackie',
+    },
+    icon: GitHubIcon,
+  },
+  {
+    name: 'nationalarchives/ds-wagtail',
+    description:
+      'High-volume contribution history across page templates, interaction/UI behavior, and content-model delivery.',
+    link: {
+      href: 'https://github.com/nationalarchives/ds-wagtail/pulls?q=is%3Apr+author%3AWilliam-Blackie',
+      label: 'PRs by William-Blackie',
+    },
+    icon: GitHubIcon,
+  },
+  {
+    name: 'wagtail/wagtail',
+    description:
+      'Core OSS contribution to Wagtail CMS, including a merged change to search-query normalisation behavior.',
+    link: {
+      href: 'https://github.com/wagtail/wagtail/pulls?q=is%3Apr+author%3AWilliam-Blackie',
+      label: 'PRs by William-Blackie',
+    },
+    icon: GitHubIcon,
+  },
+  {
+    name: 'jazzband/django-two-factor-auth',
+    description:
+      'Community contribution to authentication docs and setup guidance in a widely used Django security package.',
+    link: {
+      href: 'https://github.com/jazzband/django-two-factor-auth/pulls?q=is%3Apr+author%3AWilliam-Blackie',
+      label: 'PRs by William-Blackie',
+    },
+    icon: GitHubIcon,
   },
 ]
 
@@ -86,40 +183,76 @@ function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 
 export const metadata: Metadata = {
   title: 'Projects',
-  description: 'Showcasing my contributions to various impactful projects.',
+  description:
+    'Client delivery highlights and selected open-source contributions from my public GitHub history.',
 }
 
-export default function Projects() {
+function ProjectGrid({ projects }: { projects: Array<Project> }) {
   return (
-    <SimpleLayout
-      title="Showcasing my contributions to various impactful projects."
-      intro="Over the years, I've had the privilege to work on numerous projects. Here are some that stand out."
+    <ul
+      role="list"
+      className="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3"
     >
-      <ul
-        role="list"
-        className="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3"
-      >
-        {projects.map((project) => (
-          <Card as="li" key={project.name}>
-            <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+      {projects.map((project) => (
+        <Card as="li" key={project.name}>
+          <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+            {project.logo ? (
               <Image
                 src={project.logo}
                 alt=""
                 className="h-8 w-8"
                 unoptimized
               />
-            </div>
-            <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
-              <Card.Link href={project.link.href}>{project.name}</Card.Link>
-            </h2>
-            <Card.Description>{project.description}</Card.Description>
-            <p className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-teal-500 dark:text-zinc-200">
-              <LinkIcon className="h-6 w-6 flex-none" />
-              <span className="ml-2">{project.link.label}</span>
-            </p>
-          </Card>
-        ))}
-      </ul>
+            ) : project.icon ? (
+              <project.icon className="h-8 w-8 fill-zinc-600 dark:fill-zinc-300" />
+            ) : null}
+          </div>
+          <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
+            <Card.Link href={project.link.href}>{project.name}</Card.Link>
+          </h2>
+          <Card.Description>{project.description}</Card.Description>
+          <p className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-teal-500 dark:text-zinc-200">
+            <LinkIcon className="h-6 w-6 flex-none" />
+            <span className="ml-2">{project.link.label}</span>
+          </p>
+        </Card>
+      ))}
+    </ul>
+  )
+}
+
+export default function Projects() {
+  return (
+    <SimpleLayout
+      title="Client outcomes and open-source contributions."
+      intro="A mix of product/platform work for high-profile teams and selected repositories I&apos;ve contributed to across GitHub."
+    >
+      <div className="space-y-24">
+        <section>
+          <h2 className="text-xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+            Client and Product Work
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
+            Projects delivered across startup, agency, and contract
+            engagements, including current work at MabyDuck.
+          </p>
+          <div className="mt-10">
+            <ProjectGrid projects={clientProjects} />
+          </div>
+        </section>
+        <section>
+          <h2 className="text-xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+            Open-Source Contributions
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
+            Selected repositories from my public GitHub history, including both
+            projects I own and projects I contribute to.
+          </p>
+          <div className="mt-10">
+            <ProjectGrid projects={openSourceContributions} />
+          </div>
+        </section>
+      </div>
     </SimpleLayout>
   )
 }
