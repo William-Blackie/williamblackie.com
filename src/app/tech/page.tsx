@@ -36,43 +36,62 @@ function Tool({
 
 export const metadata = {
   title: 'Tech',
-  description: 'Software I use.',
+  description: 'Tools I use each week to ship product and platform work.',
 }
 
 export default function Tech() {
   return (
     <SimpleLayout
-      title="Software I use, gadgets I love, and other things I recommend."
-      intro="I get asked a lot about the things I use to build software, stay productive. Here’s a big list of all of my favorite stuff."
+      title="Tools I use every week."
+      intro="The stack and setup I rely on for day-to-day delivery."
     >
       <div className="space-y-20">
-        <ToolsSection title="Tech stack">
-          <Tool title="Python: Wagtail CMS, Django, FastAPI and Flask">
-            I’ve been using Python for years and it’s my go-to language for
-            building web applications, APIs, and data processing pipelines.
+        <ToolsSection title="Core Stack">
+          <Tool title="Backend: Python, Django, Wagtail and DRF">
+            Most backend work is Python-first. Django and Wagtail for product
+            and CMS-heavy systems, with DRF for API services.
           </Tool>
-          <Tool title="JavaScript: React, Next.JS and Vanilla">
-            I use JavaScript for building web applications, and I’m a big fan of
-            TypeScript for larger projects.
+          <Tool title="Frontend: TypeScript, React, Next.js, HTMX and Webpack">
+            React and Next.js for application work, plus HTMX when
+            server-rendered interactions are faster and simpler.
           </Tool>
-          <Tool title="Styling: Sass, CSS and Tailwind">
-            I’ve been using Tailwind CSS for a while now and I love how it
-            allows me to build beautiful, responsive designs quickly.
+          <Tool title="Data and platform: PostgreSQL, Redis, RQ and Stripe">
+            PostgreSQL and Redis for core data and queue workflows, plus Stripe
+            for billing systems.
           </Tool>
-          <Tool title="Database: PostgreSQL, SQLite and Redis">
-            I use PostgreSQL for most of my projects, but I also use SQLite for
-            smaller projects and Redis for caching.
+          <Tool title="Quality and delivery: Pytest, Ruff, ESLint, Stylelint, Prettier">
+            Fast feedback loops through testing, linting, and formatting checks
+            to keep quality high without blocking delivery.
           </Tool>
-          <Tool title="DevOps: Docker, Linux, AWS, Heroku, fly.io and Netlify">
-            I use Docker for containerization, Kubernetes for orchestration, and
-            GitHub Actions for CI/CD.
+          <Tool title="Operational tooling: Docker, uv, GitHub Actions, Sentry and Codecov">
+            Docker for local parity, uv for Python environments, and CI with
+            coverage and error tracking.
+          </Tool>
+        </ToolsSection>
+        <ToolsSection title="Local Workflow">
+          <Tool title=".dotfiles: Zsh, tmux, Neovim, Starship, fzf and ripgrep">
+            My local setup is versioned in{' '}
+            <a
+              href="https://github.com/William-Blackie/.dotfiles"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+            >
+              github.com/William-Blackie/.dotfiles
+            </a>
+            . It keeps shell, editor, and terminal workflows consistent across
+            projects.
+          </Tool>
+          <Tool title="Support tools: Storybook, Redocly and Make-driven workflows">
+            Storybook for component work, Redocly for API checks, and Make
+            targets for repeatable commands.
           </Tool>
         </ToolsSection>
         <ToolsSection title="Hardware">
           <Tool title="14” MacBook Pro, M3 Pro, 18GB RAM (2023)">
-            I recently transitioned to macOS after being a Linux user for the
-            last decade. I still use Linux for servers and development
-            environments, but I&apos;m enjoying the macOS experience so far.
+            I use macOS for day-to-day work and Linux for server and container
+            environments. This setup has been a good balance between local speed
+            and production parity.
           </Tool>
         </ToolsSection>
       </div>

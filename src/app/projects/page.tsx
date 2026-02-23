@@ -26,9 +26,9 @@ interface Project {
 
 const clientProjects: Array<Project> = [
   {
-    name: 'MabyDuck',
+    name: 'Mabyduck',
     description:
-      'Staff Engineer focused on product and platform delivery, helping the team ship quickly without sacrificing reliability.',
+      'Product and platform delivery focused on reliability, delivery quality, and steady shipping pace.',
     link: {
       href: 'https://mabyduck.com',
       label: 'mabyduck.com',
@@ -38,7 +38,7 @@ const clientProjects: Array<Project> = [
   {
     name: "Google - DeepMind",
     description:
-      'Delivered backend and platform work on Django/Wagtail systems, including deployment and delivery improvements.',
+      'Worked on Django/Wagtail delivery for deepmind.google, including CMS structure, frontend components, search, and releases.',
     link: {
       href: 'https://deepmind.google/',
       label: 'deepmind.google',
@@ -48,7 +48,7 @@ const clientProjects: Array<Project> = [
   {
     name: 'ValeurSport',
     description:
-      'Built a Django and Next.js platform supporting fair pay advocacy in women&apos;s sport.',
+      "Built a Django and Next.js platform supporting fair-pay advocacy in women's sport, with practical editorial workflows.",
     link: {
       href: 'http://www.app.valeursport.com',
       label: 'app.valeursport.com',
@@ -58,7 +58,7 @@ const clientProjects: Array<Project> = [
   {
     name: 'The Doc Society',
     description:
-      'Built and delivered Django/Wagtail CMS work to improve publishing workflows for editorial teams.',
+      'Delivered Django/Wagtail CMS work to make publishing workflows smoother for content teams.',
     link: {
       href: 'https://docsociety.org/',
       label: 'docsociety.org',
@@ -68,7 +68,7 @@ const clientProjects: Array<Project> = [
   {
     name: 'Resource for the Future',
     description:
-      'Led delivery work on Django/Wagtail architecture and implementation for a large policy/research platform.',
+      'Led Django/Wagtail delivery for a policy and research platform with complex publishing requirements.',
     link: {
       href: 'https://rff.org/',
       label: 'rff.org',
@@ -78,17 +78,17 @@ const clientProjects: Array<Project> = [
   {
     name: 'The National Archives',
     description:
-      'Contributed to nationalarchives.gov.uk delivery through the `ds-wagtail` platform with broad frontend/backend changes.',
+      'Contributed to ds-wagtail delivery for nationalarchives.gov.uk across frontend behaviour, CMS features, and content modelling.',
     link: {
-      href: 'https://github.com/nationalarchives/ds-wagtail',
-      label: 'github.com/nationalarchives/ds-wagtail',
+      href: 'https://www.nationalarchives.gov.uk/',
+      label: 'nationalarchives.gov.uk',
     },
     logo: logoTna,
   },
   {
     name: 'Torchbox - Samaritans UK',
     description:
-      'Built a Django/Wagtail CMS platform to improve content management for Samaritans UK.',
+      'Delivered long-running Django/Wagtail improvements across content operations, donation journeys, and platform maintenance.',
     link: {
       href: 'https://www.samaritans.org/',
       label: 'www.samaritans.org',
@@ -101,7 +101,7 @@ const openSourceContributions: Array<Project> = [
   {
     name: 'lazydjango',
     description:
-      'A keyboard-first TUI for Django projects to inspect state, run workflows, and manage data/snapshots.',
+      'Keyboard-first TUI for Django projects focused on day-to-day workflows, data operations, and local tooling.',
     link: {
       href: 'https://github.com/William-Blackie/lazydjango',
       label: 'github.com/William-Blackie/lazydjango',
@@ -111,7 +111,7 @@ const openSourceContributions: Array<Project> = [
   {
     name: 'chromeappcap',
     description:
-      'CLI for polished app-window screenshots with native macOS capture and Playwright fallback for cross-platform use.',
+      'CLI for clean app-window screenshots, using native macOS capture with Playwright fallback for cross-platform use.',
     link: {
       href: 'https://github.com/William-Blackie/chromeappcap',
       label: 'github.com/William-Blackie/chromeappcap',
@@ -121,7 +121,7 @@ const openSourceContributions: Array<Project> = [
   {
     name: 'django-storybook',
     description:
-      'Published package for integrating Storybook-style component workflows into Django projects.',
+      'Package for bringing Storybook-style component workflows into Django and template-led teams.',
     link: {
       href: 'https://github.com/William-Blackie/django_storybook',
       label: 'github.com/William-Blackie/django_storybook',
@@ -131,40 +131,40 @@ const openSourceContributions: Array<Project> = [
   {
     name: 'wagtail/wagtail.org',
     description:
-      'Contributed feature and frontend work via PRs to Wagtail&apos;s official website repository.',
+      "Contributed feature and frontend work to Wagtail's main website repository.",
     link: {
-      href: 'https://github.com/wagtail/wagtail.org/pulls?q=is%3Apr+author%3AWilliam-Blackie',
-      label: 'PRs by William-Blackie',
+      href: 'https://github.com/wagtail/wagtail.org',
+      label: 'github.com/wagtail/wagtail.org',
     },
     icon: GitHubIcon,
   },
   {
-    name: 'nationalarchives/ds-wagtail',
+    name: 'torchbox/wagtail-torchbox',
     description:
-      'High-volume contribution history across page templates, interaction/UI behavior, and content-model delivery.',
+      'Contributed to Wagtail delivery and frontend behaviour on the Torchbox website codebase.',
     link: {
-      href: 'https://github.com/nationalarchives/ds-wagtail/pulls?q=is%3Apr+author%3AWilliam-Blackie',
-      label: 'PRs by William-Blackie',
+      href: 'https://github.com/torchbox/wagtail-torchbox',
+      label: 'github.com/torchbox/wagtail-torchbox',
     },
     icon: GitHubIcon,
   },
   {
     name: 'wagtail/wagtail',
     description:
-      'Core OSS contribution to Wagtail CMS, including a merged change to search-query normalisation behavior.',
+      'Contributed upstream to Wagtail CMS, including search query handling and platform behaviour improvements.',
     link: {
-      href: 'https://github.com/wagtail/wagtail/pulls?q=is%3Apr+author%3AWilliam-Blackie',
-      label: 'PRs by William-Blackie',
+      href: 'https://github.com/wagtail/wagtail',
+      label: 'github.com/wagtail/wagtail',
     },
     icon: GitHubIcon,
   },
   {
-    name: 'jazzband/django-two-factor-auth',
+    name: 'torchbox/django-pattern-library',
     description:
-      'Community contribution to authentication docs and setup guidance in a widely used Django security package.',
+      'Contributed to Django template tooling and pattern-library workflows used by content teams.',
     link: {
-      href: 'https://github.com/jazzband/django-two-factor-auth/pulls?q=is%3Apr+author%3AWilliam-Blackie',
-      label: 'PRs by William-Blackie',
+      href: 'https://github.com/torchbox/django-pattern-library',
+      label: 'github.com/torchbox/django-pattern-library',
     },
     icon: GitHubIcon,
   },
@@ -184,7 +184,7 @@ function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 export const metadata: Metadata = {
   title: 'Projects',
   description:
-    'Client delivery highlights and selected open-source contributions from my public GitHub history.',
+    'Selected delivery work and open-source contributions.',
 }
 
 function ProjectGrid({ projects }: { projects: Array<Project> }) {
@@ -224,8 +224,8 @@ function ProjectGrid({ projects }: { projects: Array<Project> }) {
 export default function Projects() {
   return (
     <SimpleLayout
-      title="Client outcomes and open-source contributions."
-      intro="A mix of product/platform work for high-profile teams and selected repositories I&apos;ve contributed to across GitHub."
+      title="Delivery work and open-source projects."
+      intro="A mix of client delivery and open-source work from my public contribution history."
     >
       <div className="space-y-24">
         <section>
@@ -233,8 +233,7 @@ export default function Projects() {
             Client and Product Work
           </h2>
           <p className="mt-3 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
-            Projects delivered across startup, agency, and contract
-            engagements, including current work at MabyDuck.
+            Work across startup, agency, and contract engagements.
           </p>
           <div className="mt-10">
             <ProjectGrid projects={clientProjects} />
@@ -245,8 +244,8 @@ export default function Projects() {
             Open-Source Contributions
           </h2>
           <p className="mt-3 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
-            Selected repositories from my public GitHub history, including both
-            projects I own and projects I contribute to.
+            Repositories from my public GitHub history, including projects I
+            own and projects I contribute to.
           </p>
           <div className="mt-10">
             <ProjectGrid projects={openSourceContributions} />

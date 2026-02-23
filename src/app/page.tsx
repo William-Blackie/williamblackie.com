@@ -65,7 +65,7 @@ function Role({ role }: { role: Role }) {
 function Resume() {
   const resume: Array<Role> = [
     {
-      company: 'MabyDuck',
+      company: 'Mabyduck',
       title: 'Staff Engineer',
       logo: logoMabyDuck,
       start: 'April 2025',
@@ -75,35 +75,28 @@ function Resume() {
       },
     },
     {
-      company: 'Torchbox',
-      title: 'Software Engineer - Contract',
-      logo: logoTorchbox,
-      start: 'Jan 2025',
-      end: 'April 2025',
-    },
-    {
-      company: 'Google',
-      title: 'Software Engineer - Contract',
-      logo: logoGoogle,
-      start: 'Jul 2024',
-      end: 'Dec 2024',
-    },
-    {
       company: 'Developerfy',
-      title: 'Founder - Selective Consulting',
+      title: 'Owner',
       logo: logoDeveloperfy,
-      start: '2024',
+      start: 'March 2024',
       end: {
         label: 'Present',
         dateTime: new Date().getFullYear().toString(),
       },
     },
     {
+      company: 'Google',
+      title: 'Full-stack Developer - Contract',
+      logo: logoGoogle,
+      start: 'August 2024',
+      end: 'December 2024',
+    },
+    {
       company: 'Torchbox',
-      title: 'Software Engineer - FTE',
+      title: 'Software Developer',
       logo: logoTorchbox,
-      start: '2020',
-      end: '2024',
+      start: 'September 2019',
+      end: 'March 2024',
     },
   ]
 
@@ -158,25 +151,36 @@ export default function Home() {
             William Blackie
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I&apos;m William, a Staff Engineer based in London and Bristol, UK.
-            I build full-stack products and platforms, with a focus on
-            delivering reliable systems that teams can scale with confidence.
+            Hi, I&apos;m William. I&apos;m a Full-stack Engineer based in London
+            and Bristol, UK.
           </p>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I&apos;m currently a Staff Engineer at{' '}
+            My path has been agency delivery, then freelance and contract work,
+            and now full-time product engineering. It taught me how to ship
+            quickly without cutting corners and how to keep projects calm when
+            timelines are not.
+          </p>
+          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+            I build with Python (Django, FastAPI, Wagtail) and TypeScript
+            (React, Next.js), and I care about accessible products, clear
+            architecture, and releases that do not need a prayer circle.
+          </p>
+          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+            I currently work at{' '}
             <a
               href="https://mabyduck.com"
               rel="noopener noreferrer"
               target="_blank"
               className="text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
             >
-              MabyDuck
+              Mabyduck
             </a>
-            , and I occasionally support selected consulting work through
-            Developerfy.
+            . I also run Developerfy for selected side projects, because I am
+            genuinely bad at not building things.
           </p>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I&apos;ve also started writing again. You can find new posts on the{' '}
+            I write about delivery, tooling, and lessons learned from real
+            projects. New posts are on the{' '}
             <Link
               href="/articles"
               className="font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
@@ -194,12 +198,12 @@ export default function Home() {
             />
             <SocialLink
               href="https://github.com/William-Blackie"
-              srLabel="Follow me GitHub"
+              srLabel="Follow on GitHub"
               icon={GitHubIcon}
             />
             <SocialLink
               href="https://www.linkedin.com/in/william-blackie/"
-              srLabel="Follow me LinkedIn"
+              srLabel="Follow on LinkedIn"
               icon={LinkedInIcon}
             />
           </div>
