@@ -5,7 +5,7 @@ export const article = {
   date: '2026-02-22',
   title: 'Dotfiles for adults: less terminal cosplay, more useful flow',
   description:
-    'A practical approach to dotfiles that improves delivery quality, reduces friction, and supports team workflows.',
+    'Why I keep my dotfiles boring on purpose, and how that reduces delivery friction in real teams.'
 }
 
 export const metadata = {
@@ -14,42 +14,33 @@ export const metadata = {
 }
 
 <ArticleLayout article={article}>
-I like a pretty terminal. I also like not wasting half an hour a day on avoidable friction.
+I like a nice terminal as much as the next engineer. I also like not wasting half an hour a day on avoidable friction.
 
-Only one of those survives contact with real delivery pressure.
+Only one of those survives contact with real delivery work.
 
-I maintain [my dotfiles](https://github.com/William-Blackie/.dotfiles) because local setup quality compounds. Tiny paper-cuts stack up: one command you always forget, one alias that behaves differently per machine, one editor quirk that drags you out of flow. None is catastrophic. Together they are a tax on judgement.
+I maintain [my dotfiles](https://github.com/William-Blackie/.dotfiles) because local friction compounds quietly. One alias that behaves differently per machine. One setup step you always forget. One command you run daily that still feels like a scavenger hunt. None is catastrophic. Together they are a tax on judgement.
 
-When teams say "we need to move faster", they often jump straight to architecture conversations. Reasonable instinct. But there is another lever: reduce local cognitive drag so engineers spend less time context-switching and more time making good decisions.
+When teams say “we need to move faster”, they often jump straight to architecture. Sensible instinct. But there is another lever: reduce local cognitive drag so engineers spend less time context‑switching and more time making good decisions.
 
 That is what dotfiles are for when used well.
 
-## My rule: configuration must earn its place
+## My rule: config has to earn its place
 
-Over time I removed most "clever" customisation and kept only what pays off repeatedly.
+Over time I removed most “clever” customisation and kept only what pays off repeatedly. If a tweak mostly makes me feel clever, it does not survive. If it helps me move from question to verified change with less noise, it stays.
 
-A config stays if it does one of these:
-
-1. reduces repeated context switches;
-2. makes common commands predictable;
-3. lowers setup cost for new/temporary machines;
-4. helps me move from question to verified change quickly.
-
-If it mostly makes me feel fancy, it gets deleted.
-
-I’ve become quite ruthless here. The terminal is a workplace, not a theme park.
+The terminal is a workplace, not a theme park.
 
 ## What actually helps me deliver better
 
-The biggest gains in my setup are boring and consistent.
+The biggest wins are boring and consistent:
 
-- Fast discovery: `fzf` + `ripgrep` for finding files and symbols quickly.
-- Session continuity: `tmux` for long-running contexts and safer multitasking.
-- Predictable shell behaviour: minimal aliases, obvious names, consistent flags.
-- Editor ergonomics: Neovim defaults tuned for readability and navigation speed, not novelty.
-- Script-first mindset: project-critical operations live in repo scripts/Make targets, not only in my shell.
+- fast discovery (`fzf` + `ripgrep` for finding files and symbols);
+- stable sessions (`tmux` for long‑running contexts);
+- predictable shell behaviour (minimal aliases, obvious names, consistent flags);
+- editor ergonomics (Neovim tuned for readability and navigation speed, not novelty);
+- script‑first workflow (project‑critical operations live in repo scripts/Make targets, not in my shell).
 
-The last point is the one that matters most for teams.
+That last one is the one that matters most for teams.
 
 ## A hard boundary: personal setup must not hide team workflows
 
@@ -57,49 +48,24 @@ I made this mistake earlier in my career and I still see it often: moving essent
 
 It feels fast for one engineer. It is fragile for everyone else.
 
-If a command matters to delivery, it belongs in the project:
+If a command matters to delivery, it belongs in the project. Dotfiles should support shared workflows, not replace them.
 
-- `make` targets;
-- `npm` scripts;
-- documented runbooks;
-- CI pipelines that mirror local checks.
-
-Dotfiles should support shared workflows, not replace them.
-
-A quick test I use: if I disappear for two weeks, can the team run the same workflow without guessing? If not, I’ve put too much in my personal layer.
+A quick test I use: if I disappear for two weeks, can the team run the same workflow without guessing? If not, I put too much in my personal layer.
 
 ## Why this is really about reliability, not preference
 
-Good local tooling improves more than typing speed.
+Good local tooling improves more than typing speed. It helps where engineering is expensive:
 
-It helps where engineering is expensive:
+- incident triage, when you need fast, accurate investigation;
+- release windows, when confidence matters more than cleverness;
+- onboarding, when setup friction can burn a full week;
+- refactors, when context breadth is high and mistakes are easy.
 
-1. incident triage, when you need fast, accurate investigation;
-2. release windows, when confidence matters more than cleverness;
-3. onboarding, when setup friction can burn a full week;
-4. refactors, when context breadth is high and mistakes are easy.
-
-Stable local workflows preserve cognitive bandwidth for architecture, debugging, and user-impact decisions.
-
-That is a reliability outcome, not just a productivity vibe.
-
-## How I keep dotfiles healthy over time
-
-I treat dotfiles like a small product:
-
-1. Keep changes incremental.
-2. Prefer explicit over magical.
-3. Document non-obvious behaviour.
-4. Remove old tweaks aggressively.
-5. Re-check setup on fresh machines periodically.
-
-If setup becomes a puzzle, the system has drifted.
+Stable local workflows preserve cognitive bandwidth for architecture, debugging and user‑impact decisions. That is a reliability outcome, not a productivity vibe.
 
 ## Final thought
 
-Dotfiles are not about being "that engineer with the dramatic terminal".
-
-They are about reducing repeat friction so your best attention goes to the hard problems, not to command archaeology.
+Dotfiles are not about being “that engineer with the dramatic terminal”. They are about reducing repeat friction so your best attention goes to the hard problems, not to command archaeology.
 
 Good dotfiles are quietly useful. They don’t perform. They support.
 
