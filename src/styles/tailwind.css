@@ -1,3 +1,93 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+/* Catppuccin Mocha theme — activated via .catppuccin class on <html> */
+.catppuccin {
+  /* Base colours — Mocha */
+  --ctp-rosewater: #f5e0dc;
+  --ctp-flamingo: #f2cdcd;
+  --ctp-pink: #f5c2e7;
+  --ctp-mauve: #cba6f7;
+  --ctp-red: #f38ba8;
+  --ctp-maroon: #eba0ac;
+  --ctp-peach: #fab387;
+  --ctp-yellow: #f9e2af;
+  --ctp-green: #a6e3a1;
+  --ctp-teal: #94e2d5;
+  --ctp-sky: #89dceb;
+  --ctp-sapphire: #74c7ec;
+  --ctp-blue: #89b4fa;
+  --ctp-lavender: #b4befe;
+  --ctp-text: #cdd6f4;
+  --ctp-subtext1: #bac2de;
+  --ctp-subtext0: #a6adc8;
+  --ctp-overlay2: #9399b2;
+  --ctp-overlay1: #7f849c;
+  --ctp-overlay0: #6c7086;
+  --ctp-surface2: #585b70;
+  --ctp-surface1: #45475a;
+  --ctp-surface0: #313244;
+  --ctp-base: #1e1e2e;
+  --ctp-mantle: #181825;
+  --ctp-crust: #11111b;
+
+  color-scheme: dark;
+  background-color: var(--ctp-base) !important;
+  color: var(--ctp-text) !important;
+}
+
+.catppuccin body {
+  background-color: var(--ctp-base) !important;
+}
+
+/* Nav pill */
+.catppuccin .bg-white\/90 {
+  background-color: color-mix(in srgb, var(--ctp-surface0) 95%, transparent) !important;
+  color: var(--ctp-text) !important;
+}
+
+/* Active nav + hover links */
+.catppuccin .hover\:text-teal-500:hover,
+.catppuccin a:hover {
+  color: var(--ctp-mauve) !important;
+}
+.catppuccin .text-teal-500,
+.catppuccin .text-teal-400 {
+  color: var(--ctp-mauve) !important;
+}
+
+/* Gradient underline on active nav item */
+.catppuccin .bg-gradient-to-r.from-teal-500\/0 {
+  background-image: linear-gradient(to right, transparent, var(--ctp-mauve), transparent) !important;
+}
+
+/* Cards + surfaces */
+.catppuccin .bg-white {
+  background-color: var(--ctp-mantle) !important;
+}
+.catppuccin .bg-zinc-50 {
+  background-color: var(--ctp-base) !important;
+}
+.catppuccin .text-zinc-900,
+.catppuccin .text-zinc-800 {
+  color: var(--ctp-text) !important;
+}
+.catppuccin .text-zinc-600,
+.catppuccin .text-zinc-500 {
+  color: var(--ctp-subtext1) !important;
+}
+.catppuccin .text-zinc-400 {
+  color: var(--ctp-overlay1) !important;
+}
+.catppuccin .border-zinc-100,
+.catppuccin .divide-zinc-100 > * + *,
+.catppuccin .divide-zinc-100\/5 > * + * {
+  border-color: var(--ctp-surface1) !important;
+}
+.catppuccin .ring-zinc-900\/5 {
+  --tw-ring-color: color-mix(in srgb, var(--ctp-crust) 50%, transparent) !important;
+}
+.catppuccin .shadow-zinc-800\/5 {
+  --tw-shadow-color: color-mix(in srgb, var(--ctp-crust) 50%, transparent) !important;
+}
