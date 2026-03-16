@@ -1,0 +1,97 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'William Blackie',
+  date: '2026-03-16',
+  title: 'AI in the workflow: what actually helps and what just performs',
+  description:
+    'After a year of using AI tools daily across agency, contracting, and product work, here is what earns its place and what is mostly theatre.'
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+<ArticleLayout article={article}>
+The current conversation around AI in engineering falls roughly into two camps: people who think it is going to replace engineers in six months, and people who won't touch it because it's overhyped nonsense. Both camps are making the same mistake, which is treating AI as a verdict rather than a tool.
+
+I've been using AI tools daily for about a year. Some have earned a permanent place in my workflow. Most haven't. This is an honest account of what actually helped delivery and what just felt impressive in a demo.
+
+## What I was trying to solve
+
+My day-to-day involves a lot of context switching — between a product codebase, several legacy systems, and the ongoing background hum of architecture decisions, async communication, and occasional fire-fighting.
+
+The expensive part isn't writing code. It's orientation: understanding a system well enough to make a confident change, re-establishing context after an interruption, reviewing something you didn't write with enough depth to say something useful.
+
+That's where I went looking for leverage.
+
+## What earns its place
+
+### Understanding unfamiliar code quickly
+
+The biggest consistent win: feeding a file or function into a language model and asking "what does this do and what would break if I changed X?" Not as a replacement for reading the code — as a first pass that cuts orientation time.
+
+It's particularly useful when the code is old, undocumented, or in a style you don't use day-to-day. The answer isn't always right, but it gives you a mental model to pressure-test against the actual source, which is faster than building the model from scratch.
+
+I use this multiple times a day and it hasn't stopped being useful.
+
+### Writing the boring-but-important prose
+
+Good documentation gets avoided because it takes more time than engineers feel they have. AI makes that honest: I'll describe what a function does, what it assumes, and what happens if those assumptions break — and ask for a first draft. I then edit it, usually heavily. But starting from something is faster than starting from nothing.
+
+Same for ADR write-ups, incident summaries, and PR descriptions. These matter more than most teams treat them. Any tool that lowers the cost of writing them properly has a real delivery payoff.
+
+### Commit messages and review prep
+
+I generate commit message drafts from a `git diff` and then edit. Sounds trivial. In practice it removes a small but real moment of friction that happens dozens of times a week, at exactly the moment you want to stay in flow.
+
+### Local context without the cloud
+
+One thing I've been experimenting with more recently: running assistants locally, against my own files and calendar and project notes. The value isn't the model quality — it's the privacy and the integration. Being able to ask "what am I supposed to be doing this week and is there anything I've missed" against real context, without pasting sensitive information into a web interface, is a different category of useful.
+
+It's rough at the edges. But the underlying idea — a persistent, local assistant that knows your actual environment — is one I think will matter more, not less, as this tooling matures.
+
+## What doesn't earn its place
+
+### Generating features you haven't fully thought through
+
+AI is very good at producing code that looks complete. That quality becomes a liability when you haven't yet understood what "complete" means. I've watched engineers accept AI output for features they couldn't fully explain — and the bugs that came from that were expensive, because they were hard to trace back to an assumption that was never examined.
+
+The model has no idea whether the requirements make sense. Neither does the engineer if they asked it to figure out the requirements.
+
+### Replacing the reading you should be doing
+
+There's a version of AI use that lets you skip understanding entirely. You ask the model, you get an answer, you move on. This works until it doesn't — usually at a point where the accumulated shortcuts converge into a system nobody fully understands, and something breaks in a way that can't be explained quickly.
+
+I still read code I'm going to change. I still read documentation before I ask a model to interpret it. The model is a thinking aid, not a reading substitute.
+
+### Code review that just nods
+
+AI-assisted review tools produce a lot of output that sounds thorough and isn't. They're good at catching formatting and obvious antipatterns. They're not good at catching the wrong abstraction chosen for plausible-sounding reasons, or the edge case that only matters in the context of how the system is actually used.
+
+Use them for a first pass. Don't confuse them for review.
+
+## The principle that held
+
+The same principle that applies to dotfiles and tooling generally applies here: it has to earn its place.
+
+If a tool helps me move from uncertainty to grounded decision faster, it stays. If it produces confident-sounding output that I'd need to fully rewrite to trust, it doesn't save time — it adds a review step to work that wasn't reviewed before.
+
+AI in the workflow isn't a philosophy question. It's an empirical one. Run the experiment, track the friction honestly, cut what doesn't pay off.
+
+## Final thought
+
+The most useful framing I've found is this: AI is good at the parts of engineering that are expensive but not actually hard — orientation, summarisation, first drafts, mechanical translation. It isn't good at the parts that are hard because they require genuine understanding of a system and the people using it.
+
+Use it for the first category. Stay in the seat for the second.
+
+The job isn't going away. The parts of the job you can outsource cheaply are, though — which means the parts that are left are the parts that actually required you in the first place.
+
+## References
+
+- [Architecture Decision Records](https://adr.github.io/)
+- [Local AI with Ollama](https://ollama.ai/)
+- [Conventional Commits](https://www.conventionalcommits.org/)
+- [DORA research on software delivery](https://dora.dev/)
+</ArticleLayout>
