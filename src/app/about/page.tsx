@@ -83,8 +83,7 @@ export default function About() {
             </p>
             <p>
               Outside work, I climb, ride motorcycles, and spend too much money
-              on great food and coffee. I&apos;m based in Bristol — which is
-              the right call.
+              on great food and coffee. I&apos;m based in Bristol, with regular stints in London.
             </p>
           </div>
         </div>

@@ -151,7 +151,7 @@ export default function Home() {
             William Blackie
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            Hi, I&apos;m William — a Full-stack Engineer based in Bristol, UK.
+            Hi, I&apos;m William. I&apos;m a Full-stack Engineer based in Bristol and London, UK.
           </p>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
             I&apos;ve worked across agency delivery at Torchbox, contract and
