@@ -1,3 +1,4 @@
+import Script from 'next/script'
 import { Container } from '@/components/Container'
 import { Comments } from '@/components/Comments'
 import { Prose } from '@/components/Prose'
@@ -17,8 +18,34 @@ export function ArticleLayout({
   article: ArticleMetadata
   children: React.ReactNode
 }) {
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: article.title,
+    description: article.description,
+    datePublished: article.date,
+    author: {
+      '@type': 'Person',
+      name: article.author,
+      url: 'https://williamblackie.com',
+    },
+    publisher: {
+      '@type': 'Person',
+      name: 'William Blackie',
+      url: 'https://williamblackie.com',
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+    },
+  }
+
   return (
     <Container className="mt-16 lg:mt-32">
+      <Script
+        id={`article-schema-${article.date}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <article className="mx-auto max-w-2xl">
         <header className="flex flex-col">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">

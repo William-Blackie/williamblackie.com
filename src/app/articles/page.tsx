@@ -6,9 +6,12 @@ import { formatDate } from '@/lib/formatDate'
 import { getAllArticles } from '@/lib/articles'
 
 export const metadata: Metadata = {
-  title: 'Blog',
+  title: 'Articles',
   description:
-    'Practical notes on engineering, delivery, and building products over time.',
+    'Writing by William Blackie on software engineering, delivery, and tooling. Topics include Python, Django, TypeScript, AI in the workflow, dotfiles, and lessons from agency, contract, and product engineering.',
+  alternates: {
+    canonical: 'https://williamblackie.com/articles',
+  },
 }
 
 export default async function Articles() {

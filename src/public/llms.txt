@@ -1,0 +1,27 @@
+# William Blackie
+
+> Full-stack software engineer based in Bristol and London, UK. Staff Engineer at Mabyduck. Builds product and platform software with Python (Django, Wagtail, FastAPI) and TypeScript (React, Next.js).
+
+William Blackie is a software engineer with experience across agency, contract, and product engineering contexts. He has worked at Torchbox (2019-2024), Google DeepMind (contract, 2024), and currently works as Staff Engineer at Mabyduck (2025-present). He also runs Developerfy, a consulting vehicle for selected projects.
+
+His technical focus is Python-based backend systems (Django, Wagtail, FastAPI, DRF) and TypeScript frontend work (React, Next.js), with an emphasis on reliable delivery, accessible products, and reducing engineering friction in product teams.
+
+## Pages
+
+- [Home](https://williamblackie.com): Introduction and career overview
+- [About](https://williamblackie.com/about): Background, career history, and personal context
+- [Articles](https://williamblackie.com/articles): Writing on engineering, delivery, and tooling
+- [Projects](https://williamblackie.com/projects): Selected client work and open-source contributions
+- [Tech](https://williamblackie.com/tech): Tools and stack used in day-to-day delivery
+
+## Articles
+
+- [Agency to contracting to product: the same engineer, different time horizon](https://williamblackie.com/articles/agency-to-contracting-to-product): Reflections on moving across agency, freelance, and product engineering contexts - what changed and what stayed the same.
+- [Dotfiles for adults: less terminal cosplay, more useful flow](https://williamblackie.com/articles/dotfiles-that-actually-improve-delivery): Why keeping dotfiles minimal and boring is a delivery practice, not just a preference.
+- [AI in the workflow: what actually helps and what just performs](https://williamblackie.com/articles/ai-in-the-workflow): An honest account of which AI tools earn their place in a real engineering workflow and which produce confident-sounding theatre.
+
+## Contact
+
+- Email: will@developerfy.com
+- GitHub: https://github.com/William-Blackie
+- LinkedIn: https://www.linkedin.com/in/william-blackie/

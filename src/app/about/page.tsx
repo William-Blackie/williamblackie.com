@@ -20,7 +20,10 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 export const metadata: Metadata = {
   title: 'About',
   description:
-    "I'm William Blackie, a Full-stack Engineer with agency, freelance, and product experience across Python and TypeScript.",
+    'William Blackie is a full-stack engineer based in Bristol and London, UK. He spent five years at Torchbox delivering agency work for charities and public sector teams, then moved into contract work through Developerfy including a stint at Google DeepMind, and now works as Staff Engineer at Mabyduck. He builds with Python (Django, Wagtail) and TypeScript (React, Next.js).',
+  alternates: {
+    canonical: 'https://williamblackie.com/about',
+  },
 }
 
 export default function About() {
