@@ -151,22 +151,12 @@ export default function Home() {
             William Blackie
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            Hi, I&apos;m William. I&apos;m a Full-stack Engineer based in London
-            and Bristol, UK.
+            Hi, I&apos;m William — a Full-stack Engineer based in Bristol, UK.
           </p>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            My path has been agency delivery, then freelance and contract work,
-            and now full-time product engineering. It taught me how to ship
-            quickly without cutting corners and how to keep projects calm when
-            timelines are not.
-          </p>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I build with Python (Django, FastAPI, Wagtail) and TypeScript
-            (React, Next.js), and I care about accessible products, clear
-            architecture, and releases that do not need a prayer circle.
-          </p>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I currently work at{' '}
+            I&apos;ve worked across agency delivery at Torchbox, contract and
+            freelance work through Developerfy (including a stint at Google
+            DeepMind), and now full-time product engineering at{' '}
             <a
               href="https://mabyduck.com"
               rel="noopener noreferrer"
@@ -175,12 +165,19 @@ export default function Home() {
             >
               Mabyduck
             </a>
-            . I also run Developerfy for selected side projects, because I am
-            genuinely bad at not building things.
+            . Each context taught me the same thing at a different speed: pace
+            matters, but so does building systems that don&apos;t need heroics
+            to keep running.
           </p>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I write about delivery, tooling, and lessons learned from real
-            projects. New posts are on the{' '}
+            I build with Python (Django, FastAPI, Wagtail) and TypeScript
+            (React, Next.js). I care about accessible products, clear
+            architecture, and releases that don&apos;t require a prayer circle
+            on Friday afternoon.
+          </p>
+          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+            I write about delivery, tooling, and lessons from real projects on
+            the{' '}
             <Link
               href="/articles"
               className="font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
