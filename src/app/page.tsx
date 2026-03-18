@@ -161,7 +161,7 @@ export default function Home() {
               href="https://mabyduck.com"
               rel="noopener noreferrer"
               target="_blank"
-              className="text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+              className="text-sm font-medium text-zinc-800 transition hover:text-teal-700 dark:text-zinc-200 dark:hover:text-teal-400"
             >
               Mabyduck
             </a>
@@ -180,14 +180,14 @@ export default function Home() {
             the{' '}
             <Link
               href="/articles"
-              className="font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+              className="font-medium text-zinc-800 transition hover:text-teal-700 dark:text-zinc-200 dark:hover:text-teal-400"
             >
               blog
             </Link>
             .
           </p>
 
-          <div className="mt-6 flex gap-6">
+          <ul className="mt-6 flex gap-6">
             <SocialLink
               href="mailto:will@developerfy.com"
               srLabel="Send me an email"
@@ -203,7 +203,7 @@ export default function Home() {
               srLabel="Follow on LinkedIn"
               icon={LinkedInIcon}
             />
-          </div>
+          </ul>
         </div>
       </Container>
       <Photos />
