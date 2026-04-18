@@ -52,11 +52,9 @@ export function Comments() {
   const configuredCategoryId = categoryId as string
 
   return (
-    <section className="mt-16 border-t border-zinc-200 pt-10 dark:border-zinc-700/40">
-      <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
-        Comments
-      </h2>
-      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+    <section className="mt-16 border-t border-ctp-surface0/70 pt-10">
+      <h2 className="text-xl font-semibold text-ctp-text">Comments</h2>
+      <p className="mt-2 text-sm text-ctp-subtext1">
         Join the discussion via GitHub Discussions.
       </p>
       <div className="mt-6">

@@ -17,8 +17,12 @@ import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
 import avatarImage from '@/images/photos/image-3.jpg'
-import { CloseIcon, ChevronDownIcon, MoonIcon, SunIcon } from '@/components/GeneralIcons'
-
+import {
+  CloseIcon,
+  ChevronDownIcon,
+  MoonIcon,
+  SunIcon,
+} from '@/components/GeneralIcons'
 
 function MobileNavItem({
   href,
@@ -41,9 +45,9 @@ function MobileNavigation(
 ) {
   return (
     <Popover {...props}>
-      <PopoverButton className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
+      <PopoverButton className="group bg-ctp-mantle/90 text-ctp-text shadow-ctp-crust/10 ring-ctp-surface0/80 hover:ring-ctp-blue/40 mocha:hover:ring-ctp-pink/40 flex items-center rounded-full px-4 py-2 text-sm font-medium shadow-lg ring-1 backdrop-blur">
         Menu
-        <ChevronDownIcon className="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400" />
+        <ChevronDownIcon className="stroke-ctp-subtext1 group-hover:stroke-ctp-blue mocha:group-hover:stroke-ctp-pink ml-3 h-auto w-2" />
       </PopoverButton>
       <Transition>
         <TransitionChild
@@ -54,7 +58,7 @@ function MobileNavigation(
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <PopoverBackdrop className="fixed inset-0 z-50 bg-zinc-800/40 backdrop-blur-sm dark:bg-black/80" />
+          <PopoverBackdrop className="bg-ctp-crust/75 fixed inset-0 z-50 backdrop-blur-sm" />
         </TransitionChild>
         <TransitionChild
           enter="duration-150 ease-out"
@@ -66,18 +70,18 @@ function MobileNavigation(
         >
           <PopoverPanel
             focus
-            className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-white p-8 ring-1 ring-zinc-900/5 dark:bg-zinc-900 dark:ring-zinc-800"
+            className="bg-ctp-mantle ring-ctp-surface0/80 fixed inset-x-4 top-8 z-50 origin-top rounded-3xl p-8 ring-1"
           >
             <div className="flex flex-row-reverse items-center justify-between">
               <PopoverButton aria-label="Close menu" className="-m-1 p-1">
-                <CloseIcon className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
+                <CloseIcon className="text-ctp-subtext1 h-6 w-6" />
               </PopoverButton>
-              <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+              <h2 className="text-ctp-subtext1 text-sm font-medium">
                 Navigation
               </h2>
             </div>
             <nav className="mt-6">
-              <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
+              <ul className="divide-ctp-surface0 text-ctp-text -my-2 divide-y text-base">
                 <MobileNavItem href="/about">About</MobileNavItem>
                 <MobileNavItem href="/projects">Projects</MobileNavItem>
                 <MobileNavItem href="/articles">Blog</MobileNavItem>
@@ -108,13 +112,13 @@ function NavItem({
         className={clsx(
           'relative block px-3 py-2 transition',
           isActive
-            ? 'text-teal-700 dark:text-teal-400'
-            : 'hover:text-teal-700 dark:hover:text-teal-400',
+            ? 'font-semibold text-ctp-text'
+            : 'hover:text-ctp-blue mocha:hover:text-ctp-pink',
         )}
       >
         {children}
         {isActive && (
-          <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-teal-500/0 via-teal-500/40 to-teal-500/0 dark:from-teal-400/0 dark:via-teal-400/40 dark:to-teal-400/0" />
+          <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-ctp-blue/0 via-ctp-blue/45 to-ctp-blue/0 mocha:from-ctp-pink/0 mocha:via-ctp-pink/40 mocha:to-ctp-pink/0" />
         )}
       </Link>
     </li>
@@ -124,7 +128,7 @@ function NavItem({
 function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
   return (
     <nav {...props}>
-      <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
+      <ul className="bg-ctp-mantle/90 text-ctp-text shadow-ctp-crust/10 ring-ctp-surface0/80 flex rounded-full px-3 text-sm font-medium shadow-lg ring-1 backdrop-blur">
         <NavItem href="/about">About</NavItem>
         <NavItem href="/projects">Projects</NavItem>
         <NavItem href="/articles">Blog</NavItem>
@@ -135,43 +139,39 @@ function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
 }
 
 function ThemeToggle() {
-  const { resolvedTheme, theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  function cycleTheme() {
-    if (theme === 'light' || theme === 'system' && resolvedTheme === 'light') {
-      setTheme('catppuccin')
-    } else if (theme === 'catppuccin') {
-      setTheme('dark')
-    } else {
-      setTheme('light')
-    }
+  function toggleTheme() {
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
   }
 
-  const isCatppuccin = theme === 'catppuccin'
-  const isDark = theme === 'dark' || (theme === 'system' && resolvedTheme === 'dark')
-
-  const label = isCatppuccin ? 'Switch to dark theme' : isDark ? 'Switch to light theme' : 'Switch to Catppuccin theme'
+  const isLight = resolvedTheme !== 'dark'
+  const label = isLight ? 'Latte (light)' : 'Mocha (dark)'
+  const nextLabel = isLight ? 'Mocha (dark)' : 'Latte (light)'
 
   return (
     <button
       type="button"
-      aria-label={mounted ? label : 'Toggle theme'}
-      title={isCatppuccin ? '🐱 Catppuccin - you found it!' : undefined}
-      className="group rounded-full bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
-      onClick={cycleTheme}
+      aria-label={
+        mounted ? `Current: ${label}. Click for ${nextLabel}` : 'Toggle theme'
+      }
+      title={mounted ? `Catppuccin ${label}` : undefined}
+      className="group bg-ctp-mantle/90 shadow-ctp-crust/10 ring-ctp-surface0/80 hover:ring-ctp-blue/50 mocha:hover:ring-ctp-pink/50 flex h-10 w-10 items-center justify-center rounded-full shadow-lg ring-1 backdrop-blur transition hover:cursor-pointer"
+      onClick={toggleTheme}
     >
-      {mounted && isCatppuccin ? (
-        <span className="flex h-6 w-6 items-center justify-center text-base leading-none" role="img" aria-label="Cat">🐱</span>
+      {mounted ? (
+        isLight ? (
+          <SunIcon className="fill-ctp-yellow stroke-ctp-subtext1 group-hover:fill-ctp-peach group-hover:stroke-ctp-blue mocha:group-hover:stroke-ctp-pink h-6 w-6 transition" />
+        ) : (
+          <MoonIcon className="fill-ctp-lavender stroke-ctp-subtext1 group-hover:stroke-ctp-blue mocha:group-hover:stroke-ctp-pink h-6 w-6 transition" />
+        )
       ) : (
-        <>
-          <SunIcon className="h-6 w-6 fill-zinc-100 stroke-zinc-500 transition group-hover:fill-zinc-200 group-hover:stroke-zinc-700 dark:hidden [@media(prefers-color-scheme:dark)]:fill-teal-50 [@media(prefers-color-scheme:dark)]:stroke-teal-500 [@media(prefers-color-scheme:dark)]:group-hover:fill-teal-50 [@media(prefers-color-scheme:dark)]:group-hover:stroke-teal-600" />
-          <MoonIcon className="hidden h-6 w-6 fill-zinc-700 stroke-zinc-500 transition dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-zinc-400 [@media_not_(prefers-color-scheme:dark)]:fill-teal-400/10 [@media_not_(prefers-color-scheme:dark)]:stroke-teal-500" />
-        </>
+        <SunIcon className="fill-ctp-yellow stroke-ctp-subtext1 h-6 w-6" />
       )}
     </button>
   )
@@ -191,7 +191,7 @@ function AvatarContainer({
     <div
       className={clsx(
         className,
-        'h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10',
+        'bg-ctp-mantle/90 shadow-ctp-crust/10 ring-ctp-surface0/80 h-10 w-10 rounded-full p-0.5 shadow-lg ring-1 backdrop-blur',
       )}
       {...props}
     />
@@ -217,7 +217,7 @@ function Avatar({
         alt=""
         sizes={large ? '4rem' : '2.25rem'}
         className={clsx(
-          'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',
+          'bg-ctp-surface0 rounded-full object-cover',
           large ? 'h-16 w-16' : 'h-9 w-9',
         )}
         priority
@@ -364,7 +364,7 @@ export function Header() {
               >
                 <div className="relative">
                   <AvatarContainer
-                    className="absolute left-0 top-3 origin-left transition-opacity"
+                    className="absolute top-3 left-0 origin-left transition-opacity"
                     style={{
                       opacity: 'var(--avatar-border-opacity, 0)',
                       transform: 'var(--avatar-border-transform)',

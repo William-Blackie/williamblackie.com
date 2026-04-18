@@ -12,7 +12,7 @@ function NavLink({
   return (
     <Link
       href={href}
-      className="transition hover:text-teal-700 dark:hover:text-teal-400"
+      className="transition hover:text-ctp-blue mocha:hover:text-ctp-pink"
     >
       {children}
     </Link>
@@ -23,16 +23,16 @@ export function Footer() {
   return (
     <footer className="mt-32 flex-none">
       <ContainerOuter>
-        <div className="border-t border-zinc-100 pb-16 pt-10 dark:border-zinc-700/40">
+        <div className="border-t border-ctp-surface0/70 pb-16 pt-10">
           <ContainerInner>
             <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-              <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
+              <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium text-ctp-text">
                 <NavLink href="/about">About</NavLink>
                 <NavLink href="/projects">Projects</NavLink>
                 <NavLink href="/articles">Blog</NavLink>
                 <NavLink href="/tech">Tech</NavLink>
               </div>
-              <p className="text-sm text-zinc-500">
+              <p className="text-sm text-ctp-subtext1">
                 &copy; {new Date().getFullYear()} William Blackie. All rights
                 reserved.
               </p>

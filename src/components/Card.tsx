@@ -39,7 +39,7 @@ Card.Link = function CardLink({
 }: React.ComponentPropsWithoutRef<typeof Link>) {
   return (
     <>
-      <div className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl dark:bg-zinc-800/50" />
+      <div className="absolute -inset-x-4 -inset-y-6 z-0 scale-[0.985] rounded-2xl bg-linear-to-br from-ctp-mantle/95 via-ctp-base/90 to-ctp-surface0/75 opacity-0 shadow-xl shadow-ctp-crust/8 ring-1 ring-inset ring-ctp-surface0/55 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100 group-hover:shadow-2xl group-hover:shadow-ctp-crust/12 group-hover:ring-ctp-overlay0/25 sm:-inset-x-6" />
       <Link {...props}>
         <span className="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl" />
         <span className="relative z-10">{children}</span>
@@ -59,7 +59,7 @@ Card.Title = function CardTitle<T extends React.ElementType = 'h2'>({
   const Component = as ?? 'h2'
 
   return (
-    <Component className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+    <Component className="text-base font-semibold tracking-tight text-ctp-text">
       {href ? <Card.Link href={href}>{children}</Card.Link> : children}
     </Component>
   )
@@ -71,7 +71,7 @@ Card.Description = function CardDescription({
   children: React.ReactNode
 }) {
   return (
-    <p className="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+    <p className="relative z-10 mt-2 text-sm text-ctp-subtext1">
       {children}
     </p>
   )
@@ -81,7 +81,7 @@ Card.Cta = function CardCta({ children }: { children: React.ReactNode }) {
   return (
     <div
       aria-hidden="true"
-      className="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-700 dark:text-teal-400"
+      className="relative z-10 mt-4 flex items-center text-sm font-medium text-ctp-blue mocha:text-ctp-pink"
     >
       {children}
       <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current" />
@@ -105,7 +105,7 @@ Card.Eyebrow = function CardEyebrow<T extends React.ElementType = 'p'>({
     <Component
       className={clsx(
         className,
-        'relative z-10 order-first mb-3 flex items-center text-sm text-zinc-500 dark:text-zinc-400',
+        'relative z-10 order-first mb-3 flex items-center text-sm text-ctp-subtext1',
         decorate && 'pl-3.5',
       )}
       {...props}
@@ -115,7 +115,7 @@ Card.Eyebrow = function CardEyebrow<T extends React.ElementType = 'p'>({
           className="absolute inset-y-0 left-0 flex items-center"
           aria-hidden="true"
         >
-          <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500" />
+          <span className="h-4 w-0.5 rounded-full bg-ctp-surface1" />
         </span>
       )}
       {children}

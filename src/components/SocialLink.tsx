@@ -23,9 +23,9 @@ export function SocialLink({
         href={href}
         rel={isExternalLink ? 'noopener noreferrer' : undefined}
         target={isExternalLink ? '_blank' : undefined}
-        className="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+        className="group flex text-sm font-medium text-ctp-text transition hover:text-ctp-blue mocha:hover:text-ctp-pink"
       >
-        <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500" />
+        <Icon className="h-6 w-6 flex-none fill-ctp-subtext1 transition group-hover:fill-ctp-blue mocha:group-hover:fill-ctp-pink" />
         {children && <span className="ml-4">{children}</span>}
         {srLabel && <span className="sr-only">{srLabel}</span>}
       </Link>
