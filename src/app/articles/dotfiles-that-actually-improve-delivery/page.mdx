@@ -1,17 +1,21 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
+import { createArticleMetadata } from '@/lib/metadata'
 
 export const article = {
   author: 'William Blackie',
   date: '2026-02-22',
+  path: '/articles/dotfiles-that-actually-improve-delivery',
   title: 'Dotfiles for adults: less terminal cosplay, more useful flow',
   description:
-    'Why I keep my dotfiles boring on purpose, and how that reduces delivery friction in real teams.'
+    'Why I keep my dotfiles boring on purpose, and how that reduces delivery friction in real teams.',
 }
 
-export const metadata = {
+export const metadata = createArticleMetadata({
   title: article.title,
   description: article.description,
-}
+  path: article.path,
+  datePublished: article.date,
+})
 
 <ArticleLayout article={article}>
 I like a nice terminal as much as the next engineer. I also like not wasting half an hour a day on avoidable friction.
@@ -78,4 +82,5 @@ And if your prompt looks nice at the same time, that's a perfectly acceptable bo
 - [fzf](https://github.com/junegunn/fzf)
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 - [The Twelve-Factor App: dev/prod parity](https://12factor.net/dev-prod-parity)
+
 </ArticleLayout>

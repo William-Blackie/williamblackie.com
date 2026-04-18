@@ -1,14 +1,16 @@
-import Script from 'next/script'
 import { Container } from '@/components/Container'
 import { Comments } from '@/components/Comments'
+import { JsonLd } from '@/components/JsonLd'
 import { Prose } from '@/components/Prose'
 import { formatDate } from '@/lib/formatDate'
+import { createArticleSchema } from '@/lib/metadata'
 
 interface ArticleMetadata {
   title: string
   description: string
   author: string
   date: string
+  path: string
 }
 
 export function ArticleLayout({
@@ -18,40 +20,24 @@ export function ArticleLayout({
   article: ArticleMetadata
   children: React.ReactNode
 }) {
-  const articleSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: article.title,
-    description: article.description,
-    datePublished: article.date,
-    author: {
-      '@type': 'Person',
-      name: article.author,
-      url: 'https://williamblackie.com',
-    },
-    publisher: {
-      '@type': 'Person',
-      name: 'William Blackie',
-      url: 'https://williamblackie.com',
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-    },
-  }
-
   return (
     <Container className="mt-16 lg:mt-32">
-      <Script
+      <JsonLd
         id={`article-schema-${article.date}`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        data={createArticleSchema({
+          title: article.title,
+          description: article.description,
+          path: article.path,
+          datePublished: article.date,
+          author: article.author,
+        })}
       />
       <article className="mx-auto max-w-2xl">
         <header className="flex flex-col">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+          <h1 className="text-ctp-text text-4xl font-bold tracking-tight sm:text-5xl">
             {article.title}
           </h1>
-          <div className="order-first flex items-center gap-3 text-sm text-zinc-500 dark:text-zinc-400">
+          <div className="text-ctp-subtext1 order-first flex items-center gap-3 text-sm">
             <time dateTime={article.date}>{formatDate(article.date)}</time>
             <span aria-hidden="true">·</span>
             <span>{article.author}</span>

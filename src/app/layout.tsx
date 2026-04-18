@@ -1,96 +1,12 @@
-import { type Metadata } from 'next'
-import Script from 'next/script'
-
 import { Providers } from '@/app/providers'
+import { JsonLd } from '@/components/JsonLd'
 import { Layout } from '@/components/Layout'
+import { rootMetadata } from '@/lib/metadata'
+import { personSchema, websiteSchema } from '@/lib/site'
 
 import '@/styles/tailwind.css'
 
-export const metadata: Metadata = {
-  metadataBase: new URL('https://williamblackie.com'),
-  title: {
-    template: '%s - William Blackie',
-    default: 'William Blackie - Full-stack Engineer',
-  },
-  description:
-    'William Blackie is a full-stack software engineer based in Bristol and London, UK. He builds product and platform software with Python (Django, Wagtail, FastAPI) and TypeScript (React, Next.js). Currently Staff Engineer at Mabyduck. Previously at Torchbox and Google DeepMind.',
-  openGraph: {
-    type: 'website',
-    locale: 'en_GB',
-    siteName: 'William Blackie',
-    title: 'William Blackie - Full-stack Engineer',
-    description:
-      'Full-stack engineer building product and platform software with Python and TypeScript. Based in Bristol and London, UK. Staff Engineer at Mabyduck.',
-    url: 'https://williamblackie.com',
-  },
-  twitter: {
-    card: 'summary',
-    title: 'William Blackie - Full-stack Engineer',
-    description:
-      'Full-stack engineer building product and platform software with Python and TypeScript. Based in Bristol and London, UK.',
-  },
-  icons: {
-    icon: [{ url: '/favicon.ico' }, { url: '/icon.jpg' }],
-    apple: '/apple-icon.jpg',
-  },
-  alternates: {
-    canonical: 'https://williamblackie.com',
-  },
-}
-
-const personSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'William Blackie',
-  url: 'https://williamblackie.com',
-  jobTitle: 'Staff Engineer',
-  worksFor: {
-    '@type': 'Organization',
-    name: 'Mabyduck',
-    url: 'https://mabyduck.com',
-  },
-  alumniOf: [
-    {
-      '@type': 'Organization',
-      name: 'Torchbox',
-      url: 'https://torchbox.com',
-    },
-    {
-      '@type': 'Organization',
-      name: 'Google DeepMind',
-      url: 'https://deepmind.google',
-    },
-    {
-      '@type': 'CollegeOrUniversity',
-      name: 'University of the West of England, Bristol',
-    },
-  ],
-  knowsAbout: [
-    'Python',
-    'Django',
-    'Wagtail',
-    'FastAPI',
-    'TypeScript',
-    'React',
-    'Next.js',
-    'Software Engineering',
-    'Full-stack Development',
-    'Product Engineering',
-    'Platform Engineering',
-    'Web Accessibility',
-    'Software Delivery',
-  ],
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Bristol',
-    addressCountry: 'GB',
-  },
-  sameAs: [
-    'https://github.com/William-Blackie',
-    'https://www.linkedin.com/in/william-blackie/',
-  ],
-  email: 'will@developerfy.com',
-}
+export const metadata = rootMetadata
 
 export default function RootLayout({
   children,
@@ -100,13 +16,16 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <head>
-        <Script
-          id="person-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-        />
+        <JsonLd id="website-schema" data={websiteSchema} />
+        <JsonLd id="person-schema" data={personSchema} />
       </head>
-      <body className="flex h-full bg-zinc-50 dark:bg-black">
+      <body className="bg-ctp-base text-ctp-text flex h-full">
+        <a
+          href="#main-content"
+          className="bg-ctp-base text-ctp-text ring-ctp-text focus:ring-ctp-blue focus:ring-offset-ctp-base mocha:focus:ring-ctp-pink pointer-events-none fixed top-3 left-3 z-[100] -translate-y-[calc(100%+1rem)] px-4 py-3 text-base font-semibold opacity-0 ring-2 outline-none focus:pointer-events-auto focus:translate-y-0 focus:opacity-100 focus:ring-4 focus:ring-offset-2"
+        >
+          Skip to content
+        </a>
         <Providers>
           <div className="flex w-full">
             <Layout>{children}</Layout>

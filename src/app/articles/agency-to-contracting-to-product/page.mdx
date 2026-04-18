@@ -1,17 +1,22 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
+import { createArticleMetadata } from '@/lib/metadata'
 
 export const article = {
   author: 'William Blackie',
   date: '2026-02-21',
-  title: 'Agency to contracting to product: the same engineer, different time horizon',
+  path: '/articles/agency-to-contracting-to-product',
+  title:
+    'Agency to contracting to product: the same engineer, different time horizon',
   description:
-    'What actually changed when I moved from agency work to contracting to product teams, without the career-theatre.'
+    'What actually changed when I moved from agency work to contracting to product teams, without the career-theatre.',
 }
 
-export const metadata = {
+export const metadata = createArticleMetadata({
   title: article.title,
   description: article.description,
-}
+  path: article.path,
+  datePublished: article.date,
+})
 
 <ArticleLayout article={article}>
 If you compress my recent career into one clean line it sounds very tidy: agency years at Torchbox, then contracting through Developerfy, then product work at Mabyduck.
@@ -44,7 +49,7 @@ Every new contract I asked the same questions:
 - what changes are reversible if I'm wrong;
 - what needs writing down for whoever comes after me.
 
-That last one made me much stricter about leaving intent in the code and in the docs. If future engineers can't understand *why* I did something in one pass, I'm not done - even if the ticket says closed.
+That last one made me much stricter about leaving intent in the code and in the docs. If future engineers can't understand _why_ I did something in one pass, I'm not done - even if the ticket says closed.
 
 Contracting also killed my appetite for "let's explore for a few months." Exploration is fine. It still needs to land somewhere useful.
 
@@ -59,7 +64,7 @@ The questions I ask now are more boring, and therefore more useful:
 - can we reverse course if our assumptions turn out to be wrong?
 - are we improving reliability and speed together, or trading one for the other?
 
-Earlier in my career I measured progress mostly by direct output - shipped features, closed tickets, lines changed. I still like shipping. But I care more now about whether the team ships *predictably*, without heroics, without someone staying late on a Friday to hold things together.
+Earlier in my career I measured progress mostly by direct output - shipped features, closed tickets, lines changed. I still like shipping. But I care more now about whether the team ships _predictably_, without heroics, without someone staying late on a Friday to hold things together.
 
 ## What stayed the same across all three
 
@@ -97,4 +102,5 @@ And yes, I still enjoy a properly gnarly debugging session - provided it wraps u
 - [DORA research](https://dora.dev/)
 - [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
 - [Architecture Decision Records](https://adr.github.io/)
+
 </ArticleLayout>

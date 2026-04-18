@@ -3,7 +3,9 @@ import Image from 'next/image'
 import { type ImageProps } from 'next/image'
 
 import { Card } from '@/components/Card'
+import { JsonLd } from '@/components/JsonLd'
 import { SimpleLayout } from '@/components/SimpleLayout'
+import { createPageMetadata, createPageSchema } from '@/lib/metadata'
 import logoValeurSport from '@/images/logos/valeursport.svg'
 import logoGoogle from '@/images/logos/google.svg'
 import logoRff from '@/images/logos/rff.svg'
@@ -12,163 +14,16 @@ import logoTna from '@/images/logos/tna.png'
 import logoSamaritans from '@/images/logos/samaritans.png'
 import logoMabyDuck from '@/images/logos/mabyduck.png'
 import { GitHubIcon } from '@/components/SocialIcons'
+import {
+  clientProjects,
+  openSourceContributions,
+  type ProjectItem,
+} from '@/lib/profile-content'
 
-interface Project {
-  name: string
-  description: string
-  link: {
-    href: string
-    label: string
-  }
+interface Project extends ProjectItem {
   logo?: ImageProps['src']
   icon?: React.ComponentType<React.ComponentPropsWithoutRef<'svg'>>
 }
-
-const clientProjects: Array<Project> = [
-  {
-    name: 'Mabyduck',
-    description:
-      'Product and platform delivery focused on reliability, delivery quality, and steady shipping pace.',
-    link: {
-      href: 'https://mabyduck.com',
-      label: 'mabyduck.com',
-    },
-    logo: logoMabyDuck,
-  },
-  {
-    name: "Google - DeepMind",
-    description:
-      'Worked on Django/Wagtail delivery for deepmind.google, including CMS structure, frontend components, search, and releases.',
-    link: {
-      href: 'https://deepmind.google/',
-      label: 'deepmind.google',
-    },
-    logo: logoGoogle,
-  },
-  {
-    name: 'ValeurSport',
-    description:
-      "Built a Django and Next.js platform supporting fair-pay advocacy in women's sport, with practical editorial workflows.",
-    link: {
-      href: 'http://www.app.valeursport.com',
-      label: 'app.valeursport.com',
-    },
-    logo: logoValeurSport,
-  },
-  {
-    name: 'The Doc Society',
-    description:
-      'Delivered Django/Wagtail CMS work to make publishing workflows smoother for content teams.',
-    link: {
-      href: 'https://docsociety.org/',
-      label: 'docsociety.org',
-    },
-    logo: logoDocSoc,
-  },
-  {
-    name: 'Resource for the Future',
-    description:
-      'Led Django/Wagtail delivery for a policy and research platform with complex publishing requirements.',
-    link: {
-      href: 'https://rff.org/',
-      label: 'rff.org',
-    },
-    logo: logoRff,
-  },
-  {
-    name: 'The National Archives',
-    description:
-      'Contributed to ds-wagtail delivery for nationalarchives.gov.uk across frontend behaviour, CMS features, and content modelling.',
-    link: {
-      href: 'https://www.nationalarchives.gov.uk/',
-      label: 'nationalarchives.gov.uk',
-    },
-    logo: logoTna,
-  },
-  {
-    name: 'Torchbox - Samaritans UK',
-    description:
-      'Delivered long-running Django/Wagtail improvements across content operations, donation journeys, and platform maintenance.',
-    link: {
-      href: 'https://www.samaritans.org/',
-      label: 'www.samaritans.org',
-    },
-    logo: logoSamaritans,
-  },
-]
-
-const openSourceContributions: Array<Project> = [
-  {
-    name: 'lazydjango',
-    description:
-      'Keyboard-first TUI for Django projects focused on day-to-day workflows, data operations, and local tooling.',
-    link: {
-      href: 'https://github.com/William-Blackie/lazydjango',
-      label: 'github.com/William-Blackie/lazydjango',
-    },
-    icon: GitHubIcon,
-  },
-  {
-    name: 'chromeappcap',
-    description:
-      'CLI for clean app-window screenshots, using native macOS capture with Playwright fallback for cross-platform use.',
-    link: {
-      href: 'https://github.com/William-Blackie/chromeappcap',
-      label: 'github.com/William-Blackie/chromeappcap',
-    },
-    icon: GitHubIcon,
-  },
-  {
-    name: 'django-storybook',
-    description:
-      'Package for bringing Storybook-style component workflows into Django and template-led teams.',
-    link: {
-      href: 'https://github.com/William-Blackie/django_storybook',
-      label: 'github.com/William-Blackie/django_storybook',
-    },
-    icon: GitHubIcon,
-  },
-  {
-    name: 'wagtail/wagtail.org',
-    description:
-      "Contributed feature and frontend work to Wagtail's main website repository.",
-    link: {
-      href: 'https://github.com/wagtail/wagtail.org',
-      label: 'github.com/wagtail/wagtail.org',
-    },
-    icon: GitHubIcon,
-  },
-  {
-    name: 'torchbox/wagtail-torchbox',
-    description:
-      'Contributed to Wagtail delivery and frontend behaviour on the Torchbox website codebase.',
-    link: {
-      href: 'https://github.com/torchbox/wagtail-torchbox',
-      label: 'github.com/torchbox/wagtail-torchbox',
-    },
-    icon: GitHubIcon,
-  },
-  {
-    name: 'wagtail/wagtail',
-    description:
-      'Contributed upstream to Wagtail CMS, including search query handling and platform behaviour improvements.',
-    link: {
-      href: 'https://github.com/wagtail/wagtail',
-      label: 'github.com/wagtail/wagtail',
-    },
-    icon: GitHubIcon,
-  },
-  {
-    name: 'torchbox/django-pattern-library',
-    description:
-      'Contributed to Django template tooling and pattern-library workflows used by content teams.',
-    link: {
-      href: 'https://github.com/torchbox/django-pattern-library',
-      label: 'github.com/torchbox/django-pattern-library',
-    },
-    icon: GitHubIcon,
-  },
-]
 
 function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -181,11 +36,11 @@ function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'Projects',
-  description:
-    'Selected delivery work and open-source contributions.',
-}
+  description: 'Selected delivery work and open-source contributions.',
+  path: '/projects',
+})
 
 function ProjectGrid({ projects }: { projects: Array<Project> }) {
   return (
@@ -195,25 +50,27 @@ function ProjectGrid({ projects }: { projects: Array<Project> }) {
     >
       {projects.map((project) => (
         <Card as="li" key={project.name}>
-          <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+          <div className="bg-ctp-mantle shadow-ctp-crust/10 ring-ctp-surface0/80 relative z-10 flex h-12 w-12 items-center justify-center rounded-full shadow-md ring-1">
             {project.logo ? (
-              <Image
-                src={project.logo}
-                alt=""
-                className="h-8 w-8"
-                unoptimized
-              />
+              <div className="dark:bg-ctp-text/90 dark:ring-ctp-text/15 flex h-10 w-10 items-center justify-center rounded-full p-2 dark:ring-1">
+                <Image
+                  src={project.logo}
+                  alt=""
+                  className="h-full w-full object-contain"
+                  unoptimized
+                />
+              </div>
             ) : project.icon ? (
-              <project.icon className="h-8 w-8 fill-zinc-600 dark:fill-zinc-300" />
+              <project.icon className="fill-ctp-subtext1 h-8 w-8" />
             ) : null}
           </div>
-          <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
-            <Card.Link href={project.link.href}>{project.name}</Card.Link>
+          <h2 className="text-ctp-text mt-6 text-base font-semibold">
+            <Card.Link href={project.href}>{project.name}</Card.Link>
           </h2>
           <Card.Description>{project.description}</Card.Description>
-          <p className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-teal-700 dark:text-zinc-200">
+          <p className="text-ctp-subtext1 group-hover:text-ctp-blue mocha:group-hover:text-ctp-pink relative z-10 mt-6 flex text-sm font-medium transition">
             <LinkIcon className="h-6 w-6 flex-none" />
-            <span className="ml-2">{project.link.label}</span>
+            <span className="ml-2">{project.label}</span>
           </p>
         </Card>
       ))}
@@ -222,36 +79,69 @@ function ProjectGrid({ projects }: { projects: Array<Project> }) {
 }
 
 export default function Projects() {
+  const clientProjectLogos: Record<string, ImageProps['src']> = {
+    mabyduck: logoMabyDuck,
+    google: logoGoogle,
+    valeursport: logoValeurSport,
+    docsociety: logoDocSoc,
+    rff: logoRff,
+    tna: logoTna,
+    samaritans: logoSamaritans,
+  }
+
+  const clientProjectItems: Array<Project> = clientProjects.map((project) => ({
+    ...project,
+    logo: clientProjectLogos[project.key],
+  }))
+
+  const openSourceProjectItems: Array<Project> = openSourceContributions.map(
+    (project) => ({
+      ...project,
+      icon: GitHubIcon,
+    }),
+  )
+
   return (
-    <SimpleLayout
-      title="Delivery work and open-source projects."
-      intro="A mix of client delivery and open-source work from my public contribution history."
-    >
-      <div className="space-y-24">
-        <section>
-          <h2 className="text-xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-            Client and Product Work
-          </h2>
-          <p className="mt-3 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
-            Work across startup, agency, and contract engagements.
-          </p>
-          <div className="mt-10">
-            <ProjectGrid projects={clientProjects} />
-          </div>
-        </section>
-        <section>
-          <h2 className="text-xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-            Open-Source Contributions
-          </h2>
-          <p className="mt-3 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
-            Repositories from my public GitHub history, including projects I
-            own and projects I contribute to.
-          </p>
-          <div className="mt-10">
-            <ProjectGrid projects={openSourceContributions} />
-          </div>
-        </section>
-      </div>
-    </SimpleLayout>
+    <>
+      <JsonLd
+        id="projects-page-schema"
+        data={createPageSchema({
+          title: 'Projects',
+          description: metadata.description as string,
+          path: '/projects',
+          type: 'CollectionPage',
+        })}
+      />
+      <SimpleLayout
+        title="Delivery work and open-source projects."
+        intro="A mix of client delivery and open-source work from my public contribution history."
+      >
+        <div className="space-y-24">
+          <section>
+            <h2 className="text-ctp-text text-xl font-semibold tracking-tight">
+              Client and Product Work
+            </h2>
+            <p className="text-ctp-subtext1 mt-3 max-w-2xl text-sm">
+              Work across startup, agency, and contract engagements.
+            </p>
+            <div className="mt-10">
+              <ProjectGrid projects={clientProjectItems} />
+            </div>
+          </section>
+          <section>
+            <h2 className="text-ctp-text text-xl font-semibold tracking-tight">
+              Open-Source Contributions
+            </h2>
+            <p className="text-ctp-subtext1 mt-3 max-w-2xl text-sm">
+              Repositories from my public GitHub history, including projects I
+              own and projects I contribute to.
+            </p>
+            <div className="mt-10">
+              <ProjectGrid projects={openSourceProjectItems} />
+            </div>
+          </section>
+        </div>
+      </SimpleLayout>
+    </>
   )
 }

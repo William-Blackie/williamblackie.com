@@ -1,15 +1,20 @@
+import { type Metadata } from 'next'
 import Image, { type ImageProps } from 'next/image'
 import clsx from 'clsx'
 import React from 'react'
 import Link from 'next/link'
 import { Container } from '@/components/Container'
+import { JsonLd } from '@/components/JsonLd'
 import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons'
 import { BriefcaseIcon, MailIcon } from '@/components/GeneralIcons'
 import { SocialLink } from '@/components/SocialLink'
+import { createPageMetadata, createPageSchema } from '@/lib/metadata'
+import { personSchemaId } from '@/lib/site'
 import logoDeveloperfy from '@/images/logos/developerfy.svg'
 import logoGoogle from '@/images/logos/google.svg'
 import logoTorchbox from '@/images/logos/tbx.svg'
 import logoMabyDuck from '@/images/logos/mabyduck.png'
+import { workExperience } from '@/lib/profile-content'
 
 import image1 from '@/images/photos/image-1.jpg'
 import image2 from '@/images/photos/image-2.jpg'
@@ -36,21 +41,26 @@ function Role({ role }: { role: Role }) {
 
   return (
     <li className="flex gap-4">
-      <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-        <Image src={role.logo} alt="" className="h-7 w-7" unoptimized />
+      <div className="bg-ctp-mantle shadow-ctp-crust/10 ring-ctp-surface0/80 relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1">
+        <div className="dark:bg-ctp-text/90 dark:ring-ctp-text/15 flex h-8 w-8 items-center justify-center rounded-full p-1.5 dark:ring-1">
+          <Image
+            src={role.logo}
+            alt=""
+            className="h-full w-full object-contain"
+            unoptimized
+          />
+        </div>
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Company</dt>
-        <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+        <dd className="text-ctp-text w-full flex-none text-sm font-medium">
           {role.company}
         </dd>
         <dt className="sr-only">Role</dt>
-        <dd className="text-xs text-zinc-500 dark:text-zinc-400">
-          {role.title}
-        </dd>
+        <dd className="text-ctp-subtext1 text-xs">{role.title}</dd>
         <dt className="sr-only">Date</dt>
         <dd
-          className="ml-auto text-xs text-zinc-500"
+          className="text-ctp-subtext1 ml-auto text-xs"
           aria-label={`${startLabel} until ${endLabel}`}
         >
           <time dateTime={startDate}>{startLabel}</time>{' '}
@@ -63,46 +73,31 @@ function Role({ role }: { role: Role }) {
 }
 
 function Resume() {
-  const resume: Array<Role> = [
-    {
-      company: 'Mabyduck',
-      title: 'Staff Engineer',
-      logo: logoMabyDuck,
-      start: 'April 2025',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
+  const logos: Record<string, ImageProps['src']> = {
+    mabyduck: logoMabyDuck,
+    developerfy: logoDeveloperfy,
+    google: logoGoogle,
+    torchbox: logoTorchbox,
+  }
+
+  const resume: Array<Role> = workExperience.map((role) => ({
+    company: role.company,
+    title:
+      role.key === 'google' ? 'Full-stack Developer - Contract' : role.title,
+    logo: logos[role.key],
+    start: {
+      label: role.startLabel,
+      dateTime: role.startDateTime,
     },
-    {
-      company: 'Developerfy',
-      title: 'Owner',
-      logo: logoDeveloperfy,
-      start: 'March 2024',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
+    end: {
+      label: role.endLabel,
+      dateTime: role.endDateTime,
     },
-    {
-      company: 'Google',
-      title: 'Full-stack Developer - Contract',
-      logo: logoGoogle,
-      start: 'August 2024',
-      end: 'December 2024',
-    },
-    {
-      company: 'Torchbox',
-      title: 'Software Developer',
-      logo: logoTorchbox,
-      start: 'September 2019',
-      end: 'March 2024',
-    },
-  ]
+  }))
 
   return (
-    <div className="mx-auto max-w-2xl rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+    <div className="border-ctp-surface0/80 bg-ctp-mantle mx-auto max-w-2xl rounded-2xl border p-6">
+      <h2 className="text-ctp-text flex text-sm font-semibold">
         <BriefcaseIcon className="h-6 w-6 flex-none" />
         <span className="ml-3">Work Experience</span>
       </h2>
@@ -116,7 +111,13 @@ function Resume() {
 }
 
 function Photos() {
-  const rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
+  const rotations = [
+    'rotate-2',
+    '-rotate-2',
+    'rotate-2',
+    'rotate-2',
+    '-rotate-2',
+  ]
 
   return (
     <div className="mt-16 sm:mt-20">
@@ -125,7 +126,7 @@ function Photos() {
           <div
             key={image.src}
             className={clsx(
-              'relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800',
+              'bg-ctp-surface0 relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl sm:w-72 sm:rounded-2xl',
               rotations[imageIndex % rotations.length],
             )}
           >
@@ -145,15 +146,28 @@ function Photos() {
 export default function Home() {
   return (
     <>
+      <JsonLd
+        id="home-page-schema"
+        data={createPageSchema({
+          title: 'Home',
+          description: 'Introduction, current role, and delivery focus.',
+          path: '/',
+          type: 'ProfilePage',
+          mainEntity: {
+            '@id': personSchemaId,
+          },
+        })}
+      />
       <Container className="mt-9">
         <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+          <h1 className="text-ctp-text text-4xl font-bold tracking-tight sm:text-5xl">
             William Blackie
           </h1>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            Hi, I&apos;m William. I&apos;m a Full-stack Engineer based in Bristol and London, UK.
+          <p className="text-ctp-subtext1 mt-6 text-base">
+            Hi, I&apos;m William. I&apos;m a Full-stack Engineer based in
+            Bristol and London, UK.
           </p>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+          <p className="text-ctp-subtext1 mt-6 text-base">
             I&apos;ve worked across agency delivery at Torchbox, contract and
             freelance work through Developerfy (including a stint at Google
             DeepMind), and now full-time product engineering at{' '}
@@ -161,7 +175,7 @@ export default function Home() {
               href="https://mabyduck.com"
               rel="noopener noreferrer"
               target="_blank"
-              className="text-sm font-medium text-zinc-800 transition hover:text-teal-700 dark:text-zinc-200 dark:hover:text-teal-400"
+              className="text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue mocha:decoration-ctp-pink/35 mocha:hover:text-ctp-pink mocha:hover:decoration-ctp-pink font-medium underline underline-offset-4 transition-[text-decoration-color] transition-colors"
             >
               Mabyduck
             </a>
@@ -169,18 +183,18 @@ export default function Home() {
             matters, but so does building systems that don&apos;t need heroics
             to keep running.
           </p>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+          <p className="text-ctp-subtext1 mt-6 text-base">
             I build with Python (Django, FastAPI, Wagtail) and TypeScript
             (React, Next.js). I care about accessible products, clear
             architecture, and releases that don&apos;t require a prayer circle
             on Friday afternoon.
           </p>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+          <p className="text-ctp-subtext1 mt-6 text-base">
             I write about delivery, tooling, and lessons from real projects on
             the{' '}
             <Link
               href="/articles"
-              className="font-medium text-zinc-800 transition hover:text-teal-700 dark:text-zinc-200 dark:hover:text-teal-400"
+              className="text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue mocha:decoration-ctp-pink/35 mocha:hover:text-ctp-pink mocha:hover:decoration-ctp-pink font-medium underline underline-offset-4 transition-[text-decoration-color] transition-colors"
             >
               blog
             </Link>
@@ -213,3 +227,9 @@ export default function Home() {
     </>
   )
 }
+
+export const metadata: Metadata = createPageMetadata({
+  title: 'Home',
+  description: 'Introduction, current role, and delivery focus.',
+  path: '/',
+})
