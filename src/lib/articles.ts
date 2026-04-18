@@ -1,3 +1,5 @@
+import fs from 'node:fs/promises'
+import path from 'node:path'
 import glob from 'fast-glob'
 
 interface Article {
@@ -33,4 +35,17 @@ export async function getAllArticles() {
   const articles = await Promise.all(articleFilenames.map(importArticle))
 
   return articles.sort((a, z) => +new Date(z.date) - +new Date(a.date))
+}
+
+export async function getArticleSourceBySlug(slug: string) {
+  const articlePath = path.join(
+    process.cwd(),
+    'src',
+    'app',
+    'articles',
+    slug,
+    'page.mdx',
+  )
+
+  return fs.readFile(articlePath, 'utf8')
 }
