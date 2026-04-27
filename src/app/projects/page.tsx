@@ -52,7 +52,7 @@ function ProjectGrid({ projects }: { projects: Array<Project> }) {
         <Card as="li" key={project.name}>
           <div className="bg-ctp-mantle shadow-ctp-crust/10 ring-ctp-surface0/80 relative z-10 flex h-12 w-12 items-center justify-center rounded-full shadow-md ring-1">
             {project.logo ? (
-              <div className="dark:bg-ctp-text/90 dark:ring-ctp-text/15 flex h-10 w-10 items-center justify-center rounded-full p-2 dark:ring-1">
+              <div className="mocha:bg-ctp-text/90 mocha:ring-ctp-text/15 mocha:ring-1 flex h-10 w-10 items-center justify-center rounded-full p-2">
                 <Image
                   src={project.logo}
                   alt=""
@@ -61,7 +61,7 @@ function ProjectGrid({ projects }: { projects: Array<Project> }) {
                 />
               </div>
             ) : project.icon ? (
-              <project.icon className="fill-ctp-subtext1 h-8 w-8" />
+              <project.icon className="fill-ctp-subtext1 h-10 w-10" />
             ) : null}
           </div>
           <h2 className="text-ctp-text mt-6 text-base font-semibold">

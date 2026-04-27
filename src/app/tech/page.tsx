@@ -3,6 +3,7 @@ import { JsonLd } from '@/components/JsonLd'
 import { Section } from '@/components/Section'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import { createPageMetadata, createPageSchema } from '@/lib/metadata'
+import { Metadata } from 'next'
 
 function ToolsSection({
   children,
@@ -36,7 +37,7 @@ function Tool({
   )
 }
 
-export const metadata = createPageMetadata({
+export const metadata: Metadata = createPageMetadata({
   title: 'Tech',
   description: 'Tools I use each week to ship product and platform work.',
   path: '/tech',
@@ -88,7 +89,7 @@ export default function Tech() {
                 href="https://github.com/William-Blackie/.dotfiles"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue mocha:decoration-ctp-pink/35 mocha:hover:text-ctp-pink mocha:hover:decoration-ctp-pink font-medium underline underline-offset-4 transition-[text-decoration-color] transition-colors"
+                className="text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue mocha:decoration-ctp-pink/35 mocha:hover:text-ctp-pink mocha:hover:decoration-ctp-pink font-medium underline underline-offset-4 transition-colors"
               >
                 github.com/William-Blackie/.dotfiles
               </a>
@@ -102,7 +103,7 @@ export default function Tech() {
           </ToolsSection>
           <ToolsSection title="Hardware">
             <Tool title="14” MacBook Pro, M3 Pro, 18GB RAM (2023)">
-              I use macOS for day-to-day work and Linux for server and container
+              I use MacOS for day-to-day work and Linux for server and container
               environments. This setup has been a good balance between local
               speed and production parity.
             </Tool>

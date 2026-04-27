@@ -1,9 +1,9 @@
 import { Container } from '@/components/Container'
 import { Comments } from '@/components/Comments'
-import { JsonLd } from '@/components/JsonLd'
 import { Prose } from '@/components/Prose'
 import { formatDate } from '@/lib/formatDate'
 import { createArticleSchema } from '@/lib/metadata'
+import { JsonLd } from './JsonLd'
 
 interface ArticleMetadata {
   title: string

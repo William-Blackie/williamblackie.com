@@ -1,15 +1,25 @@
 # williamblackie.com
 
-Personal website and writing site built with Next.js, MDX, and Tailwind CSS.
+My personal website and blog site built with Next.js, MDX, and Tailwind CSS.
+
+<!-- toc -->
+
+- [Stack](#stack)
+- [Prerequisites](#prerequisites)
+- [Setup](#setup)
+- [Development](#development)
+- [Commands](#commands)
+- [Content layout](#content-layout)
+
+<!-- tocstop -->
 
 ## Stack
 
+- Node 24
 - Next.js `16`
 - React `19`
-- TypeScript
+- Typescript
 - Tailwind CSS
-- MDX
-- `rehype-pretty-code`
 
 ## Prerequisites
 
@@ -78,10 +88,3 @@ Make targets:
 - `src/app/about/page.tsx` - about
 - `src/app/tech/page.tsx` - tech
 - `src/content/blog-drafts/*` - article drafts and series planning
-
-## Writing workflow
-
-1. Write in `src/content/blog-drafts/`.
-2. Refine to publishable quality.
-3. Move/adapt into `src/app/articles/<slug>/page.mdx`.
-4. Validate with `npm run lint` and `npm run build`.

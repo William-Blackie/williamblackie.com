@@ -42,7 +42,7 @@ function Role({ role }: { role: Role }) {
   return (
     <li className="flex gap-4">
       <div className="bg-ctp-mantle shadow-ctp-crust/10 ring-ctp-surface0/80 relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1">
-        <div className="dark:bg-ctp-text/90 dark:ring-ctp-text/15 flex h-8 w-8 items-center justify-center rounded-full p-1.5 dark:ring-1">
+        <div className="mocha:bg-ctp-text/90 mocha:ring-ctp-text/15 mocha:ring-1 flex h-10 w-10 items-center justify-center rounded-full p-1.5">
           <Image
             src={role.logo}
             alt=""
@@ -168,9 +168,17 @@ export default function Home() {
             Bristol and London, UK.
           </p>
           <p className="text-ctp-subtext1 mt-6 text-base">
-            I&apos;ve worked across agency delivery at Torchbox, contract and
-            freelance work through Developerfy (including a stint at Google
-            DeepMind), and now full-time product engineering at{' '}
+            I&apos;ve worked across agency delivery at{' '}
+            <a
+              href="https://www.torchbox.com"
+              rel="noopener noreferrer"
+              target="_blank"
+              className="text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue mocha:decoration-ctp-pink/35 mocha:hover:text-ctp-pink mocha:hover:decoration-ctp-pink font-medium underline underline-offset-4 transition-[text-decoration-color] transition-colors"
+            >
+              Torchbox
+            </a>
+            , contract and freelance work through Developerfy (including a stint
+            at Google DeepMind), and now full-time product engineering at{' '}
             <a
               href="https://mabyduck.com"
               rel="noopener noreferrer"

@@ -9,9 +9,22 @@
     "dev": "npx -y node@24 ./node_modules/next/dist/bin/next dev",
     "build": "npx -y node@24 ./node_modules/next/dist/bin/next build",
     "start": "npx -y node@24 ./node_modules/next/dist/bin/next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky"
   },
   "browserslist": "defaults, not ie <= 11",
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,md,mdx,json}": [
+      "prettier --write"
+    ]
+  },
   "dependencies": {
     "@giscus/react": "^3.1.0",
     "@headlessui/react": "^2.2.9",
@@ -45,13 +58,17 @@
     "axe-core": "^4.11.1",
     "eslint": "^9.39.3",
     "eslint-config-next": "^16.1.6",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "playwright": "^1.58.2",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.2.0"
   },
   "overrides": {
+    "postcss": "^8.5.10",
     "sucrase": {
       "glob": "^11.0.3"
     }

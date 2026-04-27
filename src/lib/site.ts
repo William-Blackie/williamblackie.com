@@ -23,6 +23,11 @@ export const optionalProfileLinks = [
     description: 'Professional profile and career history.',
   },
   {
+    title: 'Mastodon',
+    url: 'https://mastodon.social/@williamblackie',
+    description: 'Social profile on Mastodon.',
+  },
+  {
     title: 'Email',
     url: 'mailto:will@developerfy.com',
     description: 'Direct contact for consulting or engineering work.',

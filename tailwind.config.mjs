@@ -3,16 +3,7 @@ import typographyStyles from './typography.mjs'
 
 const config = {
   content: ['./src/**/*.{js,jsx,ts,tsx,mdx}'],
-  darkMode: 'selector',
-  plugins: [
-    typographyPlugin,
-    function ({ addVariant }) {
-      addVariant('latte', ':is(.latte &)')
-      addVariant('frappe', ':is(.frappe &)')
-      addVariant('macchiato', ':is(.macchiato &)')
-      addVariant('mocha', ':is(.mocha &)')
-    },
-  ],
+  plugins: [typographyPlugin],
   theme: {
     fontSize: {
       xs: ['0.8125rem', { lineHeight: '1.5rem' }],

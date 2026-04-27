@@ -60,8 +60,8 @@ export function createPageMetadata({
     },
     robots: noIndex
       ? {
-          index: false,
-          follow: false,
+          index: true,
+          follow: true,
         }
       : undefined,
   }
@@ -183,4 +183,10 @@ export const rootMetadata: Metadata = {
   alternates: {
     canonical: absoluteUrl('/'),
   },
+  authors: [
+    {
+      name: siteName,
+      url: 'https://mastodon.social/@williamblackie',
+    },
+  ],
 }
