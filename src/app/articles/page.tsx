@@ -67,7 +67,7 @@ export default async function Articles() {
               ))}
             </div>
           ) : (
-            <p className="max-w-2xl text-base text-ctp-subtext1">
+            <p className="text-ctp-subtext1 max-w-2xl text-base">
               There are no published articles right now.
             </p>
           )}

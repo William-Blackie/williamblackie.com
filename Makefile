@@ -5,7 +5,7 @@ NPM ?= npm
 
 .PHONY: help install dev lint build start clean outdated audit update
 
-## Show this help message
+## Show the help message
 help:
 	@awk '\
 	  BEGIN {FS = ":"} \
@@ -36,6 +36,10 @@ dev:
 ## Run lint checks
 lint:
 	$(NPM) run lint
+
+## Run prettier format
+format:
+	$(NPM) run format
 
 ## Build production assets
 build:

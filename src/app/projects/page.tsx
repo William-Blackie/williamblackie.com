@@ -124,7 +124,7 @@ export default function Projects() {
             <p className="text-ctp-subtext1 mt-3 max-w-2xl text-sm">
               Work across startup, agency, and contract engagements.
             </p>
-            <div className="mt-10">
+            <div className="mt-10 sm:mx-auto sm:w-full">
               <ProjectGrid projects={clientProjectItems} />
             </div>
           </section>
@@ -132,7 +132,7 @@ export default function Projects() {
             <h2 className="text-ctp-text text-xl font-semibold tracking-tight">
               Open-Source Contributions
             </h2>
-            <p className="text-ctp-subtext1 mt-3 max-w-2xl text-sm">
+            <p className="text-ctp-subtext1 mt-3 max-w-2xl text-sm sm:mx-auto sm:w-1/5">
               Repositories from my public GitHub history, including projects I
               own and projects I contribute to.
             </p>
