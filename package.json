@@ -6,9 +6,9 @@
     "node": "^24.0.0"
   },
   "scripts": {
-    "dev": "npx -y node@24 ./node_modules/next/dist/bin/next dev",
-    "build": "npx -y node@24 ./node_modules/next/dist/bin/next build",
-    "start": "npx -y node@24 ./node_modules/next/dist/bin/next start",
+    "dev": "npx -y -p node@24 node ./node_modules/next/dist/bin/next dev",
+    "build": "npx -y -p node@24 node ./node_modules/next/dist/bin/next build",
+    "start": "npx -y -p node@24 node ./node_modules/next/dist/bin/next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -26,6 +26,7 @@
     ]
   },
   "dependencies": {
+    "@excalidraw/excalidraw": "^0.18.1",
     "@giscus/react": "^3.1.0",
     "@headlessui/react": "^2.2.9",
     "@mdx-js/loader": "^3.1.1",
@@ -68,6 +69,16 @@
     "tailwindcss": "^4.2.0"
   },
   "overrides": {
+    "react": "$react",
+    "react-dom": "$react-dom",
+    "@excalidraw/excalidraw": {
+      "nanoid": "3.3.11"
+    },
+    "@excalidraw/mermaid-to-excalidraw": {
+      "@mermaid-js/parser": "1.1.0",
+      "nanoid": "5.1.11"
+    },
+    "lodash-es": "4.18.1",
     "postcss": "^8.5.10",
     "sucrase": {
       "glob": "^11.0.3"

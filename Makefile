@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 SHELL := /usr/bin/env bash
 
-NPM ?= npm
+NPM ?= npx -y -p node@24 -p npm@10 npm
 
 .PHONY: help install dev lint build start clean outdated audit update
 
@@ -26,7 +26,7 @@ help:
 ### Setup
 ## Install Node dependencies
 install:
-	$(NPM) install
+	SHARP_IGNORE_GLOBAL_LIBVIPS=1 $(NPM) install
 
 ### Development
 ## Run Next.js development server
