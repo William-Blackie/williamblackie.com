@@ -46,13 +46,13 @@ function ProjectGrid({ projects }: { projects: Array<Project> }) {
   return (
     <ul
       role="list"
-      className="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3"
+      className="mx-2 grid grid-cols-1 gap-x-12 gap-y-16 sm:mx-auto sm:grid-cols-2 lg:grid-cols-3"
     >
       {projects.map((project) => (
         <Card as="li" key={project.name}>
           <div className="bg-ctp-mantle shadow-ctp-crust/10 ring-ctp-surface0/80 relative z-10 flex h-12 w-12 items-center justify-center rounded-full shadow-md ring-1">
             {project.logo ? (
-              <div className="mocha:bg-ctp-text/90 mocha:ring-ctp-text/15 mocha:ring-1 flex h-10 w-10 items-center justify-center rounded-full p-2">
+              <div className="dark:bg-ctp-text/90 dark:ring-ctp-text/15 flex h-10 w-10 items-center justify-center rounded-full p-2 dark:ring-1">
                 <Image
                   src={project.logo}
                   alt=""
@@ -68,7 +68,7 @@ function ProjectGrid({ projects }: { projects: Array<Project> }) {
             <Card.Link href={project.href}>{project.name}</Card.Link>
           </h2>
           <Card.Description>{project.description}</Card.Description>
-          <p className="text-ctp-subtext1 group-hover:text-ctp-blue mocha:group-hover:text-ctp-pink relative z-10 mt-6 flex text-sm font-medium transition">
+          <p className="text-ctp-subtext1 group-hover:text-ctp-blue dark:group-hover:text-ctp-pink relative z-10 mt-6 flex text-sm font-medium transition">
             <LinkIcon className="h-6 w-6 flex-none" />
             <span className="ml-2">{project.label}</span>
           </p>
@@ -132,7 +132,7 @@ export default function Projects() {
             <h2 className="text-ctp-text text-xl font-semibold tracking-tight">
               Open-Source Contributions
             </h2>
-            <p className="text-ctp-subtext1 mt-3 max-w-2xl text-sm sm:mx-auto sm:w-1/5">
+            <p className="text-ctp-subtext1 mt-3 max-w-2xl text-sm">
               Repositories from my public GitHub history, including projects I
               own and projects I contribute to.
             </p>

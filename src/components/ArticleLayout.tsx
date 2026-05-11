@@ -4,6 +4,7 @@ import { Prose } from '@/components/Prose'
 import { formatDate } from '@/lib/formatDate'
 import { createArticleSchema } from '@/lib/metadata'
 import { JsonLd } from './JsonLd'
+import { CodeBlockCopy } from './CopyButton'
 
 interface ArticleMetadata {
   title: string
@@ -43,7 +44,9 @@ export function ArticleLayout({
             <span>{article.author}</span>
           </div>
         </header>
-        <Prose className="mt-8">{children}</Prose>
+        <Prose className="mt-8">
+          <CodeBlockCopy>{children}</CodeBlockCopy>
+        </Prose>
         <Comments />
       </article>
     </Container>

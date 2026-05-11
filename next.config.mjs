@@ -5,12 +5,13 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
 }
 
+/** @type {import('rehype-pretty-code').Options} */
 const prettyCodeOptions = {
   theme: {
-    dark: 'github-dark-dimmed',
-    light: 'github-light',
+    dark: 'catppuccin-mocha',
+    light: 'catppuccin-latte',
   },
-  keepBackground: false,
+  defaultLang: 'plaintext',
 }
 
 const withMDX = nextMDX({

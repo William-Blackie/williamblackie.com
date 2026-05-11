@@ -1,3 +1,24 @@
 @import 'tailwindcss';
 @config '../../tailwind.config.mjs';
 @import '@catppuccin/tailwindcss/mocha.css';
+
+@custom-variant dark (&:where(.mocha, .dark *));
+@custom-variant light (&:where(.latte, .dark *));
+
+code[data-theme*=' '],
+code[data-theme*=' '] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+.mocha code[data-theme*=' '],
+.mocha code[data-theme*=' '] span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+.latte code[data-theme*=' '],
+.latte code[data-theme*=' '] span {
+  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg) !important;
+}

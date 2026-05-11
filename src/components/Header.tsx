@@ -45,9 +45,9 @@ function MobileNavigation(
 ) {
   return (
     <Popover {...props}>
-      <PopoverButton className="group bg-ctp-mantle/90 text-ctp-text shadow-ctp-crust/10 ring-ctp-surface0/80 hover:ring-ctp-blue/40 mocha:hover:ring-ctp-pink/40 flex items-center rounded-full px-4 py-2 text-sm font-medium shadow-lg ring-1 backdrop-blur">
+      <PopoverButton className="group bg-ctp-mantle/90 text-ctp-text shadow-ctp-crust/10 ring-ctp-surface0/80 hover:ring-ctp-blue/40 dark:hover:ring-ctp-pink/40 flex items-center rounded-full px-4 py-2 text-sm font-medium shadow-lg ring-1 backdrop-blur">
         Menu
-        <ChevronDownIcon className="stroke-ctp-subtext1 group-hover:stroke-ctp-blue mocha:group-hover:stroke-ctp-pink ml-3 h-auto w-2" />
+        <ChevronDownIcon className="stroke-ctp-subtext1 group-hover:stroke-ctp-blue dark:group-hover:stroke-ctp-pink ml-3 h-auto w-2" />
       </PopoverButton>
       <Transition>
         <TransitionChild
@@ -113,12 +113,12 @@ function NavItem({
           'relative block px-3 py-2 transition',
           isActive
             ? 'text-ctp-text font-semibold'
-            : 'hover:text-ctp-blue mocha:hover:text-ctp-pink',
+            : 'hover:text-ctp-blue dark:hover:text-ctp-pink',
         )}
       >
         {children}
         {isActive && (
-          <span className="from-ctp-blue/0 via-ctp-blue/45 to-ctp-blue/0 mocha:from-ctp-pink/0 mocha:via-ctp-pink/40 mocha:to-ctp-pink/0 absolute inset-x-1 -bottom-px h-px bg-linear-to-r" />
+          <span className="from-ctp-blue/0 via-ctp-blue/45 to-ctp-blue/0 dark:from-ctp-pink/0 dark:via-ctp-pink/40 dark:to-ctp-pink/0 absolute inset-x-1 -bottom-px h-px bg-linear-to-r" />
         )}
       </Link>
     </li>
@@ -161,14 +161,14 @@ function ThemeToggle() {
         mounted ? `Current: ${label}. Click for ${nextLabel}` : 'Toggle theme'
       }
       title={mounted ? `Catppuccin ${label}` : undefined}
-      className="group bg-ctp-mantle/90 shadow-ctp-crust/10 ring-ctp-surface0/80 hover:ring-ctp-blue/50 mocha:hover:ring-ctp-pink/50 flex h-10 w-10 items-center justify-center rounded-full shadow-lg ring-1 backdrop-blur transition hover:cursor-pointer"
+      className="group bg-ctp-mantle/90 shadow-ctp-crust/10 ring-ctp-surface0/80 hover:ring-ctp-blue/50 dark:hover:ring-ctp-pink/50 flex h-10 w-10 items-center justify-center rounded-full shadow-lg ring-1 backdrop-blur transition hover:cursor-pointer"
       onClick={toggleTheme}
     >
       {mounted ? (
         isLight ? (
-          <SunIcon className="fill-ctp-yellow stroke-ctp-subtext1 group-hover:fill-ctp-peach group-hover:stroke-ctp-blue mocha:group-hover:stroke-ctp-pink h-6 w-6 transition" />
+          <SunIcon className="fill-ctp-yellow stroke-ctp-subtext1 group-hover:fill-ctp-peach group-hover:stroke-ctp-blue dark:group-hover:stroke-ctp-pink h-6 w-6 transition" />
         ) : (
-          <MoonIcon className="fill-ctp-lavender stroke-ctp-subtext1 group-hover:stroke-ctp-blue mocha:group-hover:stroke-ctp-pink h-6 w-6 transition" />
+          <MoonIcon className="fill-ctp-lavender stroke-ctp-subtext1 group-hover:stroke-ctp-blue dark:group-hover:stroke-ctp-pink h-6 w-6 transition" />
         )
       ) : (
         <SunIcon className="fill-ctp-yellow stroke-ctp-subtext1 h-6 w-6" />

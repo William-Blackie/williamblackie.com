@@ -12,7 +12,7 @@ function NavLink({
   return (
     <Link
       href={href}
-      className="hover:text-ctp-blue mocha:hover:text-ctp-pink transition"
+      className="hover:text-ctp-blue dark:hover:text-ctp-pink transition"
     >
       {children}
     </Link>

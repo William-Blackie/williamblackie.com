@@ -118,24 +118,24 @@ export default function typographyStyles({ theme }) {
         },
 
         pre: {
+          position: 'relative',
           color: 'var(--tw-prose-pre-code)',
           fontSize: theme('fontSize.sm')[0],
           fontWeight: theme('fontWeight.medium'),
           backgroundColor: 'var(--tw-prose-pre-bg)',
-          borderRadius: theme('borderRadius.3xl'),
-          padding: theme('spacing.8'),
+          borderRadius: theme('borderRadius.xl'),
           overflowX: 'auto',
           border: '1px solid',
           borderColor: 'theme(colors.ctp.surface0)',
         },
         'pre code': {
-          display: 'inline',
+          display: 'grid',
+          padding: theme('spacing.4'),
           color: 'inherit',
           fontSize: 'inherit',
           fontWeight: 'inherit',
           backgroundColor: 'transparent',
           borderRadius: 0,
-          padding: 0,
         },
 
         hr: {
