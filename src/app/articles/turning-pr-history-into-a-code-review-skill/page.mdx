@@ -1,0 +1,324 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import { createArticleMetadata } from '@/lib/metadata'
+
+export const article = {
+    title: 'Turning PR history into a code review skill',
+    description:
+        'A practical write-up of building code-review guidance from historical pull request discussion, using Django review comments, lightweight diff context, deterministic merge rules, and generated skill files.',
+    author: 'William Blackie',
+    date: '2026-04-19',
+    path: '/articles/turning-pr-history-into-a-code-review-skill',
+}
+export const metadata = createArticleMetadata({
+    title: article.title,
+    description: article.description,
+    path: article.path,
+    datePublished: article.date,
+})
+
+<ArticleLayout article={article}>
+
+I have been experimenting with a simple idea: most mature teams already
+have a repository-specific review style guide, but it lives in pull
+request history rather than in one document.
+
+In practice, reviewers repeat the same comments over and over. Wrap that
+docstring properly. Reuse the existing helper. Avoid the clever shortcut
+because it breaks signals. Keep this API shape consistent with the rest
+of the project. Those are not generic Python opinions. They are
+repository habits enforced by the people who actually merge code.
+
+The project I built to test this is [code-review-skill-creator](https://github.com/William-Blackie/code-review-skill-creator). The accompanying
+[slides](https://github.com/William-Blackie/code-review-skill-creator/blob/main/slides.md) explain the pitch. The repository itself is the more useful part: it turns
+historical pull request review discussion into a generated review skill with
+`SKILL.md`, `AGENTS.md`, `CLAUDE.md`, `.cursorrules`, and split reference files.
+
+## The core ideas
+
+The interesting part is not “use an LLM to summarise comments”. That is
+the easy bit and also the least trustworthy bit. The useful idea is to
+separate extraction, weighting, synthesis, and precedence so the model
+proposes candidate rules, but the repository code decides what survives.
+
+The slides call this out using four semantic ideas that are more useful
+than they sound:
+
+- Distributional semantics: review comments show how a team actually
+  talks about quality.
+- Directive semantics: review comments are requests and constraints, not
+  just observations.
+- Diachronic semantics: projects change habits over time, so chronology
+  matters.
+- Conflict resolution: when reviewers disagree, authority and recency
+  decide the winner.
+
+<Excalidraw
+    height="400px"
+    initialData={{
+        elements: [
+            {
+                id: 'rect1',
+                type: 'rectangle',
+                x: 100,
+                y: 100,
+                width: 150,
+                height: 80,
+                backgroundColor: '#fab387',
+                strokeColor: '#1e1e2e',
+                fillStyle: 'hachure',
+                strokeWidth: 2,
+                roughness: 1,
+                opacity: 100,
+                text: 'Extraction',
+            },
+            {
+                id: 'rect2',
+                type: 'rectangle',
+                x: 300,
+                y: 100,
+                width: 150,
+                height: 80,
+                backgroundColor: '#f9e2af',
+                strokeColor: '#1e1e2e',
+                fillStyle: 'hachure',
+                strokeWidth: 2,
+                roughness: 1,
+                opacity: 100,
+                text: 'Weighting',
+            },
+            {
+                id: 'rect3',
+                type: 'rectangle',
+                x: 500,
+                y: 100,
+                width: 150,
+                height: 80,
+                backgroundColor: '#a6e3a1',
+                strokeColor: '#1e1e2e',
+                fillStyle: 'hachure',
+                strokeWidth: 2,
+                roughness: 1,
+                opacity: 100,
+                text: 'Synthesis',
+            },
+            {
+                id: 'arrow1',
+                type: 'arrow',
+                x: 250,
+                y: 140,
+                width: 50,
+                height: 0,
+                strokeColor: '#1e1e2e',
+                points: [
+                    [0, 0],
+                    [50, 0],
+                ],
+            },
+            {
+                id: 'arrow2',
+                type: 'arrow',
+                x: 450,
+                y: 140,
+                width: 50,
+                height: 0,
+                strokeColor: '#1e1e2e',
+                points: [
+                    [0, 0],
+                    [50, 0],
+                ],
+            },
+        ],
+        appState: {
+            viewBackgroundColor: '#eff1f5',
+            currentItemFontFamily: 1,
+        },
+    }}
+/>
+
+That framing matters because it stops the project from drifting into
+“generate vibes from code”. The input is not the repository source tree.
+The input is the conversation the maintainers had about what should
+merge.
+
+## What the pipeline actually does
+
+The repository is intentionally plain Python scripts:
+
+- `scripts/extract_prs.py` pulls merged pull requests and inline review comments from GitHub GraphQL.
+- `scripts/rank_authors.py` derives reviewer authority from contribution counts and participation.
+- `scripts/process_data.py` sorts pull requests chronologically, batches them, and injects reviewer weights.
+- `scripts/run_synthesis.py` runs batch synthesis through `opencode`.
+- `scripts/merge_rules.py` applies deterministic precedence.
+- `scripts/split_standards.py` renders the final skill files and theme references.
+
+That shape is deliberate. I wanted something inspectable and boring
+enough that you can reason about each stage independently.
+
+## Why the extractor keeps diff hunks, not full patches
+
+One of the most important implementation decisions is in
+`extract_prs.py`. The extractor keeps the review comment, the
+file path, line metadata, and the review thread’s `diffHunk`.
+It does not try to ingest every touched file in full.
+
+```python
+comments.append(
+    {
+        "body": comment.get("body", ""),
+        "path": comment.get("path"),
+        "diff_hunk": comment.get("diffHunk"),
+        "context_patch": comment.get("diffHunk"),
+        "created_at": comment.get("createdAt"),
+    }
+)
+```
+
+That is a practical trade-off. You need enough local code context to
+understand what the reviewer is objecting to, but not so much context
+that every batch becomes mostly noise. In review, a small patch hunk is
+often exactly the right unit of evidence.
+
+This also keeps the project grounded in the real review event. A comment
+is not interpreted in the abstract. It is interpreted alongside the
+exact fragment of code that prompted it.
+
+## Authority matters, but it cannot be the only thing
+
+Another useful detail is that reviewer authority is not guessed by the
+model. It is computed in code and injected into each batch. The current
+heuristic is simple: more repository contribution and more review
+participation move a reviewer toward a stronger authority weight.
+
+That is obviously imperfect. Contribution count is not the same as
+judgment, and some teams have maintainers who merge a lot without being
+the most careful reviewers. But even a rough authority model is much
+better than flattening every comment into one undifferentiated pile.
+
+More importantly, the final merge policy is deterministic and lives in
+the repository, not inside the model response:
+
+```python
+if nr["authority_weight"] < existing["authority_weight"]:
+    crs["rules"][topic_slug] = nr
+elif nr["authority_weight"] == existing["authority_weight"]:
+    if nr["batch_num"] >= existing["batch_num"]:
+        crs["rules"][topic_slug] = nr
+```
+
+Lower authority weight wins. If authority ties, the later batch wins.
+That gives the project two important properties:
+
+- The model does not decide precedence policy.
+- The system can reflect habit changes over time instead of freezing a
+  project at one moment.
+
+## Why batch synthesis is better than one giant prompt
+
+The pipeline processes pull requests chronologically in batches. That
+sounds like an implementation detail, but it is part of the semantics of
+the system.
+
+If you summarise two years of review history in one pass, you lose
+change over time. A project that once allowed a pattern and later
+tightened its standards ends up looking internally inconsistent. By
+batching chronologically and carrying forward a consolidated rule state,
+the system can preserve newer norms without pretending the older ones
+never existed.
+
+There is also a plain engineering reason: smaller batches are easier to
+inspect, cheaper to rerun, and much easier to debug when the synthesis
+drifts.
+
+## Django is a good test case
+
+I used Django review history because it is dense with explicit
+maintainer feedback and because the project has a long-standing culture
+of careful review. The examples in the slides are the sort of thing I
+wanted this system to preserve.
+
+One example is docstring wording for classes. Another is being careful
+with optimisations like `bulk_create()` when they bypass
+signal behaviour and can break assumptions in downstream projects.
+Those are not abstract “best practices”. They are concrete project
+standards enforced in real review conversations.
+
+That difference matters. A generated skill is only useful if it captures
+what the repository actually treats as important, not what a generic
+coding assistant thinks should matter.
+
+## The output is deliberately simple
+
+The project does not try to invent a complicated runtime. The output is
+a standalone skill repo containing markdown files:
+
+- `REVIEW_STANDARDS.md` as the consolidated rendered output
+- `references/index.md` plus split theme files for selective loading
+- `SKILL.md`, `AGENTS.md`, `CLAUDE.md`, and
+  `.cursorrules` for different tool ecosystems
+
+I like this because it keeps the result legible. A human can inspect the
+output, trim it, rewrite bad rules, or throw it away entirely. The
+generated material is not hidden in a database or a proprietary format.
+
+## What I think is actually novel here
+
+The novel bit is not the summarisation. It is using review history as a
+repository-specific supervision signal.
+
+Most AI code review tooling starts from static analysis, generic model
+priors, or diff inspection. This project starts from the maintainers’
+own feedback history and asks: what standards did this team repeatedly
+enforce strongly enough that they changed code before merge?
+
+That is a much better source of “how this repository wants code to
+look” than a generic style guide, especially for older projects with
+strong local conventions.
+
+## Where it can go wrong
+
+There are obvious failure modes:
+
+- You can overfit to comments that were situational rather than durable.
+- Reviewer authority is only approximated, not proven.
+- Projects with weak or inconsistent review culture will generate weak
+  standards.
+- Models can still hallucinate rule generality if the prompts are too
+  loose.
+
+That is why the deterministic merge layer matters, and why the output is
+designed for inspection instead of blind trust.
+
+## What I would improve next
+
+If I keep pushing this project, the next improvements are obvious:
+
+- Better reviewer authority heuristics than contribution counts.
+- More explicit rule provenance so every generated rule links cleanly
+  back to pull requests and comments.
+- Better pruning of one-off comments that should not become durable
+  standards.
+- More confidence scoring around whether a rule is stylistic,
+  architectural, or compatibility-related.
+
+I also think there is an obvious follow-up: once you have a generated
+review skill, you can compare it against new review conversations and
+detect where the project’s actual standards have started shifting.
+
+## Why I built it this way
+
+I wanted a system that a first-time engineer could read and argue with.
+That shaped the repository more than anything else. The public version is
+intentionally plain scripts, plain markdown, and explicit precedence
+rules.
+
+If this kind of thing is going to be useful inside a real team, it needs
+to be inspectable, boring, and easy to override. Otherwise it just
+becomes another AI-flavoured black box in the path between a reviewer
+and a merge button.
+
+For now, that is enough. The repo has already done the important part:
+it proved that historical pull request discussion can be turned into a
+repository-specific review skill without hiding the decision-making in
+the model.
+
+</ArticleLayout>

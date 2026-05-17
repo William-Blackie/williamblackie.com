@@ -3,49 +3,51 @@ import path from 'node:path'
 import glob from 'fast-glob'
 
 interface Article {
-  title: string
-  description: string
-  author: string
-  date: string
+    title: string
+    description: string
+    author: string
+    date: string
 }
 
 export interface ArticleWithSlug extends Article {
-  slug: string
+    slug: string
 }
 
 async function importArticle(
-  articleFilename: string,
+    articleFilename: string,
 ): Promise<ArticleWithSlug> {
-  const { article } = (await import(`../app/articles/${articleFilename}`)) as {
-    default: React.ComponentType
-    article: Article
-  }
+    const { article } = (await import(
+        `../app/articles/${articleFilename}`
+    )) as {
+        default: React.ComponentType
+        article: Article
+    }
 
-  return {
-    slug: articleFilename.replace(/(\/page)?\.mdx$/, ''),
-    ...article,
-  }
+    return {
+        slug: articleFilename.replace(/(\/page)?\.mdx$/, ''),
+        ...article,
+    }
 }
 
-export async function getAllArticles() {
-  const articleFilenames = await glob('*/page.mdx', {
-    cwd: './src/app/articles',
-  })
+export async function getAllArticles(): Promise<ArticleWithSlug[]> {
+    const articleFilenames = await glob('*/page.mdx', {
+        cwd: './src/app/articles',
+    })
 
-  const articles = await Promise.all(articleFilenames.map(importArticle))
+    const articles = await Promise.all(articleFilenames.map(importArticle))
 
-  return articles.sort((a, z) => +new Date(z.date) - +new Date(a.date))
+    return articles.sort((a, z) => +new Date(z.date) - +new Date(a.date))
 }
 
-export async function getArticleSourceBySlug(slug: string) {
-  const articlePath = path.join(
-    process.cwd(),
-    'src',
-    'app',
-    'articles',
-    slug,
-    'page.mdx',
-  )
+export async function getArticleSourceBySlug(slug: string): Promise<string> {
+    const articlePath = path.join(
+        process.cwd(),
+        'src',
+        'app',
+        'articles',
+        slug,
+        'page.mdx',
+    )
 
-  return fs.readFile(articlePath, 'utf8')
+    return fs.readFile(articlePath, 'utf8')
 }

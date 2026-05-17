@@ -1,24 +1,205 @@
 @import 'tailwindcss';
-@config '../../tailwind.config.mjs';
-@import '@catppuccin/tailwindcss/mocha.css';
+@plugin "@tailwindcss/typography";
 
-@custom-variant dark (&:where(.mocha, .dark *));
-@custom-variant light (&:where(.latte, .dark *));
+@import '../styles/typography.css';
+@import '@catppuccin/tailwindcss/mocha.css';
+@custom-variant dark (&:where(.mocha, .mocha *));
+@custom-variant light (&:where(.latte, .latte *));
 
 code[data-theme*=' '],
 code[data-theme*=' '] span {
-  color: var(--shiki-light);
-  background-color: var(--shiki-light-bg);
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
 }
 
 .mocha code[data-theme*=' '],
 .mocha code[data-theme*=' '] span {
-  color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
 }
 
 .latte code[data-theme*=' '],
 .latte code[data-theme*=' '] span {
-  color: var(--shiki-light) !important;
-  background-color: var(--shiki-light-bg) !important;
+    color: var(--shiki-light) !important;
+    background-color: var(--shiki-light-bg) !important;
+}
+
+@theme {
+    --font-size-xs: 0.8125rem;
+    --font-size-xs--line-height: 1.5rem;
+    --font-size-sm: 0.875rem;
+    --font-size-sm--line-height: 1.5rem;
+    --font-size-base: 1rem;
+    --font-size-base--line-height: 1.75rem;
+    --font-size-lg: 1.125rem;
+    --font-size-lg--line-height: 1.75rem;
+    --font-size-xl: 1.25rem;
+    --font-size-xl--line-height: 2rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-2xl--line-height: 2rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-3xl--line-height: 2.25rem;
+    --font-size-4xl: 2rem;
+    --font-size-4xl--line-height: 2.5rem;
+    --font-size-5xl: 3rem;
+    --font-size-5xl--line-height: 3.5rem;
+    --font-size-6xl: 3.75rem;
+    --font-size-6xl--line-height: 1;
+    --font-size-7xl: 4.5rem;
+    --font-size-7xl--line-height: 1;
+    --font-size-8xl: 6rem;
+    --font-size-8xl--line-height: 1;
+    --font-size-9xl: 8rem;
+    --font-size-9xl--line-height: 1;
+}
+
+@layer components {
+    .prose {
+        color: var(--color-ctp-text);
+        line-height: var(--line-height-7);
+    }
+
+    .prose > * {
+        margin-top: var(--spacing-10);
+        margin-bottom: var(--spacing-10);
+    }
+
+    .prose p {
+        margin-top: var(--spacing-7);
+        margin-bottom: var(--spacing-7);
+    }
+
+    .prose :is(h2, h3) {
+        color: var(--color-ctp-mauve);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    .prose h2 {
+        font-size: var(--font-size-xl);
+        line-height: var(--line-height-7);
+        margin-top: var(--spacing-20);
+        margin-bottom: var(--spacing-4);
+    }
+
+    .prose h3 {
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-7);
+        margin-top: var(--spacing-16);
+        margin-bottom: var(--spacing-4);
+    }
+
+    .prose :is(h2, h3) + * {
+        margin-top: 0;
+    }
+
+    .prose img {
+        border-radius: var(--radius-3xl);
+    }
+
+    .prose a {
+        color: var(--color-ctp-blue);
+        font-weight: var(--font-weight-semibold);
+        text-decoration: underline;
+        text-decoration-color: oklch(from var(--color-ctp-blue) l c h / 0.4);
+        transition-property: color, text-decoration-color;
+        transition-duration: var(--transition-duration-150);
+    }
+
+    .prose a:hover {
+        color: var(--color-ctp-pink);
+        text-decoration-color: var(--color-ctp-pink);
+    }
+
+    .prose strong {
+        color: var(--color-ctp-text);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    .prose code {
+        display: inline-block;
+        color: var(--color-ctp-text);
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-semibold);
+        background-color: var(--color-ctp-surface0);
+        border-radius: var(--radius-lg);
+        padding-left: var(--spacing-1);
+        padding-right: var(--spacing-1);
+    }
+
+    .prose a code {
+        color: inherit;
+    }
+
+    .prose :is(h2, h3) code {
+        font-weight: var(--font-weight-bold);
+    }
+
+    .prose blockquote {
+        padding-left: var(--spacing-6);
+        border-left-width: 2px;
+        border-left-color: var(--color-ctp-mauve);
+        font-style: italic;
+    }
+
+    .prose figcaption {
+        color: var(--color-ctp-subtext0);
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-6);
+        margin-top: var(--spacing-3);
+    }
+
+    .prose figcaption > p {
+        margin: 0;
+    }
+
+    .prose ul {
+        list-style-type: disc;
+    }
+
+    .prose ol {
+        list-style-type: decimal;
+    }
+
+    .prose :is(ul, ol) {
+        padding-left: var(--spacing-6);
+    }
+
+    .prose li {
+        margin-top: var(--spacing-6);
+        margin-bottom: var(--spacing-6);
+        padding-left: calc(var(--spacing) * 3.5);
+    }
+
+    .prose li::marker {
+        color: var(--color-ctp-text);
+    }
+
+    .prose pre {
+        position: relative;
+        color: var(--color-ctp-text);
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-medium);
+        background-color: var(--color-ctp-mantle);
+        border-radius: var(--radius-xl);
+        overflow-x: auto;
+        border: 1px solid;
+        border-color: var(--color-ctp-surface0);
+    }
+
+    .prose pre code {
+        display: grid;
+        padding: var(--spacing-4);
+        color: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        background-color: transparent;
+        border-radius: 0;
+    }
+
+    .prose hr {
+        margin-top: var(--spacing-20);
+        margin-bottom: var(--spacing-20);
+        border-top-width: 1px;
+        border-color: var(--color-ctp-surface1);
+    }
 }

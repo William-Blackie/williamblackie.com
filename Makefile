@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 SHELL := /usr/bin/env bash
 
-NPM ?= npx -y -p node@24 -p npm@10 npm
+PNPM := pnpm
 
 .PHONY: help install dev lint build start clean outdated audit update
 
@@ -26,42 +26,42 @@ help:
 ### Setup
 ## Install Node dependencies
 install:
-	SHARP_IGNORE_GLOBAL_LIBVIPS=1 $(NPM) install
+	$(PNPM) install
 
 ### Development
 ## Run Next.js development server
 dev:
-	$(NPM) run dev
+	$(PNPM) dev
 
 ## Run lint checks
 lint:
-	$(NPM) run lint
+	$(PNPM) run lint
 
 ## Run prettier format
 format:
-	$(NPM) run format
+	$(PNPM) run format
 
 ## Build production assets
 build:
-	$(NPM) run build
+	$(PNPM) build
 
 ## Start production server
 start:
-	$(NPM) run start
+	$(PNPM) start
 
 ### Dependencies
 ## Show outdated packages
 outdated:
-	@$(NPM) outdated || true
+	@$(PNPM) outdated || true
 
 ## Run npm audit
 audit:
-	@$(NPM) audit
+	@$(PNPM) audit
 
 ## Update packages within declared semver ranges
 update:
-	$(NPM) update
-	$(NPM) install
+	$(PNPM) update
+	$(PNPM) install
 
 ### Cleanup
 ## Remove local build artifacts

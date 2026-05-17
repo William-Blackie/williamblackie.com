@@ -1,101 +1,102 @@
 import { getAllArticles, getArticleSourceBySlug } from '@/lib/articles'
 import {
-  clientProjects,
-  highlightedProjects,
-  openSourceContributions,
-  resumeAwards,
-  resumeSkills,
-  volunteering,
-  workExperience,
+    clientProjects,
+    highlightedProjects,
+    openSourceContributions,
+    resumeAwards,
+    resumeSkills,
+    volunteering,
+    workExperience,
 } from '@/lib/profile-content'
 import {
-  absoluteUrl,
-  markdownPathForRoute,
-  markdownUrlForRoute,
-  optionalProfileLinks,
-  siteName,
-  siteSummary,
+    absoluteUrl,
+    markdownPathForRoute,
+    markdownUrlForRoute,
+    optionalProfileLinks,
+    siteName,
+    siteSummary,
 } from '@/lib/site'
 
 type LlmsSection = 'Profile' | 'Work' | 'Writing'
 
 interface LlmsPage {
-  path: string
-  title: string
-  description: string
-  section: LlmsSection
-  renderMarkdown: () => Promise<string> | string
+    path: string
+    title: string
+    description: string
+    section: LlmsSection
+    renderMarkdown: () => Promise<string> | string
 }
 
 const llmsIntro =
-  'Use the markdown URLs below for the cleanest version of each page. About, Resume, Projects, and the article pages contain the highest-signal information about background, working style, delivery approach, and technical focus.'
+    'Use the markdown URLs below for the cleanest version of each page. About, Resume, Projects, and the article pages contain the highest-signal information about background, working style, delivery approach, and technical focus.'
 
-function normalizeRoute(path: string) {
-  if (!path || path === '/') {
-    return '/'
-  }
+function normalizeRoute(path: string): string {
+    if (!path || path === '/') {
+        return '/'
+    }
 
-  const normalized = path.replace(/\/+$/, '')
-  return normalized.startsWith('/') ? normalized : `/${normalized}`
+    const normalized = path.replace(/\/+$/, '')
+    return normalized.startsWith('/') ? normalized : `/${normalized}`
 }
 
 function toMarkdownDocument({
-  title,
-  description,
-  path,
-  body,
+    title,
+    description,
+    path,
+    body,
 }: {
-  title: string
-  description: string
-  path: string
-  body: string
-}) {
-  return [
-    `# ${title}`,
-    '',
-    `> ${description}`,
-    '',
-    `Canonical URL: [${absoluteUrl(path)}](${absoluteUrl(path)})`,
-    '',
-    body.trim(),
-  ]
-    .join('\n')
-    .replace(/\n{3,}/g, '\n\n')
+    title: string
+    description: string
+    path: string
+    body: string
+}): string {
+    return [
+        `# ${title}`,
+        '',
+        `> ${description}`,
+        '',
+        `Canonical URL: [${absoluteUrl(path)}](${absoluteUrl(path)})`,
+        '',
+        body.trim(),
+    ]
+        .join('\n')
+        .replace(/\n{3,}/g, '\n\n')
 }
 
-function renderExperienceList() {
-  return workExperience
-    .map(
-      (role) =>
-        `- **${role.company}** (${role.startLabel} to ${role.endLabel}) - ${role.title}`,
-    )
-    .join('\n')
+function renderExperienceList(): string {
+    return workExperience
+        .map(
+            (role) =>
+                `- **${role.company}** (${role.startLabel} to ${role.endLabel}) - ${role.title}`,
+        )
+        .join('\n')
 }
 
 function renderProjectList(
-  projects: Array<{ name: string; description: string; href: string }>,
-) {
-  return projects
-    .map(
-      (project) =>
-        `- [${project.name}](${project.href}): ${project.description}`,
-    )
-    .join('\n')
+    projects: Array<{ name: string; description: string; href: string }>,
+): string {
+    return projects
+        .map(
+            (project) =>
+                `- [${project.name}](${project.href}): ${project.description}`,
+        )
+        .join('\n')
 }
 
 function renderStaticPages(): LlmsPage[] {
-  return [
-    {
-      path: '/',
-      title: 'Home',
-      description: 'Introduction, current role, and delivery focus.',
-      section: 'Profile',
-      renderMarkdown: () =>
-        toMarkdownDocument({
-          title: siteName,
-          description: 'Introduction, current role, and delivery focus.',
-          path: '/',
-          body: `
+    return [
+        {
+            path: '/',
+            title: 'Home',
+            description: 'Introduction, current role, and delivery focus.',
+            section: 'Profile',
+            renderMarkdown: () =>
+                toMarkdownDocument({
+                    title: siteName,
+                    description:
+                        'Introduction, current role, and delivery focus.',
+                    path: '/',
+                    body: `
 William Blackie is a full-stack software engineer based in Bristol and London, UK.
 
 He works as Staff Engineer at [Mabyduck](https://mabyduck.com) and also runs Developerfy for selected side projects and consulting work.
@@ -113,21 +114,21 @@ His background spans agency delivery at Torchbox, contract work including Google
 
 ${renderExperienceList()}
           `,
-        }),
-    },
-    {
-      path: '/about',
-      title: 'About',
-      description:
-        'Background, career path, and working style for William Blackie.',
-      section: 'Profile',
-      renderMarkdown: () =>
-        toMarkdownDocument({
-          title: 'About William Blackie',
-          description:
-            'Background, career path, and working style for William Blackie.',
-          path: '/about',
-          body: `
+                }),
+        },
+        {
+            path: '/about',
+            title: 'About',
+            description:
+                'Background, career path, and working style for William Blackie.',
+            section: 'Profile',
+            renderMarkdown: () =>
+                toMarkdownDocument({
+                    title: 'About William Blackie',
+                    description:
+                        'Background, career path, and working style for William Blackie.',
+                    path: '/about',
+                    body: `
 William Blackie is a full-stack engineer working across Python and TypeScript, with a focus on accessible, reliable, and maintainable products.
 
 He studied Computer Science at the University of the West of England, then joined Torchbox in September 2019 and spent over four years in agency delivery for charities and public-sector teams including NHS and Samaritans.
@@ -138,19 +139,20 @@ In April 2025 he joined Mabyduck full-time as Staff Engineer. Current work focus
 
 Outside work he climbs, rides motorcycles, and spends too much money on food and coffee.
           `,
-        }),
-    },
-    {
-      path: '/resume',
-      title: 'Resume',
-      description: 'Resume and delivery history for William Blackie.',
-      section: 'Profile',
-      renderMarkdown: () =>
-        toMarkdownDocument({
-          title: 'Resume',
-          description: 'Resume and delivery history for William Blackie.',
-          path: '/resume',
-          body: `
+                }),
+        },
+        {
+            path: '/resume',
+            title: 'Resume',
+            description: 'Resume and delivery history for William Blackie.',
+            section: 'Profile',
+            renderMarkdown: () =>
+                toMarkdownDocument({
+                    title: 'Resume',
+                    description:
+                        'Resume and delivery history for William Blackie.',
+                    path: '/resume',
+                    body: `
 Full-stack engineer with experience across agency, consultancy, and product teams. Focused on reliable systems, delivery standards, and helping teams ship confidently.
 
 ## Skills
@@ -160,25 +162,26 @@ ${resumeSkills.map((skill) => `- ${skill}`).join('\n')}
 ## Highlighted projects
 
 ${highlightedProjects
-  .map(
-    (project) =>
-      `### ${project.name} - ${project.role}\n\n${project.bullets
-        .map((bullet) => `- ${bullet}`)
-        .join('\n')}`,
-  )
-  .join('\n\n')}
+    .map(
+        (project) =>
+            `### ${project.name} - ${project.role}\n\n${project.bullets
+                .map((bullet) => `- ${bullet}`)
+                .join('\n')}`,
+    )
+    .join('\n\n')}
 
 ## Experience
 
 ${workExperience
-  .map((role) => {
-    const bullets = role.bullets?.length
-      ? `\n${role.bullets.map((bullet) => `- ${bullet}`).join('\n')}`
-      : ''
+    .map((role) => {
+        const bullets =
+            role.bullets?.length ?
+                `\n${role.bullets.map((bullet) => `- ${bullet}`).join('\n')}`
+            :   ''
 
-    return `### ${role.company} - ${role.title}\n\n${role.location ? `${role.location}\n\n` : ''}${role.startLabel} to ${role.endLabel}${bullets}`
-  })
-  .join('\n\n')}
+        return `### ${role.company} - ${role.title}\n\n${role.location ? `${role.location}\n\n` : ''}${role.startLabel} to ${role.endLabel}${bullets}`
+    })
+    .join('\n\n')}
 
 ## Education
 
@@ -196,19 +199,21 @@ ${resumeAwards.map((award) => `- ${award}`).join('\n')}
 - ${volunteering.date}
 ${volunteering.bullets.map((bullet) => `- ${bullet}`).join('\n')}
           `,
-        }),
-    },
-    {
-      path: '/projects',
-      title: 'Projects',
-      description: 'Selected delivery work and open-source contributions.',
-      section: 'Work',
-      renderMarkdown: () =>
-        toMarkdownDocument({
-          title: 'Projects',
-          description: 'Selected delivery work and open-source contributions.',
-          path: '/projects',
-          body: `
+                }),
+        },
+        {
+            path: '/projects',
+            title: 'Projects',
+            description:
+                'Selected delivery work and open-source contributions.',
+            section: 'Work',
+            renderMarkdown: () =>
+                toMarkdownDocument({
+                    title: 'Projects',
+                    description:
+                        'Selected delivery work and open-source contributions.',
+                    path: '/projects',
+                    body: `
 ## Client and product work
 
 ${renderProjectList(clientProjects)}
@@ -217,20 +222,21 @@ ${renderProjectList(clientProjects)}
 
 ${renderProjectList(openSourceContributions)}
           `,
-        }),
-    },
-    {
-      path: '/tech',
-      title: 'Tech',
-      description: 'Tools I use each week to ship product and platform work.',
-      section: 'Work',
-      renderMarkdown: () =>
-        toMarkdownDocument({
-          title: 'Tech',
-          description:
-            'Tools I use each week to ship product and platform work.',
-          path: '/tech',
-          body: `
+                }),
+        },
+        {
+            path: '/tech',
+            title: 'Tech',
+            description:
+                'Tools I use each week to ship product and platform work.',
+            section: 'Work',
+            renderMarkdown: () =>
+                toMarkdownDocument({
+                    title: 'Tech',
+                    description:
+                        'Tools I use each week to ship product and platform work.',
+                    path: '/tech',
+                    body: `
 ## Core stack
 
 - **Backend:** Python, Django, Wagtail, and DRF for product and CMS-heavy systems.
@@ -248,194 +254,196 @@ ${renderProjectList(openSourceContributions)}
 
 - 14-inch MacBook Pro, M3 Pro, 18GB RAM (2023)
           `,
-        }),
-    },
-  ]
+                }),
+        },
+    ]
 }
 
-function extractArticleBody(source: string) {
-  const match = source.match(
-    /<ArticleLayout[^>]*>\s*([\s\S]*?)\s*<\/ArticleLayout>/,
-  )
+function extractArticleBody(source: string): string {
+    const match = source.match(
+        /<ArticleLayout[^>]*>\s*([\s\S]*?)\s*<\/ArticleLayout>/,
+    )
 
-  if (!match) {
-    throw new Error('Unable to extract markdown body from article source.')
-  }
+    if (!match) {
+        throw new Error('Unable to extract markdown body from article source.')
+    }
 
-  return match[1].trim()
+    return match[1].trim()
 }
 
 async function renderArticleMarkdown(article: {
-  slug: string
-  title: string
-  description: string
-  author: string
-  date: string
-}) {
-  const source = await getArticleSourceBySlug(article.slug)
-  const body = extractArticleBody(source)
+    slug: string
+    title: string
+    description: string
+    author: string
+    date: string
+}): Promise<string> {
+    const source = await getArticleSourceBySlug(article.slug)
+    const body = extractArticleBody(source)
 
-  return toMarkdownDocument({
-    title: article.title,
-    description: article.description,
-    path: `/articles/${article.slug}`,
-    body: `
+    return toMarkdownDocument({
+        title: article.title,
+        description: article.description,
+        path: `/articles/${article.slug}`,
+        body: `
 - Published: ${article.date}
 - Author: ${article.author}
 
 ${body}
     `,
-  })
+    })
 }
 
-async function renderArticlesIndexMarkdown() {
-  const articles = await getAllArticles()
+async function renderArticlesIndexMarkdown(): Promise<string> {
+    const articles = await getAllArticles()
 
-  return toMarkdownDocument({
-    title: 'Articles',
-    description:
-      'Writing by William Blackie on software engineering, delivery, and tooling.',
-    path: '/articles',
-    body: `
+    return toMarkdownDocument({
+        title: 'Articles',
+        description:
+            'Writing by William Blackie on software engineering, delivery, and tooling.',
+        path: '/articles',
+        body: `
 Practical write-ups from agency, freelance, and product work.
 
 ## Articles
 
 ${articles
-  .map(
-    (article) =>
-      `- [${article.title}](${markdownUrlForRoute(`/articles/${article.slug}`)}): ${article.description} Published ${article.date}.`,
-  )
-  .join('\n')}
+    .map(
+        (article) =>
+            `- [${article.title}](${markdownUrlForRoute(`/articles/${article.slug}`)}): ${article.description} Published ${article.date}.`,
+    )
+    .join('\n')}
     `,
-  })
+    })
 }
 
 async function getArticlePages(): Promise<LlmsPage[]> {
-  const articles = await getAllArticles()
+    const articles = await getAllArticles()
 
-  return articles.map((article) => ({
-    path: `/articles/${article.slug}`,
-    title: article.title,
-    description: article.description,
-    section: 'Writing',
-    renderMarkdown: () => renderArticleMarkdown(article),
-  }))
+    return articles.map((article) => ({
+        path: `/articles/${article.slug}`,
+        title: article.title,
+        description: article.description,
+        section: 'Writing',
+        renderMarkdown: () => renderArticleMarkdown(article),
+    }))
 }
 
-export async function getLlmsPages() {
-  return [
-    ...renderStaticPages(),
-    {
-      path: '/articles',
-      title: 'Articles',
-      description:
-        'Writing by William Blackie on software engineering, delivery, and tooling.',
-      section: 'Writing' as const,
-      renderMarkdown: renderArticlesIndexMarkdown,
-    },
-    ...(await getArticlePages()),
-  ]
+export async function getLlmsPages(): Promise<LlmsPage[]> {
+    return [
+        ...renderStaticPages(),
+        {
+            path: '/articles',
+            title: 'Articles',
+            description:
+                'Writing by William Blackie on software engineering, delivery, and tooling.',
+            section: 'Writing' as const,
+            renderMarkdown: renderArticlesIndexMarkdown,
+        },
+        ...(await getArticlePages()),
+    ]
 }
 
-export async function renderLlmsTxt() {
-  const pages = await getLlmsPages()
-  const groupedSections: LlmsSection[] = ['Profile', 'Work', 'Writing']
+export async function renderLlmsTxt(): Promise<string> {
+    const pages = await getLlmsPages()
+    const groupedSections: LlmsSection[] = ['Profile', 'Work', 'Writing']
 
-  const sections = groupedSections
-    .map((section) => {
-      const items = pages.filter((page) => page.section === section)
+    const sections = groupedSections
+        .map((section) => {
+            const items = pages.filter((page) => page.section === section)
 
-      if (!items.length) {
-        return ''
-      }
+            if (!items.length) {
+                return ''
+            }
 
-      return [
-        `## ${section}`,
+            return [
+                `## ${section}`,
+                '',
+                ...items.map(
+                    (page) =>
+                        `- [${page.title}](${markdownUrlForRoute(page.path)}): ${page.description}`,
+                ),
+            ].join('\n')
+        })
+        .filter(Boolean)
+
+    const optionalSection = [
+        '## Optional',
         '',
-        ...items.map(
-          (page) =>
-            `- [${page.title}](${markdownUrlForRoute(page.path)}): ${page.description}`,
+        ...optionalProfileLinks.map(
+            (item) => `- [${item.title}](${item.url}): ${item.description}`,
         ),
-      ].join('\n')
-    })
-    .filter(Boolean)
+    ].join('\n')
 
-  const optionalSection = [
-    '## Optional',
-    '',
-    ...optionalProfileLinks.map(
-      (item) => `- [${item.title}](${item.url}): ${item.description}`,
-    ),
-  ].join('\n')
-
-  return [
-    `# ${siteName}`,
-    '',
-    `> ${siteSummary}`,
-    '',
-    llmsIntro,
-    '',
-    ...sections.flatMap((section) => [section, '']),
-    optionalSection,
-  ]
-    .join('\n')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim()
+    return [
+        `# ${siteName}`,
+        '',
+        `> ${siteSummary}`,
+        '',
+        llmsIntro,
+        '',
+        ...sections.flatMap((section) => [section, '']),
+        optionalSection,
+    ]
+        .join('\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim()
 }
 
-export async function renderLlmsFullMarkdown() {
-  const pages = await getLlmsPages()
-  const documents = await Promise.all(
-    pages.map((page) => page.renderMarkdown()),
-  )
+export async function renderLlmsFullMarkdown(): Promise<string> {
+    const pages = await getLlmsPages()
+    const documents = await Promise.all(
+        pages.map((page) => page.renderMarkdown()),
+    )
 
-  return [
-    `# ${siteName} llms-full`,
-    '',
-    `> Expanded markdown context for the primary pages linked from ${absoluteUrl('/llms.txt')}.`,
-    '',
-    'This file combines the site-level markdown equivalents into a single document for LLM ingestion.',
-    '',
-    ...documents.flatMap((document, index) =>
-      index === 0 ? [document] : ['---', '', document],
-    ),
-  ]
-    .join('\n')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim()
+    return [
+        `# ${siteName} llms-full`,
+        '',
+        `> Expanded markdown context for the primary pages linked from ${absoluteUrl('/llms.txt')}.`,
+        '',
+        'This file combines the site-level markdown equivalents into a single document for LLM ingestion.',
+        '',
+        ...documents.flatMap((document, index) =>
+            index === 0 ? [document] : ['---', '', document],
+        ),
+    ]
+        .join('\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim()
 }
 
-export async function renderMarkdownForRoute(route: string) {
-  const normalizedRoute = normalizeRoute(route)
-  const pages = await getLlmsPages()
-  const page = pages.find((entry) => entry.path === normalizedRoute)
+export async function renderMarkdownForRoute(
+    route: string,
+): Promise<string | null> {
+    const normalizedRoute = normalizeRoute(route)
+    const pages = await getLlmsPages()
+    const page = pages.find((entry) => entry.path === normalizedRoute)
 
-  return page ? page.renderMarkdown() : null
+    return page ? page.renderMarkdown() : null
 }
 
-export function resolveMarkdownRoute(pathname: string) {
-  if (pathname === '/index.html.md') {
-    return '/'
-  }
+export function resolveMarkdownRoute(pathname: string): string | null {
+    if (pathname === '/index.html.md') {
+        return '/'
+    }
 
-  if (pathname.endsWith('/index.html.md')) {
-    return normalizeRoute(pathname.slice(0, -'/index.html.md'.length))
-  }
+    if (pathname.endsWith('/index.html.md')) {
+        return normalizeRoute(pathname.slice(0, -'/index.html.md'.length))
+    }
 
-  if (pathname.endsWith('.html.md')) {
-    return normalizeRoute(pathname.slice(0, -'.html.md'.length))
-  }
+    if (pathname.endsWith('.html.md')) {
+        return normalizeRoute(pathname.slice(0, -'.html.md'.length))
+    }
 
-  if (pathname.endsWith('.md')) {
-    const route = normalizeRoute(pathname.slice(0, -'.md'.length))
+    if (pathname.endsWith('.md')) {
+        const route = normalizeRoute(pathname.slice(0, -'.md'.length))
 
-    return route === '/llms-full' ? null : route
-  }
+        return route === '/llms-full' ? null : route
+    }
 
-  return null
+    return null
 }
 
-export function getMarkdownPathnameForRoute(route: string) {
-  return markdownPathForRoute(route)
+export function getMarkdownPathnameForRoute(route: string): string {
+    return markdownPathForRoute(route)
 }

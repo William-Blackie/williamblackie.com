@@ -1,87 +1,108 @@
 {
-  "name": "tailwindui-template",
-  "version": "0.1.0",
-  "private": true,
-  "engines": {
-    "node": "^24.0.0"
-  },
-  "scripts": {
-    "dev": "npx -y -p node@24 node ./node_modules/next/dist/bin/next dev",
-    "build": "npx -y -p node@24 node ./node_modules/next/dist/bin/next build",
-    "start": "npx -y -p node@24 node ./node_modules/next/dist/bin/next start",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "prepare": "husky"
-  },
-  "browserslist": "defaults, not ie <= 11",
-  "lint-staged": {
-    "*.{ts,tsx,js,jsx}": [
-      "eslint --fix",
-      "prettier --write"
+    "name": "williambackie.com",
+    "author": "William Blackie <will@developerfy.com>",
+    "version": "0.1.0",
+    "private": true,
+    "browserslist": [
+        ">0.3%, defaults, fully supports es6-module, maintained node versions"
     ],
-    "*.{css,md,mdx,json}": [
-      "prettier --write"
-    ]
-  },
-  "dependencies": {
-    "@excalidraw/excalidraw": "^0.18.1",
-    "@giscus/react": "^3.1.0",
-    "@headlessui/react": "^2.2.9",
-    "@mdx-js/loader": "^3.1.1",
-    "@mdx-js/react": "^3.1.1",
-    "@next/mdx": "^16.1.6",
-    "@tailwindcss/typography": "^0.5.19",
-    "@types/node": "^20.19.33",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@types/webpack-env": "^1.18.8",
-    "autoprefixer": "^10.4.24",
-    "cheerio": "^1.2.0",
-    "clsx": "^2.1.0",
-    "fast-glob": "^3.3.3",
-    "feed": "^4.2.2",
-    "next": "^16.1.6",
-    "next-llms-txt": "^1.0.2",
-    "next-themes": "^0.4.6",
-    "node-mailjet": "^6.0.11",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "rehype-pretty-code": "^0.14.1",
-    "remark-gfm": "^4.0.1",
-    "typescript": "^5.9.3",
-    "xml2js": "^0.6.2"
-  },
-  "devDependencies": {
-    "@catppuccin/tailwindcss": "^1.0.0",
-    "@tailwindcss/postcss": "^4.2.0",
-    "axe-core": "^4.11.1",
-    "eslint": "^9.39.3",
-    "eslint-config-next": "^16.1.6",
-    "eslint-config-prettier": "^10.1.8",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.4.0",
-    "playwright": "^1.58.2",
-    "prettier": "^3.8.3",
-    "prettier-plugin-tailwindcss": "^0.7.2",
-    "sharp": "^0.34.5",
-    "tailwindcss": "^4.2.0"
-  },
-  "overrides": {
-    "react": "$react",
-    "react-dom": "$react-dom",
-    "@excalidraw/excalidraw": {
-      "nanoid": "3.3.11"
+    "engines": {
+        "node": "^24.0.0"
     },
-    "@excalidraw/mermaid-to-excalidraw": {
-      "@mermaid-js/parser": "1.1.0",
-      "nanoid": "5.1.11"
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "prepare": "husky"
     },
-    "lodash-es": "4.18.1",
-    "postcss": "^8.5.10",
-    "sucrase": {
-      "glob": "^11.0.3"
+    "lint-staged": {
+        "*.{ts,tsx,js,jsx}": [
+            "eslint --fix",
+            "prettier --write"
+        ],
+        "*.{css,md,mdx,json}": [
+            "prettier --write"
+        ]
+    },
+    "files": [
+        "./src/styles/typography.css"
+    ],
+    "dependencies": {
+        "@excalidraw/excalidraw": "^0.18.1",
+        "@giscus/react": "^3.1.0",
+        "@headlessui/react": "^2.2.10",
+        "@mdx-js/loader": "^3.1.1",
+        "@mdx-js/react": "^3.1.1",
+        "@next/mdx": "^16.2.6",
+        "@types/node": "^20.19.41",
+        "@types/react": "^19.2.14",
+        "@types/react-dom": "^19.2.3",
+        "@types/webpack-env": "^1.18.8",
+        "autoprefixer": "^10.5.0",
+        "browserslist": "^4.28.2",
+        "cheerio": "^1.2.0",
+        "clsx": "^2.1.1",
+        "fast-glob": "^3.3.3",
+        "feed": "^4.2.2",
+        "next": "^16.2.6",
+        "next-llms-txt": "^1.0.2",
+        "next-themes": "^0.4.6",
+        "node-addon-api": "8.7.0",
+        "node-mailjet": "^6.0.11",
+        "react": "^19.2.6",
+        "react-dom": "^19.2.6",
+        "rehype-pretty-code": "^0.14.3",
+        "remark-gfm": "^4.0.1",
+        "typescript": "^5.9.3",
+        "xml2js": "^0.6.2"
+    },
+    "devDependencies": {
+        "@catppuccin/tailwindcss": "^1.0.0",
+        "@tailwindcss/postcss": "^4.3.0",
+        "@tailwindcss/typography": "0.5.0-alpha.3",
+        "@types/mdx": "2.0.13",
+        "@types/postcss-import": "^14.0.3",
+        "axe-core": "^4.11.4",
+        "eslint": "^9.39.4",
+        "eslint-config-next": "^16.2.6",
+        "eslint-config-prettier": "^10.1.8",
+        "husky": "^9.1.7",
+        "lint-staged": "^16.4.0",
+        "playwright": "^1.60.0",
+        "postcss-flexbugs-fixes": "5.0.2",
+        "postcss-preset-env": "11.3.0",
+        "prettier": "^3.8.3",
+        "prettier-plugin-tailwindcss": "^0.8.0",
+        "sharp": "^0.34.5",
+        "tailwindcss": "^4.3.0"
+    },
+    "prettier": {
+        "trailingComma": "all",
+        "tabWidth": 4,
+        "semi": false,
+        "singleQuote": true,
+        "experimentalTernaries": true
+    },
+    "postcss": {
+        "plugins": [
+            "@tailwindcss/postcss",
+            "postcss-flexbugs-fixes",
+            [
+                "postcss-preset-env",
+                {
+                    "autoprefixer": {
+                        "flexbox": "no-2009"
+                    },
+                    "stage": 3,
+                    "features": {
+                        "custom-properties": false
+                    }
+                }
+            ]
+        ]
     }
-  }
 }
