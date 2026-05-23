@@ -6,7 +6,7 @@ import { JsonLd } from '@/components/JsonLd'
 import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons'
 import { createPageMetadata, createPageSchema } from '@/lib/metadata'
 import { personSchemaId } from '@/lib/site'
-import portraitImage from '@/images/photos/image-3.jpg'
+import portraitImage from '@/static/imgs/photos/image-3.jpg'
 import { SocialLink } from '@/components/SocialLink'
 
 function MailIcon(

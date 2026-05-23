@@ -10,7 +10,7 @@ import clsx from 'clsx'
 import { usePathname } from 'next/navigation'
 
 import { Container } from '@/components/Container'
-import avatarImage from '@/images/photos/image-3.jpg'
+import avatarImage from '@/static/imgs/photos/image-3.jpg'
 import {
     CloseIcon,
     ChevronDownIcon,

@@ -6,7 +6,7 @@ import { rootMetadata } from '@/lib/metadata'
 import { personSchema, websiteSchema } from '@/lib/site'
 import type { Metadata } from 'next'
 
-import '@/styles/tailwind.css'
+import '@/static/css/tailwind.css'
 
 export const metadata: Metadata = rootMetadata
 

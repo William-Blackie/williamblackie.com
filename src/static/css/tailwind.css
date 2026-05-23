@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
-@import '../styles/typography.css';
+@import './typography.css';
 @import '@catppuccin/tailwindcss/mocha.css';
 @custom-variant dark (&:where(.mocha, .mocha *));
 @custom-variant light (&:where(.latte, .latte *));
