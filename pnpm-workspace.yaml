@@ -8,9 +8,10 @@ trustPolicy: no-downgrade
 strictDepBuilds: true
 allowBuilds:
     '@parcel/watcher': true
-    core-js: set this to true or false
+    core-js: true
     sharp: true
     unrs-resolver: true
+    '@sentry/cli@2.58.6': true
 trustPolicyIgnoreAfter: 1080
 minimumReleaseAgeExclude:
     - nanoid@3.3.8
