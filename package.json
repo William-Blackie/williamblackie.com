@@ -13,10 +13,12 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "eslint .",
+        "lint": "eslint . --max-warnings=0",
         "lint:fix": "eslint . --fix",
+        "typecheck": "tsc --noEmit --pretty false",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
+        "check": "pnpm run lint && pnpm run typecheck && pnpm run format:check",
         "prepare": "husky"
     },
     "lint-staged": {

@@ -1,4 +1,4 @@
-import { withSentryConfig } from '@sentry/nextjs'
+import { withSentryConfig, type SentryBuildOptions } from '@sentry/nextjs'
 import nextMDX from '@next/mdx'
 import { type Options } from 'rehype-pretty-code'
 import { type NextConfig } from 'next'
@@ -25,16 +25,19 @@ const withMDX = nextMDX({
     },
 })
 
-export default withSentryConfig(withMDX(nextConfig), {
+const sentryOrg = process.env['SENTRY_ORG']
+const sentryProject = process.env['SENTRY_PROJECT']
+
+const sentryBuildOptions = {
     // For all available options, see:
     // https://www.npmjs.com/package/@sentry/webpack-plugin#options
 
-    org: process.env.SENTRY_ORG,
+    ...(sentryOrg ? { org: sentryOrg } : {}),
 
-    project: process.env.SENTRY_PROJECT,
+    ...(sentryProject ? { project: sentryProject } : {}),
 
     // Only print logs for uploading source maps in CI
-    silent: !process.env.CI,
+    silent: !process.env['CI'],
 
     // For all available options, see:
     // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
@@ -61,4 +64,6 @@ export default withSentryConfig(withMDX(nextConfig), {
             removeDebugLogging: true,
         },
     },
-})
+} satisfies SentryBuildOptions
+
+export default withSentryConfig(withMDX(nextConfig), sentryBuildOptions)

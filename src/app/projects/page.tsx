@@ -97,12 +97,18 @@ export default function Projects(): React.ReactElement {
         samaritans: logoSamaritans,
     }
 
-    const clientProjectItems: Array<Project> = clientProjects.map(
-        (project) => ({
+    const clientProjectItems: Array<Project> = clientProjects.map((project) => {
+        const logo = clientProjectLogos[project.key]
+
+        if (!logo) {
+            throw new Error(`Missing logo for client project: ${project.key}`)
+        }
+
+        return {
             ...project,
-            logo: clientProjectLogos[project.key],
-        }),
-    )
+            logo,
+        }
+    })
 
     const openSourceProjectItems: Array<Project> = openSourceContributions.map(
         (project) => ({

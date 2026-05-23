@@ -264,7 +264,7 @@ function extractArticleBody(source: string): string {
         /<ArticleLayout[^>]*>\s*([\s\S]*?)\s*<\/ArticleLayout>/,
     )
 
-    if (!match) {
+    if (!match || match[1] === undefined) {
         throw new Error('Unable to extract markdown body from article source.')
     }
 

@@ -66,7 +66,7 @@ Card.Title = function CardTitle<T extends React.ElementType = 'h2'>({
     children,
 }: Omit<React.ComponentPropsWithoutRef<T>, 'as' | 'href'> & {
     as?: T
-    href?: CardHref
+    href?: CardHref | undefined
 }): React.ReactElement {
     const Component = as ?? 'h2'
 

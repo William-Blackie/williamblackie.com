@@ -15,7 +15,6 @@ export type ExcalidrawInnerProps = ExcalidrawProps & {
 
 export default function ExcalidrawInner({
     height = '500px',
-    initialData,
     theme: propTheme,
     ...props
 }: ExcalidrawInnerProps): React.ReactElement {
@@ -51,7 +50,7 @@ export default function ExcalidrawInner({
             style={{ height, width: '100%' }}
             className="excalidraw-container my-8"
         >
-            <Excalidraw initialData={initialData} theme={theme} {...props} />
+            <Excalidraw {...props} theme={theme} />
         </div>
     )
 }

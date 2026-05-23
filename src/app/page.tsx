@@ -79,22 +79,30 @@ function Resume(): React.ReactElement {
         torchbox: logoTorchbox,
     }
 
-    const resume: Array<Role> = workExperience.map((role) => ({
-        company: role.company,
-        title:
-            role.key === 'google' ?
-                'Full-stack Developer - Contract'
-            :   role.title,
-        logo: logos[role.key],
-        start: {
-            label: role.startLabel,
-            dateTime: role.startDateTime,
-        },
-        end: {
-            label: role.endLabel,
-            dateTime: role.endDateTime,
-        },
-    }))
+    const resume: Array<Role> = workExperience.map((role) => {
+        const logo = logos[role.key]
+
+        if (!logo) {
+            throw new Error(`Missing logo for work experience: ${role.key}`)
+        }
+
+        return {
+            company: role.company,
+            title:
+                role.key === 'google' ?
+                    'Full-stack Developer - Contract'
+                :   role.title,
+            logo,
+            start: {
+                label: role.startLabel,
+                dateTime: role.startDateTime,
+            },
+            end: {
+                label: role.endLabel,
+                dateTime: role.endDateTime,
+            },
+        }
+    })
 
     return (
         <div className="border-ctp-surface0/80 bg-ctp-mantle mx-auto max-w-2xl rounded-2xl border p-6">

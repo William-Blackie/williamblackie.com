@@ -2,6 +2,7 @@
 .next
 node_modules
 .env.local
+*.tsbuildinfo
 # Local Netlify folder
 .netlify
 chrome/
