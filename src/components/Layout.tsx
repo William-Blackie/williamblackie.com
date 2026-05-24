@@ -16,7 +16,7 @@ export function Layout({
         <>
             <div className="fixed inset-0 flex justify-center sm:px-8">
                 <div className="flex w-full max-w-7xl lg:px-8">
-                    <div className="bg-ctp-mantle ring-ctp-surface0/70 w-full ring-1" />
+                    <div className="site-shell w-full" />
                 </div>
             </div>
             <div className="relative flex w-full flex-col">

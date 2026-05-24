@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { Container } from '@/components/Container'
+import { Prose } from '@/components/Prose'
 import { TableOfContents } from '@/components/TableOfContents'
 import { Comments } from '@/components/Comments'
 import { ArrowLeftIcon } from '@/components/GeneralIcons'
@@ -65,16 +66,15 @@ function ArticleMeta({
     readingTime: string
 }): React.ReactElement {
     return (
-        <div className="text-ctp-subtext1 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+        <div className="text-ctp-subtext1 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
             <span className="inline-flex items-center gap-2">
-                <CalendarIcon className="h-4 w-4" />
+                <CalendarIcon className="h-4 w-4 stroke-ctp-subtext1/70" />
                 <time dateTime={article.date}>{formatDate(article.date)}</time>
             </span>
             <span className="inline-flex items-center gap-2">
-                <ClockIcon className="h-4 w-4" />
+                <ClockIcon className="h-4 w-4 stroke-ctp-subtext1/70" />
                 {readingTime}
             </span>
-            <span>{article.author}</span>
         </div>
     )
 }
@@ -148,7 +148,7 @@ function ArticleNavigation({
                 </p>
                 <Link
                     href="/articles"
-                    className="text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue dark:decoration-ctp-pink/35 dark:hover:text-ctp-pink dark:hover:decoration-ctp-pink mt-3 inline-flex text-sm font-medium underline underline-offset-4 transition-[color,text-decoration-color]"
+                    className="theme-link theme-focus mt-3 inline-flex text-sm"
                 >
                     Back to the blog index
                 </Link>
@@ -192,7 +192,7 @@ function ArticleNavigationLink({
             <p className="text-ctp-subtext1 text-xs font-medium">{label}</p>
             <Link
                 href={article.path as LinkHref}
-                className={`text-ctp-text hover:text-ctp-blue dark:hover:text-ctp-pink mt-2 block text-sm font-semibold transition ${align === 'right' ? 'sm:text-right' : ''}`}
+                className={`theme-focus text-ctp-text hover:text-ctp-blue dark:hover:text-ctp-pink mt-2 block rounded-md text-sm font-semibold transition ${align === 'right' ? 'sm:text-right' : ''}`}
             >
                 {article.title}
             </Link>
@@ -238,49 +238,51 @@ export async function ArticleLayout({
                     ...(article.tags ? { tags: article.tags } : {}),
                 })}
             />
-            <div className="mx-auto max-w-5xl">
+            <div className="mx-auto max-w-7xl">
                 <Link
                     href="/articles"
-                    className="text-ctp-subtext1 hover:text-ctp-blue dark:hover:text-ctp-pink inline-flex items-center gap-2 text-sm font-medium transition"
+                    className="theme-focus text-ctp-subtext1 hover:text-ctp-blue dark:hover:text-ctp-pink inline-flex items-center gap-2 rounded-md text-sm font-medium transition"
                 >
                     <ArrowLeftIcon className="h-4 w-4 stroke-current" />
                     Blog
                 </Link>
 
-                <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,42rem)_16rem] lg:items-start">
+                <div className="mt-12 grid gap-16 lg:grid-cols-[1fr_minmax(auto,250px)] lg:items-start">
                     <article className="min-w-0">
                         <header>
                             <ArticleMeta
                                 article={article}
                                 readingTime={readingTime}
                             />
-                            <h1 className="text-ctp-text mt-6 text-4xl font-bold tracking-tight sm:text-5xl">
+                            <h1 className="text-ctp-text mt-8 text-4xl font-extrabold tracking-tight sm:text-6xl">
                                 {article.title}
                             </h1>
-                            <p className="text-ctp-subtext1 mt-6 text-lg">
+                            <p className="text-ctp-subtext1 mt-6 text-xl leading-relaxed">
                                 {article.description}
                             </p>
                             <ArticleTags tags={article.tags} />
                             <TableOfContents
                                 headings={headings}
-                                className="mt-8 lg:hidden"
+                                className="mt-10 lg:hidden"
                                 collapsible
                             />
                         </header>
 
-                        <div className="mt-12 prose prose-lg dark:prose-invert">
-                            {children}
-                        </div>
+                        <Prose className="mt-16">{children}</Prose>
 
-                        <ArticleNavigation
-                            newerArticle={newerArticle}
-                            olderArticle={olderArticle}
-                        />
-                        <Comments />
+                        <div className="mt-20 pt-20">
+                            <ArticleNavigation
+                                newerArticle={newerArticle}
+                                olderArticle={olderArticle}
+                            />
+                            <div className="mt-16">
+                                <Comments />
+                            </div>
+                        </div>
                     </article>
 
                     <aside className="hidden lg:sticky lg:top-24 lg:block">
-                        <div className="space-y-5">
+                        <div className="space-y-10">
                             <ArticleFacts
                                 article={article}
                                 readingTime={readingTime}

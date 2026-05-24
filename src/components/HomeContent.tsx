@@ -239,23 +239,26 @@ function Photos(): React.ReactElement {
         },
     ]
 
-    const itemVariants = {
-        initial: { scale: 1, rotate: 0 },
+    const cardVariants = {
+        initial: { y: 0 },
         hover: {
-            scale: 1.05,
-            rotate: 0,
+            y: -10,
             zIndex: 10,
             transition: {
                 type: 'spring' as const,
-                stiffness: 300,
-                damping: 20,
+                stiffness: 360,
+                damping: 28,
             },
         },
     }
 
     const overlayVariants = {
-        initial: { opacity: 0, y: 20 },
-        hover: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+        initial: { opacity: 0, y: 12 },
+        hover: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.22, ease: 'easeOut' as const },
+        },
     }
 
     return (
@@ -266,34 +269,38 @@ function Photos(): React.ReactElement {
                         key={data.image.src}
                         initial="initial"
                         whileHover="hover"
-                        variants={itemVariants}
+                        variants={cardVariants}
                         className={clsx(
-                            'bg-ctp-surface0 group/photo relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl sm:w-72 sm:rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300',
+                            'photo-card group/photo relative aspect-9/10 w-44 flex-none transform-gpu will-change-transform sm:w-72',
                             rotations[index % rotations.length],
                         )}
                     >
-                        <Image
-                            src={data.image}
-                            alt=""
-                            sizes="(min-width: 640px) 18rem, 11rem"
-                            className="absolute inset-0 h-full w-full object-cover grayscale-[0.2] group-hover/photo:grayscale-0 transition-all duration-500"
-                        />
-                        <motion.div
-                            variants={overlayVariants}
-                            className="absolute inset-0 bg-linear-to-t from-ctp-crust via-ctp-crust/40 to-transparent flex flex-col justify-end p-4 sm:p-6"
-                        >
-                            <span className="text-ctp-blue dark:text-ctp-pink text-[10px] font-bold uppercase tracking-widest">
-                                {data.date}
-                            </span>
-                            <h4 className="text-ctp-text text-sm font-semibold mt-1 sm:text-lg">
-                                {data.caption}
-                            </h4>
-                            <p className="text-ctp-subtext1 text-xs mt-2 line-clamp-2 sm:line-clamp-none">
-                                {data.details}
-                            </p>
-                        </motion.div>
-                        <div className="absolute top-3 right-3 bg-ctp-crust/50 backdrop-blur-md p-1.5 rounded-full opacity-0 group-hover/photo:opacity-100 transition-opacity">
-                            <ChevronDownIcon className="h-4 w-4 text-ctp-text -rotate-90" />
+                        <div className="photo-card-frame">
+                            <Image
+                                src={data.image}
+                                alt=""
+                                sizes="(min-width: 640px) 18rem, 11rem"
+                                className="photo-card-image"
+                            />
+                            <div className="photo-card-scrim" />
+                            <div className="photo-card-sheen" />
+                            <motion.div
+                                variants={overlayVariants}
+                                className="photo-card-caption"
+                            >
+                                <span className="text-[10px] font-bold tracking-widest text-ctp-blue uppercase dark:text-ctp-pink">
+                                    {data.date}
+                                </span>
+                                <h4 className="mt-1 text-sm font-semibold text-white sm:text-lg">
+                                    {data.caption}
+                                </h4>
+                                <p className="mt-2 line-clamp-2 text-xs text-white/78 sm:line-clamp-none">
+                                    {data.details}
+                                </p>
+                            </motion.div>
+                            <div className="photo-card-action">
+                                <ChevronDownIcon className="h-4 w-4 -rotate-90 text-white" />
+                            </div>
                         </div>
                     </motion.div>
                 ))}
@@ -320,7 +327,6 @@ export function HomeContent(): React.ReactElement {
                             href="https://www.torchbox.com"
                             rel="noopener noreferrer"
                             target="_blank"
-                            className="text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue dark:decoration-ctp-pink/35 dark:hover:text-ctp-pink dark:hover:decoration-ctp-pink font-medium underline underline-offset-4 transition-[text-decoration-color]"
                             text="Torchbox"
                         />
                         , contract and freelance work through Developerfy
@@ -330,7 +336,6 @@ export function HomeContent(): React.ReactElement {
                             href="https://mabyduck.com"
                             rel="noopener noreferrer"
                             target="_blank"
-                            className="text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue dark:decoration-ctp-pink/35 dark:hover:text-ctp-pink dark:hover:decoration-ctp-pink font-medium underline underline-offset-4 transition-[text-decoration-color]"
                             text="Mabyduck"
                         />
                         . Each context taught me the same thing at a different
@@ -346,10 +351,7 @@ export function HomeContent(): React.ReactElement {
                     <p className="text-ctp-subtext1 mt-6 text-base">
                         I write about delivery, tooling, and lessons from real
                         projects on the{' '}
-                        <InternalExternalLink
-                            href="/articles"
-                            className="text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue dark:decoration-ctp-pink/35 dark:hover:text-ctp-pink dark:hover:decoration-ctp-pink font-medium underline underline-offset-4 transition-[text-decoration-color]"
-                        >
+                        <InternalExternalLink href="/articles">
                             blog
                         </InternalExternalLink>
                         .

@@ -21,4 +21,9 @@
     --tw-prose-pre-bg: var(--color-ctp-mantle);
     --tw-prose-th-borders: var(--color-ctp-surface2);
     --tw-prose-td-borders: var(--color-ctp-surface0);
+
+    /* Additional consistency controls */
+    --tw-prose-invert-body: var(--color-ctp-text);
+    --tw-prose-invert-headings: var(--color-ctp-text);
+    --tw-prose-invert-links: var(--color-ctp-blue);
 }

@@ -44,12 +44,14 @@ export function SectionHeading({
 }
 
 export function SurfaceCard({
+    as,
     className,
     children,
     interactive = false,
     href,
     variant = 'default',
 }: {
+    as?: React.ElementType
     className?: string | undefined
     children: React.ReactNode
     interactive?: boolean
@@ -57,7 +59,7 @@ export function SurfaceCard({
     variant?: 'default' | 'ghost'
 }): React.ReactElement {
     const isLink = typeof href !== 'undefined'
-    const Component = interactive ? motion.div : 'div'
+    const Component = interactive ? motion.div : (as ?? 'div')
 
     const card = (
         <Component
@@ -73,11 +75,10 @@ export function SurfaceCard({
             :   {})}
             className={clsx(
                 'relative rounded-2xl transition-colors duration-300',
-                variant === 'default' &&
-                    'border-ctp-surface0/80 bg-ctp-mantle/60 border',
-                variant === 'ghost' && 'border-transparent bg-transparent',
-                interactive &&
-                    'hover:bg-ctp-surface0/40 hover:border-ctp-surface1 hover:border',
+                variant === 'default' && 'theme-panel',
+                variant === 'ghost' &&
+                    'border border-transparent bg-transparent',
+                interactive && 'theme-panel-interactive will-change-transform',
                 className,
             )}
         >
@@ -89,7 +90,7 @@ export function SurfaceCard({
         return (
             <Link
                 href={href as Route}
-                className="group block focus:outline-hidden"
+                className="theme-focus group block rounded-2xl"
             >
                 {card}
             </Link>
@@ -109,7 +110,7 @@ export function Pill({
     return (
         <span
             className={clsx(
-                'border-ctp-surface0 bg-ctp-base text-ctp-subtext1 inline-flex rounded-md border px-2 py-1 text-xs font-medium',
+                'theme-pill text-ctp-subtext1 inline-flex rounded-lg px-2.5 py-1.5 text-xs font-medium',
                 className,
             )}
         >

@@ -37,7 +37,12 @@ export default function ExcalidrawInner({
             className="my-8 excalidraw-container"
             role="region"
             aria-label="Interactive diagram"
+            aria-describedby="excalidraw-desc"
         >
+            <div id="excalidraw-desc" className="sr-only">
+                Use your mouse or keyboard to interact with the diagram
+                elements.
+            </div>
             <Excalidraw
                 initialData={
                     initialData as import('@excalidraw/excalidraw/types').ExcalidrawInitialDataState

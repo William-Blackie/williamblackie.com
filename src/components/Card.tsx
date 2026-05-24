@@ -20,6 +20,7 @@ function ChevronRightIcon(
     )
 }
 export function Card<T extends React.ElementType = 'div'>({
+    as,
     className,
     children,
     href,
@@ -30,20 +31,26 @@ export function Card<T extends React.ElementType = 'div'>({
     href?: CardHref
     variant?: 'default' | 'ghost'
 }): React.ReactElement {
+    const Component = href ? (as ?? 'div') : 'div'
+
     return (
         <SurfaceCard
+            {...(!href && as ? { as } : {})}
             interactive={!!href}
             href={href as string}
             variant={variant}
             className={clsx(className, variant === 'default' ? 'p-6' : 'p-0')}
         >
-            <div className="relative flex flex-col items-start">{children}</div>
+            <Component className="relative flex flex-col items-start">
+                {children}
+            </Component>
         </SurfaceCard>
     )
 }
 
 Card.Link = function CardLink({
     children,
+    className,
     href,
     ...props
 }: { href: CardHref } & Omit<
@@ -51,7 +58,11 @@ Card.Link = function CardLink({
     'href'
 >): React.ReactElement {
     return (
-        <Link href={href as LinkHref} {...props}>
+        <Link
+            href={href as LinkHref}
+            className={clsx('theme-focus rounded-md', className)}
+            {...props}
+        >
             <span className="absolute -inset-6 z-20 rounded-2xl" />
             <span className="relative z-10">{children}</span>
         </Link>
@@ -61,7 +72,9 @@ Card.Link = function CardLink({
 Card.Title = function CardTitle<T extends React.ElementType = 'h2'>({
     as,
     href,
+    className,
     children,
+    ...props
 }: Omit<React.ComponentPropsWithoutRef<T>, 'as' | 'href'> & {
     as?: T
     href?: CardHref | undefined
@@ -69,7 +82,13 @@ Card.Title = function CardTitle<T extends React.ElementType = 'h2'>({
     const Component = as ?? 'h2'
 
     return (
-        <Component className="text-ctp-text text-base font-semibold tracking-tight">
+        <Component
+            className={clsx(
+                'text-ctp-text font-semibold tracking-tight',
+                className,
+            )}
+            {...props}
+        >
             {href ?
                 <Card.Link href={href}>{children}</Card.Link>
             :   children}
@@ -78,26 +97,38 @@ Card.Title = function CardTitle<T extends React.ElementType = 'h2'>({
 }
 
 Card.Description = function CardDescription({
+    className,
     children,
 }: {
+    className?: string
     children: React.ReactNode
 }): React.ReactElement {
     return (
-        <p className="text-ctp-subtext1 relative z-10 mt-2 text-sm">
+        <p
+            className={clsx(
+                'text-ctp-subtext1 relative z-10 mt-2 text-sm',
+                className,
+            )}
+        >
             {children}
         </p>
     )
 }
 
 Card.Cta = function CardCta({
+    className,
     children,
 }: {
+    className?: string
     children: React.ReactNode
 }): React.ReactElement {
     return (
         <div
             aria-hidden="true"
-            className="text-ctp-blue dark:text-ctp-pink relative z-10 mt-4 flex items-center text-sm font-medium"
+            className={clsx(
+                'text-ctp-blue dark:text-ctp-pink relative z-10 mt-4 flex items-center text-sm font-medium',
+                className,
+            )}
         >
             {children}
             <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current transition-transform duration-300 group-hover:translate-x-1" />

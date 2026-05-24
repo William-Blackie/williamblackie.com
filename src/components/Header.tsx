@@ -32,7 +32,7 @@ function MobileNavItem({
         <li>
             <Link
                 href={href}
-                className="hover:text-ctp-blue dark:hover:text-ctp-pink block py-2 transition-colors duration-300"
+                className="theme-focus hover:text-ctp-blue dark:hover:text-ctp-pink block rounded-md py-2 transition-colors duration-300"
                 onClick={onClick}
             >
                 {children}
@@ -54,7 +54,7 @@ function MobileNavigation(
                 type="button"
                 aria-expanded={isOpen}
                 aria-controls="mobile-navigation"
-                className="group bg-ctp-mantle/90 text-ctp-text shadow-ctp-crust/10 ring-ctp-surface0/80 hover:ring-ctp-blue/40 dark:hover:ring-ctp-pink/40 flex items-center rounded-full px-4 py-2 text-sm font-medium shadow-lg ring-1 backdrop-blur"
+                className="theme-focus theme-float group text-ctp-text hover:border-ctp-blue/40 dark:hover:border-ctp-pink/40 flex items-center rounded-full px-4 py-2 text-sm font-medium"
                 onClick={() => setIsOpen(true)}
             >
                 Menu
@@ -67,7 +67,7 @@ function MobileNavigation(
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="bg-ctp-crust/75 fixed inset-0 z-50 backdrop-blur-sm"
+                            className="bg-ctp-crust/40 dark:bg-ctp-crust/75 fixed inset-0 z-50 backdrop-blur-sm"
                             onClick={() => setIsOpen(false)}
                         />
                         <motion.div
@@ -80,13 +80,13 @@ function MobileNavigation(
                                 stiffness: 350,
                                 damping: 25,
                             }}
-                            className="bg-ctp-mantle ring-ctp-surface0/80 fixed inset-x-4 top-8 z-50 origin-top rounded-3xl p-8 ring-1"
+                            className="theme-panel fixed inset-x-4 top-8 z-50 origin-top rounded-3xl p-8"
                         >
                             <div className="flex flex-row-reverse items-center justify-between">
                                 <button
                                     type="button"
                                     aria-label="Close menu"
-                                    className="-m-1 p-1"
+                                    className="theme-focus -m-1 rounded-md p-1"
                                     onClick={() => setIsOpen(false)}
                                 >
                                     <CloseIcon className="text-ctp-subtext1 h-6 w-6" />
@@ -146,7 +146,7 @@ function NavItem({
             <Link
                 href={href}
                 className={clsx(
-                    'relative block px-3 py-2 transition-colors duration-300',
+                    'theme-focus relative block rounded-full px-3 py-2 transition-colors duration-300',
                     isActive ?
                         'text-ctp-text font-semibold'
                     :   'hover:text-ctp-blue dark:hover:text-ctp-pink',
@@ -180,7 +180,7 @@ function DesktopNavigation(
 ): React.ReactElement {
     return (
         <nav {...props}>
-            <ul className="bg-ctp-mantle/90 text-ctp-text shadow-ctp-crust/10 ring-ctp-surface0/80 flex rounded-full px-3 text-sm font-medium shadow-lg ring-1 backdrop-blur">
+            <ul className="theme-float text-ctp-text flex rounded-full px-3 text-sm font-medium">
                 <NavItem href="/about">About</NavItem>
                 <NavItem href="/projects">Projects</NavItem>
                 <NavItem href="/articles">Blog</NavItem>
@@ -214,7 +214,7 @@ function ThemeToggle(): React.ReactElement {
                 :   'Toggle theme'
             }
             title={mounted ? `Catppuccin ${label}` : undefined}
-            className="group bg-ctp-mantle/90 shadow-ctp-crust/10 ring-ctp-surface0/80 hover:ring-ctp-blue/50 dark:hover:ring-ctp-pink/50 flex h-10 w-10 items-center justify-center rounded-full shadow-lg ring-1 backdrop-blur transition-all hover:cursor-pointer"
+            className="theme-focus theme-float group hover:border-ctp-blue/50 dark:hover:border-ctp-pink/50 flex h-10 w-10 items-center justify-center rounded-full transition-all hover:cursor-pointer"
             onClick={toggleTheme}
         >
             {mounted ?
@@ -236,7 +236,7 @@ function AvatarContainer({
         <div
             className={clsx(
                 className,
-                'bg-ctp-mantle/90 shadow-ctp-crust/10 ring-ctp-surface0/80 h-10 w-10 rounded-full p-0.5 shadow-lg ring-1 backdrop-blur',
+                'theme-float h-10 w-10 rounded-full p-0.5',
             )}
             {...props}
         />
@@ -254,7 +254,10 @@ function Avatar({
         <Link
             href="/"
             aria-label="Home"
-            className={clsx(className, 'pointer-events-auto')}
+            className={clsx(
+                className,
+                'theme-focus pointer-events-auto rounded-full',
+            )}
             {...props}
         >
             <motion.div
@@ -266,7 +269,7 @@ function Avatar({
             >
                 <Image
                     src={avatarImage}
-                    alt=""
+                    alt="Homepage"
                     sizes={large ? '4rem' : '2.25rem'}
                     className={clsx(
                         'bg-ctp-surface0 rounded-full object-cover',

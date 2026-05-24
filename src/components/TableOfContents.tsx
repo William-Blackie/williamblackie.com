@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { clsx } from 'clsx'
 import { SurfaceCard } from '@/components/PagePrimitives'
@@ -21,41 +21,64 @@ export function TableOfContents({
     collapsible?: boolean
 }) {
     const [activeId, setActiveId] = useState<string | null>(null)
-    const [offsets, setOffsets] = useState<Record<string, number>>({})
+    const [sliderTop, setSliderTop] = useState(0)
+    const listRef = useRef<HTMLOListElement>(null)
 
     useEffect(() => {
+        const hash = window.location.hash.substring(1)
+        let hashFrame: number | undefined
+        let sliderTimeout: ReturnType<typeof setTimeout> | undefined
+
+        if (hash) {
+            hashFrame = window.requestAnimationFrame(() => {
+                setActiveId(hash)
+            })
+        }
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveId(entry.target.id)
-                    }
+                    if (entry.isIntersecting) setActiveId(entry.target.id)
                 })
             },
-            { rootMargin: '-20% 0% -70% 0%' },
+            { rootMargin: '-10% 0px -60% 0px' },
         )
 
-        headings.forEach((heading) => {
-            const element = document.getElementById(heading.id)
-            if (element) observer.observe(element)
+        headings.forEach((h) => {
+            const el = document.getElementById(h.id)
+            if (el) observer.observe(el)
         })
 
-        // Calculate offsets based on list item positions
-        const updateOffsets = () => {
-            const newOffsets: Record<string, number> = {}
-            headings.forEach((heading, index) => {
-                newOffsets[heading.id] = index * 40 // Assuming ~40px spacing
-            })
-            setOffsets(newOffsets)
+        // Force a calculation after the layout is established on mount
+        if (hash) {
+            sliderTimeout = setTimeout(() => {
+                const activeEl = listRef.current?.querySelector(
+                    `a[href="#${hash}"]`,
+                )
+                if (activeEl instanceof HTMLElement) {
+                    setSliderTop(activeEl.offsetTop)
+                }
+            }, 100)
         }
 
-        updateOffsets()
-        window.addEventListener('resize', updateOffsets)
         return () => {
             observer.disconnect()
-            window.removeEventListener('resize', updateOffsets)
+            if (typeof hashFrame !== 'undefined') {
+                window.cancelAnimationFrame(hashFrame)
+            }
+            if (sliderTimeout) {
+                clearTimeout(sliderTimeout)
+            }
         }
     }, [headings])
+
+    useEffect(() => {
+        if (!activeId || !listRef.current) return
+        const activeEl = listRef.current.querySelector(`a[href="#${activeId}"]`)
+        if (activeEl instanceof HTMLElement) {
+            setSliderTop(activeEl.offsetTop)
+        }
+    }, [activeId])
 
     if (!headings.length) return null
 
@@ -64,17 +87,11 @@ export function TableOfContents({
             <div className="absolute left-0 top-0 h-full w-0.5 bg-ctp-surface0">
                 <motion.div
                     className="absolute left-0 w-0.5 bg-ctp-blue dark:bg-ctp-pink"
-                    animate={{
-                        top:
-                            activeId && offsets[activeId] !== undefined ?
-                                `${offsets[activeId]}px`
-                            :   0,
-                        height: '20px',
-                    }}
+                    animate={{ top: sliderTop, height: '24px' }}
                     transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 />
             </div>
-            <ol className="ml-4 space-y-3 text-sm">
+            <ol ref={listRef} className="ml-4 space-y-3 text-sm">
                 {headings.map((heading) => (
                     <li
                         key={heading.id}
@@ -111,7 +128,7 @@ export function TableOfContents({
     }
 
     return (
-        <nav className={className}>
+        <nav className={className} aria-label="Table of contents">
             <h2
                 id="table-of-contents"
                 className="text-ctp-text text-sm font-semibold"

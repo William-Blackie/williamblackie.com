@@ -12,7 +12,7 @@ function ToolsSection({
 }: React.ComponentPropsWithoutRef<typeof Section>): React.ReactElement {
     return (
         <Section {...props}>
-            <ul role="list" className="space-y-10">
+            <ul role="list" aria-label="Tools" className="space-y-10">
                 {children}
             </ul>
         </Section>
@@ -30,7 +30,7 @@ function Tool({
 }): React.ReactElement {
     return (
         <Card as="li">
-            <Card.Title as="h3" href={href}>
+            <Card.Title as="h3" href={href} className="text-base">
                 {title}
             </Card.Title>
             <Card.Description>{children}</Card.Description>
@@ -93,7 +93,6 @@ export default function Tech(): React.ReactElement {
                                 href="https://github.com/William-Blackie/.dotfiles"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue dark:decoration-ctp-pink/35 dark:hover:text-ctp-pink dark:hover:decoration-ctp-pink font-medium underline underline-offset-4 transition-colors"
                             >
                                 github.com/William-Blackie/.dotfiles
                             </InternalExternalLink>

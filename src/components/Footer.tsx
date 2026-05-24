@@ -1,48 +1,53 @@
 'use client'
 
 import Link from 'next/link'
-import type { Route } from 'next'
-import { motion } from 'framer-motion'
 
 import { ContainerInner, ContainerOuter } from '@/components/Container'
 import { GooseInteraction } from '@/components/GooseInteraction'
 
-function NavLink({
-    href,
-    children,
-}: {
-    href: Route
-    children: React.ReactNode
-}): React.ReactElement {
-    return (
-        <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-        >
-            <Link
-                href={href}
-                className="text-ctp-text hover:text-ctp-blue dark:hover:text-ctp-pink transition-colors duration-300"
-            >
-                {children}
-            </Link>
-        </motion.div>
-    )
-}
-
 export function Footer(): React.ReactElement {
     return (
-        <footer className="mt-16 sm:mt-20 flex-none">
+        <footer className="mt-16 flex-none sm:mt-20">
             <ContainerOuter>
                 <div className="border-ctp-surface0/70 border-t pt-10 pb-16">
                     <ContainerInner>
                         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-                            <div className="text-ctp-text flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium">
-                                <NavLink href="/about">About</NavLink>
-                                <NavLink href="/projects">Projects</NavLink>
-                                <NavLink href="/articles">Blog</NavLink>
-                                <NavLink href="/tech">Tech</NavLink>
-                            </div>
+                            <nav aria-label="Footer navigation">
+                                <ul className="text-ctp-text flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium">
+                                    <li>
+                                        <Link
+                                            href="/about"
+                                            className="theme-focus hover:text-ctp-blue dark:hover:text-ctp-pink rounded-md px-1 transition-colors duration-300"
+                                        >
+                                            About
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href="/projects"
+                                            className="theme-focus hover:text-ctp-blue dark:hover:text-ctp-pink rounded-md px-1 transition-colors duration-300"
+                                        >
+                                            Projects
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href="/articles"
+                                            className="theme-focus hover:text-ctp-blue dark:hover:text-ctp-pink rounded-md px-1 transition-colors duration-300"
+                                        >
+                                            Blog
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href="/tech"
+                                            className="theme-focus hover:text-ctp-blue dark:hover:text-ctp-pink rounded-md px-1 transition-colors duration-300"
+                                        >
+                                            Tech
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </nav>
                             <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-8">
                                 <GooseInteraction />
                                 <p className="text-ctp-subtext1 text-sm">

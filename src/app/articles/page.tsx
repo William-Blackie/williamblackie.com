@@ -139,26 +139,33 @@ function ArticlePreview({
 }): React.ReactElement {
     return (
         <Card
+            as="article"
             href={article.path}
             variant={featured ? 'default' : 'ghost'}
             className={clsx(
-                featured ? 'p-8!' : (
-                    'py-8 border-t! border-ctp-surface0/70! rounded-none!'
+                featured ? 'p-6 sm:p-8' : (
+                    'py-8 border-t border-ctp-surface0/70'
                 ),
             )}
         >
-            <ArticleMetadata article={article} />
-            <Card.Title
-                as="h3"
-                className={
-                    featured ? 'text-2xl sm:text-3xl mt-4' : 'text-lg mt-4'
-                }
-            >
-                {article.title}
-            </Card.Title>
-            <Card.Description>{article.description}</Card.Description>
+            <header>
+                <ArticleMetadata article={article} />
+                <Card.Title
+                    as="h3"
+                    className={
+                        featured ? 'mt-4 text-2xl sm:text-3xl' : 'mt-2 text-xl'
+                    }
+                >
+                    {article.title}
+                </Card.Title>
+            </header>
+            <Card.Description className="mt-3">
+                {article.description}
+            </Card.Description>
             <TagList tags={article.tags ?? []} />
-            <Card.Cta>Read article</Card.Cta>
+            <Card.Cta className="mt-4">
+                {featured ? 'Read latest article' : 'Read article'}
+            </Card.Cta>
         </Card>
     )
 }
@@ -174,12 +181,19 @@ function ArticleArchive({
 
     return (
         <section aria-labelledby="article-archive">
-            <SectionHeading id="article-archive" title="Archive" />
-            <div className="mt-6">
+            <h2
+                id="article-archive"
+                className="text-ctp-text text-lg font-semibold"
+            >
+                All articles
+            </h2>
+            <ol className="mt-6" aria-label="Older articles">
                 {articles.map((article) => (
-                    <ArticlePreview key={article.slug} article={article} />
+                    <li key={article.slug}>
+                        <ArticlePreview article={article} />
+                    </li>
                 ))}
-            </div>
+            </ol>
         </section>
     )
 }
@@ -204,7 +218,7 @@ function BlogSidebar({
                         Blog index
                     </h2>
                     <dl className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-1">
-                        <SurfaceCard interactive className="p-4">
+                        <SurfaceCard className="p-4">
                             <dt className="text-ctp-subtext1 text-xs">
                                 Published
                             </dt>
@@ -212,7 +226,7 @@ function BlogSidebar({
                                 {articles.length}
                             </dd>
                         </SurfaceCard>
-                        <SurfaceCard interactive className="p-4">
+                        <SurfaceCard className="p-4">
                             <dt className="text-ctp-subtext1 text-xs">
                                 Focus areas
                             </dt>
@@ -337,8 +351,8 @@ export default async function Articles(): Promise<React.ReactElement> {
                                 <section aria-labelledby="latest-article">
                                     <SectionHeading
                                         id="latest-article"
-                                        eyebrow="Latest article"
-                                        title="Start here"
+                                        eyebrow="Latest"
+                                        title="Latest article"
                                         className="mb-6"
                                     />
                                     <ArticlePreview

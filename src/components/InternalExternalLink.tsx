@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
+import clsx from 'clsx'
 import { ExternalIcon, InternalIcon } from './Icons'
 
 type InternalExternalLinkProps = React.ComponentProps<typeof Link> & {
@@ -16,12 +17,15 @@ function isExternalUrl(href: string | object): boolean {
 export function InternalExternalLink({
     href,
     children,
+    className,
     text,
     ...props
 }: InternalExternalLinkProps): React.ReactElement {
     const isExternal = isExternalUrl(href)
-    const className =
-        'group inline-flex items-center gap-1 text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue dark:decoration-ctp-pink/35 dark:hover:text-ctp-pink dark:hover:decoration-ctp-pink font-medium underline underline-offset-4 transition-all duration-300'
+    const linkClassName = clsx(
+        'theme-link theme-focus group inline-flex items-center gap-1 transition-all duration-300',
+        className,
+    )
 
     if (isExternal) {
         return (
@@ -29,7 +33,7 @@ export function InternalExternalLink({
                 href={typeof href === 'string' ? href : undefined}
                 rel="noopener noreferrer"
                 target="_blank"
-                className={className}
+                className={linkClassName}
                 {...props}
             >
                 {children}
@@ -39,7 +43,7 @@ export function InternalExternalLink({
         )
     }
     return (
-        <Link href={href} className={className} {...props}>
+        <Link href={href} className={linkClassName} {...props}>
             {children}
             <InternalIcon className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
         </Link>

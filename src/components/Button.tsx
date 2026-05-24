@@ -5,10 +5,8 @@ import clsx from 'clsx'
 import { motion } from 'framer-motion'
 
 const variantStyles = {
-    primary:
-        'bg-ctp-text font-semibold text-ctp-base hover:bg-ctp-overlay1 active:bg-ctp-overlay0 active:text-ctp-base/70',
-    secondary:
-        'bg-ctp-surface0/50 font-medium text-ctp-text hover:bg-ctp-surface0 active:bg-ctp-surface1 active:text-ctp-text/70',
+    primary: 'button-primary font-semibold active:opacity-90',
+    secondary: 'button-secondary font-medium active:text-ctp-text/70',
 }
 
 type ButtonProps = {
@@ -24,7 +22,7 @@ export function Button({
     ...props
 }: ButtonProps): React.ReactElement {
     className = clsx(
-        'inline-flex items-center gap-2 justify-center rounded-md py-2 px-3 text-sm outline-offset-2 transition active:transition-none',
+        'theme-focus inline-flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm transition active:transition-none',
         variantStyles[variant],
         className,
     )

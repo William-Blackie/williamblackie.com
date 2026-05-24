@@ -96,9 +96,6 @@ importers:
         specifier: ^0.6.2
         version: 0.6.2
     devDependencies:
-      '@catppuccin/tailwindcss':
-        specifier: ^1.0.0
-        version: 1.0.0
       '@tailwindcss/postcss':
         specifier: ^4.3.0
         version: 4.3.0
@@ -236,10 +233,6 @@ packages:
 
   '@braintree/sanitize-url@7.1.2':
     resolution: {integrity: sha512-jigsZK+sMF/cuiB7sERuo9V7N9jx+dhmHHnQyDSVdpZwVutaBu7WvNYqMDLSgFgfB30n452TP3vjDAvFC973mA==}
-
-  '@catppuccin/tailwindcss@1.0.0':
-    resolution: {integrity: sha512-l8pOlcYe2ncGd8a1gUmL5AHmKlxR2+CHuG5kt4Me6IZwzntW1DoLmj89BH+DcsPHBsdDGLrTSv35emlYyU3FeQ==}
-    engines: {node: '>=22.0.0'}
 
   '@chevrotain/cst-dts-gen@11.0.3':
     resolution: {integrity: sha512-BvIKpRLeS/8UbfxXxgC33xOumsacaeCKAjAeLyOn7Pcp95HiRbrpl14S+9vaZLolnbssPIUuiUd8IvgkRyt6NQ==}
@@ -5563,8 +5556,6 @@ snapshots:
   '@braintree/sanitize-url@6.0.2': {}
 
   '@braintree/sanitize-url@7.1.2': {}
-
-  '@catppuccin/tailwindcss@1.0.0': {}
 
   '@chevrotain/cst-dts-gen@11.0.3':
     dependencies:
