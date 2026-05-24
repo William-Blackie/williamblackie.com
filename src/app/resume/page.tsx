@@ -1,6 +1,8 @@
 import { type Metadata } from 'next'
-import { Container } from '@/components/Container'
+
 import { JsonLd } from '@/components/JsonLd'
+import { Pill, SectionHeading, SurfaceCard } from '@/components/PagePrimitives'
+import { SimpleLayout } from '@/components/SimpleLayout'
 import { createPageMetadata, createPageSchema } from '@/lib/metadata'
 import {
     highlightedProjects,
@@ -21,15 +23,63 @@ export const metadata: Metadata = createPageMetadata({
 export const dynamic = 'force-static'
 export const revalidate = 0
 
-function SectionTitle({
+function BulletList({ items }: { items: Array<string> }): React.ReactElement {
+    return (
+        <ul className="text-ctp-subtext1 mt-4 list-disc space-y-2 pl-5 text-sm">
+            {items.map((item) => (
+                <li key={item}>{item}</li>
+            ))}
+        </ul>
+    )
+}
+
+function ResumeSection({
+    title,
     children,
 }: {
+    title: string
     children: React.ReactNode
 }): React.ReactElement {
     return (
-        <h2 className="text-ctp-text mt-8 text-xl font-semibold tracking-tight">
+        <section>
+            <SectionHeading title={title} />
+            <div className="mt-6">{children}</div>
+        </section>
+    )
+}
+
+function ResumeItem({
+    title,
+    subtitle,
+    meta,
+    children,
+}: {
+    title: string
+    subtitle?: string
+    meta?: string
+    children?: React.ReactNode
+}): React.ReactElement {
+    return (
+        <SurfaceCard className="p-6">
+            <div className="gap-4 sm:flex sm:items-baseline sm:justify-between">
+                <div>
+                    <h3 className="text-ctp-text text-base font-semibold">
+                        {title}
+                    </h3>
+                    {subtitle && (
+                        <p className="text-ctp-subtext1 mt-1 text-sm">
+                            {subtitle}
+                        </p>
+                    )}
+                </div>
+                {meta && (
+                    <p className="text-ctp-subtext1 mt-2 text-sm sm:mt-0 sm:text-right">
+                        {meta}
+                    </p>
+                )}
+            </div>
             {children}
-        </h2>
+        </SurfaceCard>
     )
 }
 
@@ -48,96 +98,93 @@ export default function Resume(): React.ReactElement {
                     },
                 })}
             />
-            <Container className="mt-16 sm:mt-32">
-                <div className="max-w-3xl">
-                    <h1 className="text-ctp-text text-2xl font-bold tracking-tight sm:text-3xl">
-                        William Blackie | Full-stack Software Engineer
-                    </h1>
-                    <p className="text-ctp-subtext1 mt-1 text-sm">
-                        London and Bristol, UK (remote-friendly) |
-                        will@developerfy.com
-                    </p>
+            <SimpleLayout
+                title="Resume and delivery history."
+                intro="Full-stack engineer working across agency, contract, and product teams. Based in Bristol and London, UK."
+            >
+                <div className="max-w-4xl space-y-16">
+                    <SurfaceCard className="p-6">
+                        <p className="text-ctp-subtext1 text-base">
+                            I design and deliver reliable systems, improve
+                            delivery standards, and help teams keep shipping
+                            confidently. Past work includes delivery for Google,
+                            public-sector organisations, and major UK charities.
+                        </p>
+                        <p className="text-ctp-subtext1 mt-4 text-sm">
+                            London and Bristol, UK (remote-friendly) |
+                            will@developerfy.com
+                        </p>
+                    </SurfaceCard>
 
-                    <SectionTitle>About</SectionTitle>
-                    <p className="text-ctp-subtext1 mt-4 text-base">
-                        Full-stack engineer with experience across agency,
-                        consultancy, and product teams. I design and deliver
-                        reliable systems, improve delivery standards, and help
-                        teams keep shipping confidently. Past work includes
-                        delivery for Google, public-sector organisations, and
-                        major UK charities.
-                    </p>
-
-                    <SectionTitle>Skills / Technologies</SectionTitle>
-                    <ul className="text-ctp-subtext1 mt-4 list-inside list-disc space-y-2 text-base">
-                        {resumeSkills.map((skill) => (
-                            <li key={skill}>{skill}</li>
-                        ))}
-                    </ul>
-
-                    <SectionTitle>Highlighted Projects</SectionTitle>
-                    <div className="text-ctp-subtext1 mt-4 space-y-4 text-base">
-                        {highlightedProjects.map((project) => (
-                            <div key={project.name}>
-                                <strong>{project.name}</strong> – {project.role}
-                                <ul className="list-inside list-disc">
-                                    {project.bullets.map((bullet) => (
-                                        <li key={bullet}>{bullet}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
-                    </div>
-
-                    <SectionTitle>Experience</SectionTitle>
-                    <div className="text-ctp-subtext1 mt-4 space-y-4 text-base">
-                        {workExperience.map((role) => (
-                            <div key={role.key}>
-                                <strong>{role.company}</strong>
-                                {role.location ?
-                                    `, ${role.location}`
-                                :   ''} - {role.title}
-                                <span className="text-ctp-subtext1 block text-sm">
-                                    {role.startLabel} – {role.endLabel}
-                                </span>
-                                {role.bullets ?
-                                    <ul className="mt-1 list-inside list-disc">
-                                        {role.bullets.map((bullet) => (
-                                            <li key={bullet}>{bullet}</li>
-                                        ))}
-                                    </ul>
-                                :   null}
-                            </div>
-                        ))}
-                    </div>
-
-                    <SectionTitle>Education</SectionTitle>
-                    <div className="text-ctp-subtext1 mt-4 text-base">
-                        <strong>BSc (Hons) Computer Science</strong>, University
-                        of the West of England, Bristol
-                        <br />
-                        (September 2016 – May 2019, First-Class Honours)
-                    </div>
-
-                    <SectionTitle>Awards</SectionTitle>
-                    <ul className="text-ctp-subtext1 mt-4 list-inside list-disc space-y-2 text-base">
-                        {resumeAwards.map((award) => (
-                            <li key={award}>{award}</li>
-                        ))}
-                    </ul>
-
-                    <SectionTitle>Volunteering</SectionTitle>
-                    <div className="text-ctp-subtext1 mt-4 text-base">
-                        <strong>{volunteering.role}</strong> (
-                        {volunteering.date})
-                        <ul className="list-inside list-disc">
-                            {volunteering.bullets.map((bullet) => (
-                                <li key={bullet}>{bullet}</li>
+                    <ResumeSection title="Skills and Technologies">
+                        <ul className="flex flex-wrap gap-2">
+                            {resumeSkills.map((skill) => (
+                                <li key={skill}>
+                                    <Pill>{skill}</Pill>
+                                </li>
                             ))}
                         </ul>
-                    </div>
+                    </ResumeSection>
+
+                    <ResumeSection title="Highlighted Projects">
+                        <div className="space-y-4">
+                            {highlightedProjects.map((project) => (
+                                <ResumeItem
+                                    key={project.name}
+                                    title={project.name}
+                                    subtitle={project.role}
+                                >
+                                    <BulletList items={project.bullets} />
+                                </ResumeItem>
+                            ))}
+                        </div>
+                    </ResumeSection>
+
+                    <ResumeSection title="Experience">
+                        <div className="space-y-4">
+                            {workExperience.map((role) => (
+                                <ResumeItem
+                                    key={role.key}
+                                    title={role.company}
+                                    subtitle={`${role.title}${role.location ? `, ${role.location}` : ''}`}
+                                    meta={`${role.startLabel} - ${role.endLabel}`}
+                                >
+                                    {role.bullets && (
+                                        <BulletList items={role.bullets} />
+                                    )}
+                                </ResumeItem>
+                            ))}
+                        </div>
+                    </ResumeSection>
+
+                    <ResumeSection title="Education">
+                        <ResumeItem
+                            title="BSc (Hons) Computer Science"
+                            subtitle="University of the West of England, Bristol"
+                            meta="September 2016 - May 2019"
+                        >
+                            <p className="text-ctp-subtext1 mt-4 text-sm">
+                                First-Class Honours.
+                            </p>
+                        </ResumeItem>
+                    </ResumeSection>
+
+                    <ResumeSection title="Awards">
+                        <SurfaceCard className="p-6">
+                            <BulletList items={resumeAwards} />
+                        </SurfaceCard>
+                    </ResumeSection>
+
+                    <ResumeSection title="Volunteering">
+                        <ResumeItem
+                            title={volunteering.role}
+                            meta={volunteering.date}
+                        >
+                            <BulletList items={volunteering.bullets} />
+                        </ResumeItem>
+                    </ResumeSection>
                 </div>
-            </Container>
+            </SimpleLayout>
         </>
     )
 }

@@ -1,4 +1,7 @@
+'use client'
+
 import clsx from 'clsx'
+import { motion } from 'framer-motion'
 
 export function SocialLink({
     className,
@@ -18,16 +21,26 @@ export function SocialLink({
 
     return (
         <li className={clsx(className, 'flex')}>
-            <a
-                href={href}
-                rel={isExternalLink ? 'noopener noreferrer' : undefined}
-                target={isExternalLink ? '_blank' : undefined}
-                className="group text-ctp-text hover:text-ctp-blue dark:hover:text-ctp-pink flex text-sm font-medium transition"
+            <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{
+                    type: 'spring' as const,
+                    stiffness: 400,
+                    damping: 20,
+                }}
             >
-                <Icon className="fill-ctp-subtext1 group-hover:fill-ctp-blue dark:group-hover:fill-ctp-pink h-6 w-6 flex-none transition" />
-                {children && <span className="ml-4">{children}</span>}
-                {srLabel && <span className="sr-only">{srLabel}</span>}
-            </a>
+                <a
+                    href={href}
+                    rel={isExternalLink ? 'noopener noreferrer' : undefined}
+                    target={isExternalLink ? '_blank' : undefined}
+                    className="group text-ctp-text hover:text-ctp-blue dark:hover:text-ctp-pink flex text-sm font-medium transition"
+                >
+                    <Icon className="fill-ctp-subtext1 group-hover:fill-ctp-blue dark:group-hover:fill-ctp-pink h-6 w-6 flex-none transition" />
+                    {children && <span className="ml-4">{children}</span>}
+                    {srLabel && <span className="sr-only">{srLabel}</span>}
+                </a>
+            </motion.div>
         </li>
     )
 }

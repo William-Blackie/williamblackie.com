@@ -1,14 +1,20 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import type { ExcalidrawInnerProps } from './ExcalidrawInner'
 
+/**
+ * ExcalidrawWrapper - A dynamic loader for the Excalidraw component.
+ */
 const ExcalidrawInner = dynamic(() => import('./ExcalidrawInner'), {
     ssr: false,
     loading: () => (
-        <div className="bg-ctp-mantle border-ctp-surface0 my-8 flex h-125 w-full items-center justify-center rounded-xl border">
+        <div
+            className="flex h-[500px] w-full items-center justify-center bg-ctp-mantle rounded-xl border border-ctp-surface0 my-8"
+            role="status"
+            aria-label="Loading diagram"
+        >
             <div className="flex flex-col items-center gap-2">
-                <div className="border-ctp-blue h-8 w-8 animate-spin rounded-full border-4 border-t-transparent"></div>
+                <div className="h-8 w-8 animate-spin rounded-full border-4 border-ctp-blue border-t-transparent"></div>
                 <span className="text-ctp-subtext0 font-medium">
                     Loading diagram...
                 </span>
@@ -17,8 +23,13 @@ const ExcalidrawInner = dynamic(() => import('./ExcalidrawInner'), {
     ),
 })
 
-export function ExcalidrawWrapper(
-    props: ExcalidrawInnerProps,
-): React.ReactElement {
+interface ExcalidrawWrapperProps {
+    height?: string
+    initialData?: Record<string, unknown>
+    theme?: 'dark' | 'light'
+    [key: string]: unknown
+}
+
+export function ExcalidrawWrapper(props: ExcalidrawWrapperProps) {
     return <ExcalidrawInner {...props} />
 }

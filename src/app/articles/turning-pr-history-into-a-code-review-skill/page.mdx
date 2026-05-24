@@ -8,12 +8,14 @@ export const article = {
     author: 'William Blackie',
     date: '2026-04-19',
     path: '/articles/turning-pr-history-into-a-code-review-skill',
+    tags: ['Code review', 'AI tooling', 'Developer workflow'],
 }
 export const metadata = createArticleMetadata({
     title: article.title,
     description: article.description,
     path: article.path,
     datePublished: article.date,
+    tags: article.tags,
 })
 
 <ArticleLayout article={article}>
@@ -129,7 +131,6 @@ than they sound:
             },
         ],
         appState: {
-            viewBackgroundColor: '#eff1f5',
             currentItemFontFamily: 1,
         },
     }}

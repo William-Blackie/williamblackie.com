@@ -20,8 +20,11 @@ export function useHeaderScroll(): {
     const isInitial = useRef(true)
 
     useEffect(() => {
-        const downDelay = avatarRef.current?.offsetTop ?? 0
         const upDelay = 64
+
+        function getDownDelay(): number {
+            return avatarRef.current?.offsetTop ?? 0
+        }
 
         function setProperty(property: string, value: string): void {
             document.documentElement.style.setProperty(property, value)
@@ -36,6 +39,7 @@ export function useHeaderScroll(): {
                 return
             }
 
+            const downDelay = getDownDelay()
             const { top, height } = headerRef.current.getBoundingClientRect()
             const scrollY = clamp(
                 window.scrollY,
@@ -73,7 +77,12 @@ export function useHeaderScroll(): {
         }
 
         function updateAvatarStyles(): void {
-            if (!isHomePage) {
+            const downDelay = getDownDelay()
+
+            if (!isHomePage || downDelay <= 0) {
+                removeProperty('--avatar-image-transform')
+                removeProperty('--avatar-border-transform')
+                removeProperty('--avatar-border-opacity')
                 return
             }
 

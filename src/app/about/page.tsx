@@ -2,25 +2,14 @@ import { type Metadata } from 'next'
 import Image from 'next/image'
 
 import { Container } from '@/components/Container'
+import { MailIcon } from '@/components/GeneralIcons'
 import { JsonLd } from '@/components/JsonLd'
+import { SurfaceCard } from '@/components/PagePrimitives'
 import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons'
 import { createPageMetadata, createPageSchema } from '@/lib/metadata'
 import { personSchemaId } from '@/lib/site'
 import portraitImage from '@/static/imgs/photos/image-3.jpg'
 import { SocialLink } from '@/components/SocialLink'
-
-function MailIcon(
-    props: React.ComponentPropsWithoutRef<'svg'>,
-): React.ReactElement {
-    return (
-        <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-            <path
-                fillRule="evenodd"
-                d="M6 5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H6Zm.245 2.187a.75.75 0 0 0-.99 1.126l6.25 5.5a.75.75 0 0 0 .99 0l6.25-5.5a.75.75 0 0 0-.99-1.126L12 12.251 6.245 7.187Z"
-            />
-        </svg>
-    )
-}
 
 export const metadata: Metadata = createPageMetadata({
     title: 'About',
@@ -60,13 +49,14 @@ export default function About(): React.ReactElement {
                         <h1 className="text-ctp-text text-4xl font-bold tracking-tight sm:text-5xl">
                             Hi, I&apos;m William.
                         </h1>
-                        <div className="text-ctp-subtext1 mt-6 space-y-7 text-base">
+                        <p className="text-ctp-subtext1 mt-6 text-base">
+                            I build product and platform software with Python,
+                            Django, Wagtail, TypeScript, React, and Next.js.
+                        </p>
+                        <div className="text-ctp-subtext1 mt-8 space-y-7 text-base">
                             <p>
-                                I&apos;m a Full-stack engineer working across
-                                Python (Django/FastAPI/Wagtail) and TypeScript
-                                (React/Next.js). My focus is building
-                                user-centred products that are accessible,
-                                reliable, and maintainable.
+                                My focus is building user-centred products that
+                                are accessible, reliable, and maintainable.
                             </p>
                             <p>
                                 I studied Computer Science at the University of
@@ -118,29 +108,34 @@ export default function About(): React.ReactElement {
                         </div>
                     </div>
                     <div className="lg:pl-20">
-                        <ul role="list">
-                            <SocialLink
-                                href="https://github.com/William-Blackie"
-                                icon={GitHubIcon}
-                                className="mt-4"
-                            >
-                                Follow on GitHub
-                            </SocialLink>
-                            <SocialLink
-                                href="https://www.linkedin.com/in/william-blackie/"
-                                icon={LinkedInIcon}
-                                className="mt-4"
-                            >
-                                Follow on LinkedIn
-                            </SocialLink>
-                            <SocialLink
-                                href="mailto:will@developerfy.com"
-                                icon={MailIcon}
-                                className="mt-4"
-                            >
-                                will@developerfy.com
-                            </SocialLink>
-                        </ul>
+                        <SurfaceCard className="p-6">
+                            <h2 className="text-ctp-text text-sm font-semibold">
+                                Elsewhere
+                            </h2>
+                            <ul role="list" className="mt-2">
+                                <SocialLink
+                                    href="https://github.com/William-Blackie"
+                                    icon={GitHubIcon}
+                                    className="mt-4"
+                                >
+                                    Follow on GitHub
+                                </SocialLink>
+                                <SocialLink
+                                    href="https://www.linkedin.com/in/william-blackie/"
+                                    icon={LinkedInIcon}
+                                    className="mt-4"
+                                >
+                                    Follow on LinkedIn
+                                </SocialLink>
+                                <SocialLink
+                                    href="mailto:will@developerfy.com"
+                                    icon={MailIcon}
+                                    className="mt-4"
+                                >
+                                    will@developerfy.com
+                                </SocialLink>
+                            </ul>
+                        </SurfaceCard>
                     </div>
                 </div>
             </Container>

@@ -1,3 +1,5 @@
+'use client'
+
 export function CloseIcon(
     props: React.ComponentPropsWithoutRef<'svg'>,
 ): React.ReactElement {

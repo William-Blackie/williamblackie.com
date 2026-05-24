@@ -1,7 +1,11 @@
+'use client'
+
 import Link from 'next/link'
 import type { Route } from 'next'
+import { motion } from 'framer-motion'
 
 import { ContainerInner, ContainerOuter } from '@/components/Container'
+import { GooseInteraction } from '@/components/GooseInteraction'
 
 function NavLink({
     href,
@@ -11,18 +15,24 @@ function NavLink({
     children: React.ReactNode
 }): React.ReactElement {
     return (
-        <Link
-            href={href}
-            className="hover:text-ctp-blue dark:hover:text-ctp-pink transition"
+        <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
         >
-            {children}
-        </Link>
+            <Link
+                href={href}
+                className="text-ctp-text hover:text-ctp-blue dark:hover:text-ctp-pink transition-colors duration-300"
+            >
+                {children}
+            </Link>
+        </motion.div>
     )
 }
 
 export function Footer(): React.ReactElement {
     return (
-        <footer className="mt-32 flex-none">
+        <footer className="mt-16 sm:mt-20 flex-none">
             <ContainerOuter>
                 <div className="border-ctp-surface0/70 border-t pt-10 pb-16">
                     <ContainerInner>
@@ -33,10 +43,13 @@ export function Footer(): React.ReactElement {
                                 <NavLink href="/articles">Blog</NavLink>
                                 <NavLink href="/tech">Tech</NavLink>
                             </div>
-                            <p className="text-ctp-subtext1 text-sm">
-                                &copy; {new Date().getFullYear()} William
-                                Blackie. All rights reserved.
-                            </p>
+                            <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-8">
+                                <GooseInteraction />
+                                <p className="text-ctp-subtext1 text-sm">
+                                    &copy; {new Date().getFullYear()} William
+                                    Blackie. All rights reserved.
+                                </p>
+                            </div>
                         </div>
                     </ContainerInner>
                 </div>

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import clsx from 'clsx'
+import { SurfaceCard } from './PagePrimitives'
 
 type LinkHref = React.ComponentPropsWithoutRef<typeof Link>['href']
 type CardHref = LinkHref | string
@@ -18,26 +19,26 @@ function ChevronRightIcon(
         </svg>
     )
 }
-
 export function Card<T extends React.ElementType = 'div'>({
-    as,
     className,
     children,
+    href,
+    variant = 'default',
 }: Omit<React.ComponentPropsWithoutRef<T>, 'as' | 'className'> & {
     as?: T
     className?: string
+    href?: CardHref
+    variant?: 'default' | 'ghost'
 }): React.ReactElement {
-    const Component = as ?? 'div'
-
     return (
-        <Component
-            className={clsx(
-                className,
-                'group relative flex flex-col items-start',
-            )}
+        <SurfaceCard
+            interactive={!!href}
+            href={href as string}
+            variant={variant}
+            className={clsx(className, variant === 'default' ? 'p-6' : 'p-0')}
         >
-            {children}
-        </Component>
+            <div className="relative flex flex-col items-start">{children}</div>
+        </SurfaceCard>
     )
 }
 
@@ -50,13 +51,10 @@ Card.Link = function CardLink({
     'href'
 >): React.ReactElement {
     return (
-        <>
-            <div className="from-ctp-mantle/95 via-ctp-base/90 to-ctp-surface0/75 shadow-ctp-crust/8 ring-ctp-surface0/55 group-hover:shadow-ctp-crust/12 group-hover:ring-ctp-overlay0/25 absolute -inset-x-4 -inset-y-6 z-0 scale-[0.985] rounded-2xl bg-linear-to-br opacity-0 shadow-xl ring-1 transition-all duration-300 ease-out ring-inset group-hover:scale-100 group-hover:opacity-100 group-hover:shadow-2xl sm:-inset-x-6" />
-            <Link href={href as LinkHref} {...props}>
-                <span className="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl" />
-                <span className="relative z-10">{children}</span>
-            </Link>
-        </>
+        <Link href={href as LinkHref} {...props}>
+            <span className="absolute -inset-6 z-20 rounded-2xl" />
+            <span className="relative z-10">{children}</span>
+        </Link>
     )
 }
 
@@ -102,7 +100,7 @@ Card.Cta = function CardCta({
             className="text-ctp-blue dark:text-ctp-pink relative z-10 mt-4 flex items-center text-sm font-medium"
         >
             {children}
-            <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current" />
+            <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current transition-transform duration-300 group-hover:translate-x-1" />
         </div>
     )
 }

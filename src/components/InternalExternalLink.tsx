@@ -20,25 +20,28 @@ export function InternalExternalLink({
     ...props
 }: InternalExternalLinkProps): React.ReactElement {
     const isExternal = isExternalUrl(href)
+    const className =
+        'group inline-flex items-center gap-1 text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue dark:decoration-ctp-pink/35 dark:hover:text-ctp-pink dark:hover:decoration-ctp-pink font-medium underline underline-offset-4 transition-all duration-300'
+
     if (isExternal) {
         return (
             <a
                 href={typeof href === 'string' ? href : undefined}
                 rel="noopener noreferrer"
                 target="_blank"
-                className="text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue dark:decoration-ctp-pink/35 dark:hover:text-ctp-pink dark:hover:decoration-ctp-pink font-medium underline underline-offset-4 transition-[text-decoration-color]"
+                className={className}
                 {...props}
             >
                 {children}
                 {text && text}
-                <ExternalIcon />
+                <ExternalIcon className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
         )
     }
     return (
-        <Link href={href} {...props}>
+        <Link href={href} className={className} {...props}>
             {children}
-            <InternalIcon />
+            <InternalIcon className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
         </Link>
     )
 }

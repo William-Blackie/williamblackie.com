@@ -12,7 +12,7 @@ function ToolsSection({
 }: React.ComponentPropsWithoutRef<typeof Section>): React.ReactElement {
     return (
         <Section {...props}>
-            <ul role="list" className="space-y-16">
+            <ul role="list" className="space-y-10">
                 {children}
             </ul>
         </Section>

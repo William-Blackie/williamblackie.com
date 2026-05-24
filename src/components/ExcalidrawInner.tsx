@@ -1,56 +1,50 @@
 'use client'
 
+import { useMemo } from 'react'
 import { Excalidraw } from '@excalidraw/excalidraw'
-import type { ExcalidrawProps } from '@excalidraw/excalidraw/types'
-import type { CSSProperties } from 'react'
-import { useEffect, useRef } from 'react'
 import { useTheme } from 'next-themes'
 
-// IMPORTANT: Excalidraw CSS must be imported
+// IMPORTANT: Excalidraw CSS must be imported for correct layout and icons
 import '@excalidraw/excalidraw/index.css'
 
-export type ExcalidrawInnerProps = ExcalidrawProps & {
-    height?: CSSProperties['height']
+interface ExcalidrawInnerProps {
+    height?: string
+    initialData?: Record<string, unknown>
+    theme?: 'dark' | 'light'
+    [key: string]: unknown
 }
 
+/**
+ * ExcalidrawInner - The actual browser-side component that renders the diagram.
+ * It detects the site's current theme (Catppuccin Mocha/Latte) and applies it to the canvas.
+ */
 export default function ExcalidrawInner({
     height = '500px',
+    initialData,
     theme: propTheme,
     ...props
-}: ExcalidrawInnerProps): React.ReactElement {
-    const containerRef = useRef<HTMLDivElement>(null)
+}: ExcalidrawInnerProps) {
     const { resolvedTheme } = useTheme()
-    const theme = propTheme || (resolvedTheme === 'dark' ? 'dark' : 'light')
 
-    useEffect(() => {
-        function labelMenuButton(): void {
-            containerRef.current
-                ?.querySelectorAll<HTMLButtonElement>('.main-menu-trigger')
-                .forEach((button) => {
-                    button.setAttribute('aria-label', 'Open diagram menu')
-                })
-        }
-
-        labelMenuButton()
-
-        const observer = new MutationObserver(labelMenuButton)
-        if (containerRef.current) {
-            observer.observe(containerRef.current, {
-                childList: true,
-                subtree: true,
-            })
-        }
-
-        return () => observer.disconnect()
-    }, [])
+    // Compute theme once using useMemo to avoid hydration mismatches
+    const currentTheme = useMemo(() => {
+        return propTheme || (resolvedTheme === 'light' ? 'light' : 'dark')
+    }, [propTheme, resolvedTheme])
 
     return (
         <div
-            ref={containerRef}
             style={{ height, width: '100%' }}
-            className="excalidraw-container my-8"
+            className="my-8 excalidraw-container"
+            role="region"
+            aria-label="Interactive diagram"
         >
-            <Excalidraw {...props} theme={theme} />
+            <Excalidraw
+                initialData={
+                    initialData as import('@excalidraw/excalidraw/types').ExcalidrawInitialDataState
+                }
+                theme={currentTheme}
+                {...props}
+            />
         </div>
     )
 }

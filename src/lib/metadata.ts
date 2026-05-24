@@ -31,6 +31,7 @@ interface ArticleSchemaInput {
     path: string
     datePublished: string
     author?: string
+    tags?: Array<string>
 }
 
 export function createPageMetadata({
@@ -73,6 +74,7 @@ export function createArticleMetadata({
     description,
     path,
     datePublished,
+    tags,
 }: ArticleSchemaInput): Metadata {
     return {
         ...createPageMetadata({
@@ -80,6 +82,7 @@ export function createArticleMetadata({
             description,
             path,
         }),
+        keywords: tags,
         openGraph: {
             type: 'article',
             locale: 'en_GB',
@@ -129,12 +132,14 @@ export function createArticleSchema({
     path,
     datePublished,
     author = siteName,
+    tags,
 }: ArticleSchemaInput): Record<string, unknown> {
     return {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
         headline: title,
         description,
+        ...(tags ? { keywords: tags } : {}),
         datePublished,
         author: {
             '@type': 'Person',

@@ -1,0 +1,388 @@
+'use client'
+
+import Image, { type ImageProps } from 'next/image'
+import clsx from 'clsx'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
+import { Container } from '@/components/Container'
+import {
+    GitHubIcon,
+    MastodonIcon,
+    LinkedInIcon,
+} from '@/components/SocialIcons'
+import {
+    BriefcaseIcon,
+    MailIcon,
+    ChevronDownIcon,
+} from '@/components/GeneralIcons'
+import { SurfaceCard } from '@/components/PagePrimitives'
+import { SocialLink } from '@/components/SocialLink'
+import { InternalExternalLink } from '@/components/InternalExternalLink'
+import { Button } from '@/components/Button'
+
+import image1 from '@/static/imgs/photos/image-1.jpg'
+import image2 from '@/static/imgs/photos/image-2.jpg'
+import image3 from '@/static/imgs/photos/image-3.jpg'
+import image4 from '@/static/imgs/photos/image-4.jpg'
+import image5 from '@/static/imgs/photos/image-5.jpg'
+
+import logoDeveloperfy from '@/static/imgs/logos/developerfy.svg'
+import logoGoogle from '@/static/imgs/logos/google.svg'
+import logoTorchbox from '@/static/imgs/logos/tbx.svg'
+import logoMabyDuck from '@/static/imgs/logos/mabyduck.png'
+
+import { workExperience } from '@/lib/profile-content'
+
+interface RoleProps {
+    company: string
+    title: string
+    logo: ImageProps['src']
+    start: string | { label: string; dateTime: string }
+    end: string | { label: string; dateTime: string }
+    bullets?: string[]
+}
+
+function Role({ role }: { role: RoleProps }): React.ReactElement {
+    const [isHovered, setIsHovered] = useState(false)
+    const startLabel =
+        typeof role.start === 'string' ? role.start : role.start.label
+    const startDate =
+        typeof role.start === 'string' ? role.start : role.start.dateTime
+
+    const endLabel = typeof role.end === 'string' ? role.end : role.end.label
+    const endDate = typeof role.end === 'string' ? role.end : role.end.dateTime
+
+    return (
+        <motion.li
+            className="group/role relative flex flex-col gap-4 rounded-xl p-3 -mx-3 transition-colors hover:bg-ctp-surface0/30 cursor-default"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            <div className="flex gap-4">
+                <div className="bg-ctp-mantle shadow-ctp-crust/10 ring-ctp-surface0/80 relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1">
+                    <div className="dark:bg-ctp-text/90 dark:ring-ctp-text/15 flex h-10 w-10 items-center justify-center rounded-full p-1.5 dark:ring-1">
+                        <Image
+                            src={role.logo}
+                            alt=""
+                            sizes="2.5rem"
+                            className="h-full w-full object-contain"
+                        />
+                    </div>
+                </div>
+                <dl className="flex-col flex-auto flex-wrap gap-x-2 sm:flex">
+                    <dt className="sr-only">Company</dt>
+                    <dd className="text-ctp-text w-full flex-none text-sm font-medium">
+                        {role.company}
+                    </dd>
+                    <dt className="sr-only">Role</dt>
+                    <dd className="text-ctp-subtext1 text-xs">{role.title}</dd>
+                    <dt className="sr-only">Date</dt>
+                    <dd
+                        className="text-ctp-subtext1 ml-auto text-xs"
+                        aria-label={`${startLabel} until ${endLabel}`}
+                    >
+                        <time dateTime={startDate}>{startLabel}</time>{' '}
+                        <span aria-hidden="true">—</span>{' '}
+                        <time dateTime={endDate}>{endLabel}</time>
+                    </dd>
+                </dl>
+                <div className="flex-none self-center sm:hidden">
+                    <ChevronDownIcon
+                        className={clsx(
+                            'h-4 w-4 transition-transform',
+                            isHovered && 'rotate-180',
+                        )}
+                    />
+                </div>
+            </div>
+
+            <AnimatePresence initial={false}>
+                {isHovered && role.bullets && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: 'circOut' }}
+                        className="overflow-hidden"
+                    >
+                        <ul className="mt-2 space-y-2 border-l-2 border-ctp-surface1 pl-4">
+                            {role.bullets.map((bullet, i) => (
+                                <li
+                                    key={i}
+                                    className="text-ctp-subtext1 text-xs leading-relaxed"
+                                >
+                                    {bullet}
+                                </li>
+                            ))}
+                        </ul>
+                        <div className="mt-3 flex flex-wrap items-center gap-1 pl-4">
+                            <span className="text-ctp-blue dark:text-ctp-pink text-[10px] font-bold uppercase tracking-wider opacity-80">
+                                Discover more
+                            </span>
+                            <ChevronDownIcon className="text-ctp-blue dark:text-ctp-pink h-3 w-3 -rotate-90 transition-transform duration-300 group-hover/role:translate-x-0.5" />
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.li>
+    )
+}
+
+function Resume(): React.ReactElement {
+    const logos: Record<string, ImageProps['src']> = {
+        mabyduck: logoMabyDuck,
+        developerfy: logoDeveloperfy,
+        google: logoGoogle,
+        torchbox: logoTorchbox,
+    }
+
+    const resume: Array<RoleProps> = workExperience.map((role) => {
+        const logo = logos[role.key]
+
+        if (!logo) {
+            throw new Error(`Missing logo for work experience: ${role.key}`)
+        }
+
+        return {
+            company: role.company,
+            title:
+                role.key === 'google' ?
+                    'Full-stack Developer - Contract'
+                :   role.title,
+            logo,
+            start: {
+                label: role.startLabel,
+                dateTime: role.startDateTime,
+            },
+            end: {
+                label: role.endLabel,
+                dateTime: role.endDateTime,
+            },
+            bullets: role.bullets || [
+                'Delivering high-quality product engineering and architectural guidance.',
+                'Ensuring systems are reliable, maintainable, and built for scale.',
+                'Collaborating with multi-disciplinary teams to ship meaningful features.',
+            ],
+        }
+    })
+
+    return (
+        <SurfaceCard
+            interactive
+            className="mx-auto max-w-2xl p-6 group/resume relative overflow-hidden"
+        >
+            <h2 className="text-ctp-text mb-6 flex text-sm font-semibold">
+                <BriefcaseIcon className="h-6 w-6 flex-none" />
+                <span className="ml-3">Work Experience</span>
+            </h2>
+            <ol className="space-y-2">
+                {resume.map((role, roleIndex) => (
+                    <Role key={roleIndex} role={role} />
+                ))}
+            </ol>
+            <div className="border-ctp-surface0 mt-8 flex justify-center gap-4 border-t pt-6">
+                <Button variant="secondary" className="px-4! py-2! text-xs!">
+                    Download CV
+                </Button>
+                <Button variant="secondary" className="px-4! py-2! text-xs!">
+                    Copy Email
+                </Button>
+            </div>
+        </SurfaceCard>
+    )
+}
+
+function Photos(): React.ReactElement {
+    const rotations = [
+        'rotate-2',
+        '-rotate-2',
+        'rotate-2',
+        'rotate-2',
+        '-rotate-2',
+    ]
+
+    const photoData = [
+        {
+            image: image1,
+            caption: 'Bristol harbor at sunset',
+            details:
+                'A favorite spot for a evening walk, capturing the industrial charm of the South West.',
+            date: 'Summer 2024',
+        },
+        {
+            image: image2,
+            caption: 'Workspace setup in London',
+            details:
+                'Pragmatic minimalism for deep work stints while consulting in the city.',
+            date: 'Autumn 2024',
+        },
+        {
+            image: image3,
+            caption: 'Hiking in the Peak District',
+            details:
+                'Offline and uphill. The best way to reset between long delivery cycles.',
+            date: 'Spring 2025',
+        },
+        {
+            image: image4,
+            caption: 'Weekend project tinkering',
+            details:
+                'Exploring new TUI patterns and local LLM integrations at the home desk.',
+            date: 'Winter 2024',
+        },
+        {
+            image: image5,
+            caption: 'Coffee break between sprints',
+            details:
+                'Proper fuel is non-negotiable for maintaining a steady shipping pace.',
+            date: 'Always',
+        },
+    ]
+
+    const itemVariants = {
+        initial: { scale: 1, rotate: 0 },
+        hover: {
+            scale: 1.05,
+            rotate: 0,
+            zIndex: 10,
+            transition: {
+                type: 'spring' as const,
+                stiffness: 300,
+                damping: 20,
+            },
+        },
+    }
+
+    const overlayVariants = {
+        initial: { opacity: 0, y: 20 },
+        hover: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+    }
+
+    return (
+        <div className="mt-16 sm:mt-20">
+            <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
+                {photoData.map((data, index) => (
+                    <motion.div
+                        key={data.image.src}
+                        initial="initial"
+                        whileHover="hover"
+                        variants={itemVariants}
+                        className={clsx(
+                            'bg-ctp-surface0 group/photo relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl sm:w-72 sm:rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300',
+                            rotations[index % rotations.length],
+                        )}
+                    >
+                        <Image
+                            src={data.image}
+                            alt=""
+                            sizes="(min-width: 640px) 18rem, 11rem"
+                            className="absolute inset-0 h-full w-full object-cover grayscale-[0.2] group-hover/photo:grayscale-0 transition-all duration-500"
+                        />
+                        <motion.div
+                            variants={overlayVariants}
+                            className="absolute inset-0 bg-linear-to-t from-ctp-crust via-ctp-crust/40 to-transparent flex flex-col justify-end p-4 sm:p-6"
+                        >
+                            <span className="text-ctp-blue dark:text-ctp-pink text-[10px] font-bold uppercase tracking-widest">
+                                {data.date}
+                            </span>
+                            <h4 className="text-ctp-text text-sm font-semibold mt-1 sm:text-lg">
+                                {data.caption}
+                            </h4>
+                            <p className="text-ctp-subtext1 text-xs mt-2 line-clamp-2 sm:line-clamp-none">
+                                {data.details}
+                            </p>
+                        </motion.div>
+                        <div className="absolute top-3 right-3 bg-ctp-crust/50 backdrop-blur-md p-1.5 rounded-full opacity-0 group-hover/photo:opacity-100 transition-opacity">
+                            <ChevronDownIcon className="h-4 w-4 text-ctp-text -rotate-90" />
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+export function HomeContent(): React.ReactElement {
+    return (
+        <>
+            <Container className="mt-9">
+                <div className="max-w-2xl">
+                    <h1 className="text-ctp-text text-4xl font-bold tracking-tight sm:text-5xl">
+                        William Blackie
+                    </h1>
+                    <p className="text-ctp-subtext1 mt-6 text-base">
+                        Hi, I&apos;m William. I&apos;m a Full-stack Engineer
+                        based in Bristol and London, UK.
+                    </p>
+                    <p className="text-ctp-subtext1 mt-6 text-base">
+                        I&apos;ve worked across agency delivery at{' '}
+                        <InternalExternalLink
+                            href="https://www.torchbox.com"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            className="text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue dark:decoration-ctp-pink/35 dark:hover:text-ctp-pink dark:hover:decoration-ctp-pink font-medium underline underline-offset-4 transition-[text-decoration-color]"
+                            text="Torchbox"
+                        />
+                        , contract and freelance work through Developerfy
+                        (including a stint at Google DeepMind), and now
+                        full-time product engineering at{' '}
+                        <InternalExternalLink
+                            href="https://mabyduck.com"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            className="text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue dark:decoration-ctp-pink/35 dark:hover:text-ctp-pink dark:hover:decoration-ctp-pink font-medium underline underline-offset-4 transition-[text-decoration-color]"
+                            text="Mabyduck"
+                        />
+                        . Each context taught me the same thing at a different
+                        speed: pace matters, but so does building systems that
+                        don&apos;t need heroics to keep running.
+                    </p>
+                    <p className="text-ctp-subtext1 mt-6 text-base">
+                        I build with Python (Django, FastAPI, Wagtail) and
+                        TypeScript (React, Next.js). I care about clear
+                        architecture, and releases that don&apos;t require a
+                        prayer circle on Friday afternoon.
+                    </p>
+                    <p className="text-ctp-subtext1 mt-6 text-base">
+                        I write about delivery, tooling, and lessons from real
+                        projects on the{' '}
+                        <InternalExternalLink
+                            href="/articles"
+                            className="text-ctp-text decoration-ctp-blue/50 hover:text-ctp-blue hover:decoration-ctp-blue dark:decoration-ctp-pink/35 dark:hover:text-ctp-pink dark:hover:decoration-ctp-pink font-medium underline underline-offset-4 transition-[text-decoration-color]"
+                        >
+                            blog
+                        </InternalExternalLink>
+                        .
+                    </p>
+
+                    <ul className="mt-6 flex gap-6">
+                        <SocialLink
+                            href="mailto:will@developerfy.com"
+                            srLabel="Send me an email"
+                            icon={MailIcon}
+                        />
+                        <SocialLink
+                            href="https://github.com/William-Blackie"
+                            srLabel="Follow on GitHub"
+                            icon={GitHubIcon}
+                        />
+                        <SocialLink
+                            href="https://www.linkedin.com/in/william-blackie/"
+                            srLabel="Follow on LinkedIn"
+                            icon={LinkedInIcon}
+                        />
+                        <SocialLink
+                            href="https://mastodon.social/@williamblackie"
+                            srLabel="Follow on Mastadon"
+                            icon={MastodonIcon}
+                        />
+                    </ul>
+                </div>
+            </Container>
+            <Photos />
+            <Container className="mt-16 sm:mt-20">
+                <Resume />
+            </Container>
+        </>
+    )
+}

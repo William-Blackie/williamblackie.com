@@ -3,6 +3,8 @@
 import Giscus from '@giscus/react'
 import { useTheme } from 'next-themes'
 
+import { SectionHeading, SurfaceCard } from '@/components/PagePrimitives'
+
 type GiscusMapping =
     | 'pathname'
     | 'url'
@@ -54,11 +56,11 @@ export function Comments(): React.ReactElement | null {
 
     return (
         <section className="border-ctp-surface0/70 mt-16 border-t pt-10">
-            <h2 className="text-ctp-text text-xl font-semibold">Comments</h2>
-            <p className="text-ctp-subtext1 mt-2 text-sm">
-                Join the discussion via GitHub Discussions.
-            </p>
-            <div className="mt-6">
+            <SectionHeading
+                title="Comments"
+                description="Join the discussion via GitHub Discussions."
+            />
+            <SurfaceCard className="mt-6 p-4">
                 <Giscus
                     repo={configuredRepo}
                     repoId={configuredRepoId}
@@ -73,7 +75,7 @@ export function Comments(): React.ReactElement | null {
                     loading="lazy"
                     theme={resolvedTheme === 'dark' ? 'dark' : 'light'}
                 />
-            </div>
+            </SurfaceCard>
         </section>
     )
 }

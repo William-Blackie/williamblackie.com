@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import clsx from 'clsx'
+import { motion } from 'framer-motion'
 
 const variantStyles = {
     primary:
@@ -26,7 +29,20 @@ export function Button({
         className,
     )
 
-    return typeof props.href === 'undefined' ?
+    const motionProps = {
+        whileHover: { scale: 1.02 },
+        whileTap: { scale: 0.98 },
+        transition: { type: 'spring' as const, stiffness: 400, damping: 25 },
+    }
+
+    const inner =
+        typeof props.href === 'undefined' ?
             <button className={className} {...props} />
         :   <Link className={className} {...props} />
+
+    return (
+        <motion.div className="contents" {...motionProps}>
+            {inner}
+        </motion.div>
+    )
 }
