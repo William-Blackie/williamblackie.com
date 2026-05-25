@@ -26,7 +26,6 @@ export function InternalExternalLink({
         'theme-link theme-focus group inline-flex items-center gap-1 transition-all duration-300',
         className,
     )
-
     if (isExternal) {
         return (
             <a
@@ -38,7 +37,7 @@ export function InternalExternalLink({
             >
                 {children}
                 {text && text}
-                <ExternalIcon className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                <ExternalIcon className="h-3 w-3 transition-transform  group-hover:translate-x-0.5" />
             </a>
         )
     }

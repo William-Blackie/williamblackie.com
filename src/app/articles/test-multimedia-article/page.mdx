@@ -1,0 +1,191 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import { createArticleMetadata } from '@/lib/metadata'
+import Image from 'next/image'
+import cliPipelineImg from '@/static/imgs/photos/cli_pipeline_diagram.png'
+import devDeskHeroImg from '@/static/imgs/photos/dev_desk_hero.png'
+
+export const article = {
+    title: 'Building a Modern Developer Workspace and High-Performance CLI Pipeline',
+    description:
+        'A comprehensive deep dive into designing a premium developer experience, featuring advanced terminal ergonomics, fast asset builds, and high-fidelity workspace setups.',
+    author: 'William Blackie',
+    date: '2026-05-25',
+    path: '/articles/test-multimedia-article',
+    tags: ['DX', 'Aesthetics', 'CLI', 'Workspace'],
+}
+
+export const metadata = createArticleMetadata({
+    title: article.title,
+    description: article.description,
+    path: article.path,
+    datePublished: article.date,
+    tags: article.tags,
+})
+
+<ArticleLayout article={article}>
+
+Designing a developer experience (DX) that is both highly performant and aesthetically delightful is an art form. In this article, we’ll explore how modern engineering pipelines intersect with premium workspace design. We will look at visual configurations, pipeline architecture diagrams, multimedia embeds, and code-block usability patterns.
+
+---
+
+## Technical Overview: The Pipeline Architecture
+
+A modern CLI tool requires a solid architecture that efficiently routes user events, invokes compiler engines, and renders gorgeous console feedback. Below is a structured breakdown comparing legacy execution styles with the modern event-driven model:
+
+| Phase         | Legacy Pipeline     | Modern Async Pipeline      | Performance Gain |
+| :------------ | :------------------ | :------------------------- | :--------------- |
+| **Parsing**   | Synchonous Blocking | Non-blocking AST Streaming | ~2.5x speedup    |
+| **Codegen**   | Write-to-disk       | Memory-mapped IPC          | ~10x speedup     |
+| **Rendering** | Standard TTY prints | Double-buffered Canvas API | Zero flicker     |
+
+### System Architecture Diagram
+
+To better visualize this event flow, let's look at the pipeline lifecycle. It handles task scheduling, asynchronous subagents, and direct standard streams.
+
+<div className="my-8 overflow-hidden rounded-xl border border-ctp-surface1/60 shadow-lg">
+    <Image
+        src={cliPipelineImg}
+        alt="CLI Pipeline Architecture Diagram showing non-blocking task streams and double-buffered rendering"
+        placeholder="blur"
+        className="w-100 object-cover"
+    />
+    <div className="bg-ctp-mantle/50 px-4 py-2 text-xs text-ctp-subtext0 border-t border-ctp-surface1/40">
+        Figure 1: Complete end-to-end telemetry and background compiler pipeline
+        execution graph.
+    </div>
+</div>
+
+---
+
+## High-Performance Task Orchestration
+
+Let's look at some production code implementations. To manage asynchronous task states without polling, we implement a reactive event emitter in TypeScript.
+
+### The TypeScript Coordinator
+
+```typescript
+import { EventEmitter } from 'events'
+
+interface Task {
+    id: string
+    command: string
+    status: 'idle' | 'running' | 'completed' | 'failed'
+}
+
+export class TaskCoordinator extends EventEmitter {
+    private activeTasks = new Map<string, Task>()
+
+    constructor(private maxConcurrency = 4) {
+        super()
+    }
+
+    public async schedule(task: Task): Promise<void> {
+        if (this.activeTasks.size >= this.maxConcurrency) {
+            this.emit('queued', task.id)
+            return
+        }
+
+        this.activeTasks.set(task.id, { ...task, status: 'running' })
+        this.emit('started', task.id)
+
+        try {
+            await this.execute(task)
+            this.emit('completed', task.id)
+        } catch (error) {
+            this.emit('failed', task.id, error)
+        } finally {
+            this.activeTasks.delete(task.id)
+        }
+    }
+
+    private async execute(task: Task): Promise<void> {
+        // Simulating asynchronous subprocess execution
+        return new Promise((resolve) => setTimeout(resolve, 1500))
+    }
+}
+```
+
+This TS class utilizes standard Node `EventEmitter` patterns to decouple task lifecycle triggers from UI state loops.
+
+---
+
+## The Perfect Developer Desk Setup
+
+Physical aesthetics are just as critical as virtual ones. A clean, inspiring environment drastically reduces cognitive load and boosts long-term productivity.
+
+> "A premium workspace is not about premium price points; it is about functional ergonomics, intentional cable routing, and harmonious lighting."
+
+Here is a shot of our target high-fidelity developer desk workspace setup, designed for ultimate productivity:
+
+<div className="my-8 overflow-hidden rounded-xl border border-ctp-surface1/60 shadow-lg">
+    <Image
+        src={devDeskHeroImg}
+        alt="High-fidelity developer desk workspace setup with dual monitor layout, mechanical keyboard, and dynamic ambient HSL lighting"
+        placeholder="blur"
+        className="w-100 object-cover"
+    />
+    <div className="bg-ctp-mantle/50 px-4 py-2 text-xs text-ctp-subtext0 border-t border-ctp-surface1/40">
+        Figure 2: Optimal workstation layout utilizing warm diffuse lighting and
+        modular custom keyboard.
+    </div>
+</div>
+
+### Essential Components of a Premium Station
+
+1. **Ergonomic Seating & Surfaces**
+    - Active posture task chair.
+    - Dual-motor sit-stand solid wood desk.
+2. **Peripherals & Inputs**
+    - Custom 75% mechanical keyboard with silent tactile switches.
+    - High-polling rate ergonomic pointing device.
+3. **Lighting & Acoustics**
+    - 95+ CRI monitor lightbar (prevents screen glare).
+    - Acoustic panels to eliminate high-frequency room resonance.
+
+---
+
+## Video Walkthrough: Desk Assembly & Cable Routing
+
+To see how we assemble and route cables for this desk setup, view the full high-fidelity setup guide below:
+
+<div className="my-8 aspect-video overflow-hidden rounded-xl border border-ctp-surface1/60 shadow-lg bg-ctp-mantle">
+    <iframe
+        className="w-full h-full"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="Premium Cable Management Guide"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+    ></iframe>
+</div>
+
+---
+
+## Database Telemetry Layer
+
+When monitoring performance across multiple runs, standardizing telemetry structure in SQL helps aggregate data points rapidly:
+
+```sql
+-- Fetch average compile times grouped by compilation stage
+SELECT
+  stage_name,
+  COUNT(*) as execution_count,
+  ROUND(AVG(duration_ms), 2) as avg_duration_ms,
+  PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY duration_ms) as p95_duration_ms
+FROM build_telemetry
+WHERE created_at >= NOW() - INTERVAL '7 days'
+GROUP BY stage_name
+ORDER BY avg_duration_ms DESC;
+```
+
+With indexes on `(stage_name, created_at)` and `(duration_ms)`, this aggregates millions of pipeline records in milliseconds.
+
+---
+
+## Conclusion & Code Block Copy Check
+
+Having these interactive code blocks makes copying snippets a breeze!
+Use the copy button on the top-right of any codeblock above to try it out.
+
+Happy hacking! 🚀
+
+</ArticleLayout>

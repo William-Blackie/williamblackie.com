@@ -4,6 +4,7 @@ import { type MDXComponents } from 'mdx/types'
 import { ExcalidrawWrapper } from '@/components/Excalidraw'
 import { InternalExternalLink } from '@/components/InternalExternalLink'
 import { slugifyHeading } from '@/lib/headings'
+import { CodeBlockPre } from '@/components/CodeBlock'
 
 function getNodeText(node: React.ReactNode): string {
     if (typeof node === 'string' || typeof node === 'number') {
@@ -53,5 +54,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         a: InternalExternalLink,
         h2: (props) => <Heading as="h2" {...props} />,
         h3: (props) => <Heading as="h3" {...props} />,
+        pre: CodeBlockPre,
     }
 }
