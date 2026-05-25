@@ -38,11 +38,6 @@ export const workExperience: ExperienceItem[] = [
         endLabel: 'Present',
         endDateTime: new Date().getFullYear().toString(),
         location: 'Greater Bristol Area, UK',
-        bullets: [
-            'Ongoing product and platform work through Developerfy.',
-            'Delivered full-stack product development for startup teams.',
-            'Provided technical direction, architecture, and delivery support.',
-        ],
     },
     {
         key: 'google',
@@ -63,11 +58,6 @@ export const workExperience: ExperienceItem[] = [
         endLabel: 'March 2024',
         endDateTime: '2024-03',
         location: 'Greater Bristol Area, UK',
-        bullets: [
-            'Led projects for Resource for the Future and NHS England.',
-            'Contributed to core Wagtail features and community feedback.',
-            'Mentored junior engineers and supported cross-team knowledge sharing.',
-        ],
     },
 ]
 

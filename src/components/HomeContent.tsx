@@ -43,7 +43,6 @@ interface RoleProps {
 }
 
 function Role({ role }: { role: RoleProps }): React.ReactElement {
-    const [isHovered, setIsHovered] = useState(false)
     const startLabel =
         typeof role.start === 'string' ? role.start : role.start.label
     const startDate =
@@ -53,11 +52,7 @@ function Role({ role }: { role: RoleProps }): React.ReactElement {
     const endDate = typeof role.end === 'string' ? role.end : role.end.dateTime
 
     return (
-        <motion.li
-            className="group/role relative flex flex-col gap-4 rounded-xl p-3 -mx-3 transition-colors hover:bg-ctp-surface0/30 cursor-default"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
+        <div className="group/role relative flex flex-col gap-4 rounded-xl p-3 -mx-3">
             <div className="flex gap-4">
                 <div className="bg-ctp-mantle shadow-ctp-crust/10 ring-ctp-surface0/80 relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1">
                     <div className="dark:bg-ctp-text/90 dark:ring-ctp-text/15 flex h-10 w-10 items-center justify-center rounded-full p-1.5 dark:ring-1">
@@ -86,45 +81,8 @@ function Role({ role }: { role: RoleProps }): React.ReactElement {
                         <time dateTime={endDate}>{endLabel}</time>
                     </dd>
                 </dl>
-                <div className="flex-none self-center sm:hidden">
-                    <ChevronDownIcon
-                        className={clsx(
-                            'h-4 w-4 transition-transform',
-                            isHovered && 'rotate-180',
-                        )}
-                    />
-                </div>
             </div>
-
-            <AnimatePresence initial={false}>
-                {isHovered && role.bullets && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: 'circOut' }}
-                        className="overflow-hidden"
-                    >
-                        <ul className="mt-2 space-y-2 border-l-2 border-ctp-surface1 pl-4">
-                            {role.bullets.map((bullet, i) => (
-                                <li
-                                    key={i}
-                                    className="text-ctp-subtext1 text-xs leading-relaxed"
-                                >
-                                    {bullet}
-                                </li>
-                            ))}
-                        </ul>
-                        <div className="mt-3 flex flex-wrap items-center gap-1 pl-4">
-                            <span className="text-ctp-blue dark:text-ctp-pink text-[10px] font-bold uppercase tracking-wider opacity-80">
-                                Discover more
-                            </span>
-                            <ChevronDownIcon className="text-ctp-blue dark:text-ctp-pink h-3 w-3 -rotate-90 transition-transform duration-300 group-hover/role:translate-x-0.5" />
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </motion.li>
+        </div>
     )
 }
 
@@ -160,10 +118,7 @@ function Resume(): React.ReactElement {
     })
 
     return (
-        <SurfaceCard
-            interactive
-            className="mx-auto max-w-2xl p-6 group/resume relative overflow-hidden"
-        >
+        <SurfaceCard className="mx-auto max-w-2xl p-6 relative overflow-hidden">
             <h2 className="text-ctp-text mb-6 flex text-sm font-semibold">
                 <BriefcaseIcon className="h-6 w-6 flex-none" />
                 <span className="ml-3">Work Experience</span>
@@ -173,14 +128,6 @@ function Resume(): React.ReactElement {
                     <Role key={roleIndex} role={role} />
                 ))}
             </ol>
-            <div className="border-ctp-surface0 mt-8 flex justify-center gap-4 border-t pt-6">
-                <Button variant="secondary" className="px-4! py-2! text-xs!">
-                    Download CV
-                </Button>
-                <Button variant="secondary" className="px-4! py-2! text-xs!">
-                    Copy Email
-                </Button>
-            </div>
         </SurfaceCard>
     )
 }

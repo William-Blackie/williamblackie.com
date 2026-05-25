@@ -8,7 +8,7 @@ import { SurfaceCard } from '@/components/PagePrimitives'
 import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons'
 import { createPageMetadata, createPageSchema } from '@/lib/metadata'
 import { personSchemaId } from '@/lib/site'
-import portraitImage from '@/static/imgs/photos/image-3.jpg'
+import portraitImage from '@/static/imgs/photos/sam-wedding.jpg'
 import { SocialLink } from '@/components/SocialLink'
 
 export const metadata: Metadata = createPageMetadata({
