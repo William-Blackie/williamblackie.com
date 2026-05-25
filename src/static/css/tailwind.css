@@ -414,23 +414,6 @@
         );
     }
 
-    .photo-card-action {
-        position: absolute;
-        top: calc(var(--spacing) * 3);
-        right: calc(var(--spacing) * 3);
-        border-radius: 9999px;
-        padding: calc(var(--spacing) * 1.5);
-        color: white;
-        background-color: rgb(0 0 0 / 0.45);
-        opacity: 0;
-        backdrop-filter: blur(12px);
-        transition: opacity 200ms;
-    }
-
-    .photo-card:hover .photo-card-action {
-        opacity: 1;
-    }
-
     .code-shell {
         position: relative;
         margin-top: calc(var(--spacing) * 6);

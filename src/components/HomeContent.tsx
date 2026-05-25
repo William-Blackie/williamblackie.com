@@ -20,11 +20,11 @@ import { SocialLink } from '@/components/SocialLink'
 import { InternalExternalLink } from '@/components/InternalExternalLink'
 import { Button } from '@/components/Button'
 
-import image1 from '@/static/imgs/photos/image-1.jpg'
-import image2 from '@/static/imgs/photos/image-2.jpg'
-import image3 from '@/static/imgs/photos/image-3.jpg'
-import image4 from '@/static/imgs/photos/image-4.jpg'
-import image5 from '@/static/imgs/photos/image-5.jpg'
+import image1 from '@/static/imgs/photos/paint-night.jpg'
+import image2 from '@/static/imgs/photos/porto.jpg'
+import image3 from '@/static/imgs/photos/sam-wedding.jpg'
+import image4 from '@/static/imgs/photos/mabyduck.jpeg'
+import image5 from '@/static/imgs/photos/djangocon-eu-2026.jpg'
 
 import logoDeveloperfy from '@/static/imgs/logos/developerfy.svg'
 import logoGoogle from '@/static/imgs/logos/google.svg'
@@ -145,10 +145,7 @@ function Resume(): React.ReactElement {
 
         return {
             company: role.company,
-            title:
-                role.key === 'google' ?
-                    'Full-stack Developer - Contract'
-                :   role.title,
+            title: role.title,
             logo,
             start: {
                 label: role.startLabel,
@@ -158,11 +155,7 @@ function Resume(): React.ReactElement {
                 label: role.endLabel,
                 dateTime: role.endDateTime,
             },
-            bullets: role.bullets || [
-                'Delivering high-quality product engineering and architectural guidance.',
-                'Ensuring systems are reliable, maintainable, and built for scale.',
-                'Collaborating with multi-disciplinary teams to ship meaningful features.',
-            ],
+            bullets: role.bullets || [],
         }
     })
 
@@ -203,39 +196,37 @@ function Photos(): React.ReactElement {
 
     const photoData = [
         {
-            image: image1,
-            caption: 'Bristol harbor at sunset',
+            image: image2,
+            caption: 'Porto',
             details:
-                'A favorite spot for a evening walk, capturing the industrial charm of the South West.',
-            date: 'Summer 2024',
+                'Probably one of my favourite cities, green wine and sunsets.',
+            date: 'March 2023',
         },
         {
-            image: image2,
-            caption: 'Workspace setup in London',
-            details:
-                'Pragmatic minimalism for deep work stints while consulting in the city.',
-            date: 'Autumn 2024',
+            image: image1,
+            caption: 'Paint-night',
+            details: 'an evning of badly painting a racoon, with wine.',
+            date: 'November 2024',
         },
         {
             image: image3,
-            caption: 'Hiking in the Peak District',
+            caption: 'A good friends wedding',
             details:
-                'Offline and uphill. The best way to reset between long delivery cycles.',
-            date: 'Spring 2025',
+                'I got to be the bestman for my good friend, I also can dress up sometimes.',
+            date: 'Summer 2025',
         },
         {
             image: image4,
-            caption: 'Weekend project tinkering',
+            caption: 'Mabyduck',
             details:
-                'Exploring new TUI patterns and local LLM integrations at the home desk.',
-            date: 'Winter 2024',
+                'We had to get new photos taken, I enjoyed dressing up in ducks for the occasion.',
+            date: 'Feb 2026',
         },
         {
             image: image5,
-            caption: 'Coffee break between sprints',
-            details:
-                'Proper fuel is non-negotiable for maintaining a steady shipping pace.',
-            date: 'Always',
+            caption: 'Djangocon Athens',
+            details: 'Great talks, and I got to meet old friends.',
+            date: '2026',
         },
     ]
 
@@ -298,9 +289,6 @@ function Photos(): React.ReactElement {
                                     {data.details}
                                 </p>
                             </motion.div>
-                            <div className="photo-card-action">
-                                <ChevronDownIcon className="h-4 w-4 -rotate-90 text-white" />
-                            </div>
                         </div>
                     </motion.div>
                 ))}

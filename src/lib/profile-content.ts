@@ -47,7 +47,7 @@ export const workExperience: ExperienceItem[] = [
     {
         key: 'google',
         company: 'Google',
-        title: 'Full-stack Developer',
+        title: 'Full-stack Developer - Contract',
         startLabel: 'August 2024',
         startDateTime: '2024-08',
         endLabel: 'December 2024',

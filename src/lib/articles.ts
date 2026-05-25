@@ -11,6 +11,7 @@ interface Article {
     date: string
     path?: string
     tags?: Array<string>
+    is_draft?: boolean
 }
 
 export interface ArticleWithSlug extends Article {
@@ -41,6 +42,7 @@ async function importArticle(
         default: React.ComponentType
         article: Article
     }
+
     const slug = articleFilename.replace(/(\/page)?\.mdx$/, '')
     const source = await fs.readFile(
         path.join(process.cwd(), 'src', 'content', 'articles', articleFilename),
@@ -62,8 +64,12 @@ export async function getAllArticles(): Promise<ArticleWithSlug[]> {
         cwd: './src/content/articles',
     })
 
-    const articles = await Promise.all(articleFilenames.map(importArticle))
+    let articles = await Promise.all(articleFilenames.map(importArticle))
 
+    if (process.env.NODE_ENV != 'development') {
+        // hide our test-content in production
+        articles = articles.filter((article) => article.is_draft != true)
+    }
     return articles.sort((a, z) => +new Date(z.date) - +new Date(a.date))
 }
 
