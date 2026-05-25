@@ -36,14 +36,14 @@ async function importArticle(
     articleFilename: string,
 ): Promise<ArticleWithSlug> {
     const { article } = (await import(
-        `../app/articles/${articleFilename}`
+        `../content/articles/${articleFilename}`
     )) as {
         default: React.ComponentType
         article: Article
     }
     const slug = articleFilename.replace(/(\/page)?\.mdx$/, '')
     const source = await fs.readFile(
-        path.join(process.cwd(), 'src', 'app', 'articles', articleFilename),
+        path.join(process.cwd(), 'src', 'content', 'articles', articleFilename),
         'utf8',
     )
     const stats = getArticleContentStats(source)
@@ -59,7 +59,7 @@ async function importArticle(
 
 export async function getAllArticles(): Promise<ArticleWithSlug[]> {
     const articleFilenames = await glob('*/page.mdx', {
-        cwd: './src/app/articles',
+        cwd: './src/content/articles',
     })
 
     const articles = await Promise.all(articleFilenames.map(importArticle))
@@ -71,7 +71,7 @@ export async function getArticleSourceBySlug(slug: string): Promise<string> {
     const articlePath = path.join(
         process.cwd(),
         'src',
-        'app',
+        'content',
         'articles',
         slug,
         'page.mdx',
