@@ -90,7 +90,7 @@ export function SurfaceCard({
         return (
             <Link
                 href={href as Route}
-                className="theme-focus group block rounded-2xl"
+                className="theme-focus group block rounded-2xl h-full"
             >
                 {card}
             </Link>

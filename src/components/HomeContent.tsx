@@ -2,23 +2,17 @@
 
 import Image, { type ImageProps } from 'next/image'
 import clsx from 'clsx'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { Container } from '@/components/Container'
 import {
     GitHubIcon,
     MastodonIcon,
     LinkedInIcon,
 } from '@/components/SocialIcons'
-import {
-    BriefcaseIcon,
-    MailIcon,
-    ChevronDownIcon,
-} from '@/components/GeneralIcons'
+import { BriefcaseIcon, MailIcon } from '@/components/GeneralIcons'
 import { SurfaceCard } from '@/components/PagePrimitives'
 import { SocialLink } from '@/components/SocialLink'
 import { InternalExternalLink } from '@/components/InternalExternalLink'
-import { Button } from '@/components/Button'
 
 import image1 from '@/static/imgs/photos/paint-night.jpg'
 import image2 from '@/static/imgs/photos/porto.jpg'

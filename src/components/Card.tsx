@@ -39,9 +39,13 @@ export function Card<T extends React.ElementType = 'div'>({
             interactive={!!href}
             href={href as string}
             variant={variant}
-            className={clsx(className, variant === 'default' ? 'p-6' : 'p-0')}
+            className={clsx(
+                'h-full flex flex-col',
+                className,
+                variant === 'default' ? 'p-6' : 'p-0',
+            )}
         >
-            <Component className="relative flex flex-col items-start">
+            <Component className="relative flex flex-col items-start flex-1 h-full w-full">
                 {children}
             </Component>
         </SurfaceCard>
@@ -126,7 +130,7 @@ Card.Cta = function CardCta({
         <div
             aria-hidden="true"
             className={clsx(
-                'text-ctp-blue dark:text-ctp-pink relative z-10 mt-4 flex items-center text-sm font-medium',
+                'text-ctp-blue dark:text-ctp-pink relative z-10 mt-auto pt-4 flex items-center text-sm font-medium',
                 className,
             )}
         >
