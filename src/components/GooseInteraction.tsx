@@ -44,7 +44,7 @@ export function GooseInteraction() {
                 }}
                 className="text-2xl cursor-pointer select-none opacity-40 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
                 aria-label="Click for a honk"
-                title="Mabyduck Goose"
+                title="Developerfy Goose"
             >
                 🪿
             </motion.button>

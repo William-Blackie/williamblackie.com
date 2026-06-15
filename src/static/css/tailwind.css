@@ -232,12 +232,12 @@
     }
 
     .theme-link {
-        color: var(--color-ctp-text);
-        font-weight: var(--font-weight-medium);
+        color: var(--color-ctp-blue);
+        font-weight: var(--font-weight-semibold);
         text-decoration-line: underline;
         text-decoration-color: color-mix(
             in oklab,
-            var(--color-ctp-blue) 50%,
+            var(--color-ctp-blue) 40%,
             transparent
         );
         text-underline-offset: 4px;
@@ -246,14 +246,15 @@
     }
 
     .theme-link:hover {
-        color: var(--color-ctp-blue);
-        text-decoration-color: var(--color-ctp-blue);
+        color: var(--color-ctp-pink);
+        text-decoration-color: var(--color-ctp-pink);
     }
 
     .mocha .theme-link {
+        color: var(--color-ctp-blue);
         text-decoration-color: color-mix(
             in oklab,
-            var(--color-ctp-pink) 35%,
+            var(--color-ctp-blue) 40%,
             transparent
         );
     }
@@ -500,18 +501,24 @@
 }
 
 /* Shiki Dual Theme Highlighting */
+/* Shiki Dual Theme Highlighting */
 code[data-theme*=' '],
-code[data-theme*=' '] span {
+code[data-theme*=' '] span,
+pre[data-theme*=' '] span {
     color: var(--shiki-light);
-
-    .pre & {
-        color: var(--shiki-light) !important;
-    }
 }
 
-.mocha code[data-theme*=' '],
-.mocha code[data-theme*=' '] span {
+:where(.mocha, .dark) code[data-theme*=' '],
+:where(.mocha, .dark) code[data-theme*=' '] span,
+:where(.mocha, .dark) pre[data-theme*=' '] span {
     color: var(--shiki-dark) !important;
+}
+
+code[data-theme*=' '] {
+    background-color: var(--shiki-light-bg);
+}
+
+:where(.mocha, .dark) code[data-theme*=' '] {
     background-color: var(--shiki-dark-bg) !important;
 }
 
@@ -645,7 +652,12 @@ code[data-theme*=' '] span {
 
     .prose strong {
         color: var(--color-ctp-text);
-        font-weight: var(--font-weight-semibold);
+        font-weight: var(--font-weight-bold);
+    }
+
+    .mocha strong,
+    .mocha .prose strong {
+        color: #ffffff;
     }
 
     .prose code {
@@ -710,8 +722,11 @@ code[data-theme*=' '] span {
     .prose pre {
         position: relative;
         color: var(--color-ctp-text);
-        font-size: var(--font-size-sm);
-        font-weight: var(--font-weight-medium);
+        font-size: 0.875em;
+        font-weight: 400;
+        line-height: 1.7142857;
+        margin-top: 1.7142857em;
+        margin-bottom: 1.7142857em;
         background-color: var(--color-ctp-mantle);
         border-radius: var(--radius-xl);
         overflow-x: auto;
@@ -722,7 +737,10 @@ code[data-theme*=' '] span {
 
     .prose pre code {
         display: grid;
-        padding: var(--spacing-4);
+        padding-top: 0.8571429em;
+        padding-right: 1.1428571em;
+        padding-bottom: 0.8571429em;
+        padding-left: 1.1428571em;
         color: inherit;
         font-size: inherit;
         font-weight: inherit;
@@ -775,11 +793,7 @@ code[data-theme*=' '] span {
     max-width: 100%;
     padding: 0;
     color: var(--shiki-light);
-    background-color: color-mix(
-        in oklab,
-        var(--color-ctp-base) 78%,
-        var(--color-ctp-mantle)
-    );
+    background-color: var(--shiki-light-bg);
     background-image: linear-gradient(
         180deg,
         color-mix(in oklab, var(--color-ctp-surface0) 35%, transparent),
@@ -796,13 +810,9 @@ code[data-theme*=' '] span {
     tab-size: 4;
 }
 
-.mocha .prose pre[data-theme*=' '] {
-    color: var(--shiki-dark);
-    background-color: color-mix(
-        in oklab,
-        var(--color-ctp-base) 84%,
-        var(--color-ctp-mantle)
-    );
+:where(.mocha, .dark) .prose pre[data-theme*=' '] {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
 }
 
 .prose pre[data-theme*=' '] code {

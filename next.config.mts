@@ -5,7 +5,6 @@ import { type NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
     typedRoutes: true,
-
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
 }
 
@@ -64,6 +63,7 @@ const sentryBuildOptions = {
             removeDebugLogging: true,
         },
     },
+    telemetry: false,
 } satisfies SentryBuildOptions
 
 export default withSentryConfig(withMDX(nextConfig), sentryBuildOptions)

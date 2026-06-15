@@ -1,7 +1,6 @@
 import { Providers } from '@/app/providers'
 import { JsonLd } from '@/components/JsonLd'
 import { Layout } from '@/components/Layout'
-import { ScrollGoose } from '@/components/ScrollGoose'
 import { rootMetadata } from '@/lib/metadata'
 import { personSchema, websiteSchema } from '@/lib/site'
 import type { Metadata } from 'next'
@@ -27,7 +26,6 @@ export default function RootLayout({
                     Skip to content
                 </a>
                 <Providers>
-                    <ScrollGoose />
                     <div className="flex w-full">
                         <Layout>{children}</Layout>
                     </div>

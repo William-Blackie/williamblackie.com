@@ -1,16 +1,19 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
 import { createArticleMetadata } from '@/lib/metadata'
+import { SurfaceCard } from '@/components/PagePrimitives'
+import { excalidrawInitialData } from './excalidraw-data'
 
 export const article = {
-    title: 'Turning PR history into a code review skill',
+    title: "Django: Building an Adversarial AI to Shield Maintainers from 'Drive-By' PRs",
     description:
-        'A practical write-up of building code-review guidance from historical pull request discussion, using Django review comments, lightweight diff context, deterministic merge rules, and generated skill files.',
+        'How to turn years of hard-earned maintainer knowledge into an active, repository-specific adversarial review skill that pushes back against sub-optimal contributions before a human ever sees them.',
     author: 'William Blackie',
     date: '2026-04-19',
     path: '/articles/turning-pr-history-into-a-code-review-skill',
     tags: ['Code review', 'AI tooling', 'Developer workflow'],
     is_draft: true,
 }
+
 export const metadata = createArticleMetadata({
     title: article.title,
     description: article.description,
@@ -21,147 +24,42 @@ export const metadata = createArticleMetadata({
 
 <ArticleLayout article={article}>
 
-I have been experimenting with a simple idea: most mature teams already
-have a repository-specific review style guide, but it lives in pull
-request history rather than in one document.
+Every mature open-source project or scaling engineering team suffers from the same cognitive drain: **"drive-by" pull requests**. These are contributions that superficially look good and pass basic test suites, but violate deep, subtle codebase conventions and architectural invariants.
 
-In practice, reviewers repeat the same comments over and over. Wrap that
-docstring properly. Reuse the existing helper. Avoid the clever shortcut
-because it breaks signals. Keep this API shape consistent with the rest
-of the project. Those are not generic Python opinions. They are
-repository habits enforced by the people who actually merge code.
+The result is that maintainers spend vast amounts of cognitive energy repeating the same review feedback: warning against database signal bypasses, flagging silent caching regressions, or correcting database-specific query quirks.
 
-The project I built to test this is [code-review-skill-creator](https://github.com/William-Blackie/code-review-skill-creator). The accompanying
-[slides](https://github.com/William-Blackie/code-review-skill-creator/blob/main/slides.md) explain the pitch. The repository itself is the more useful part: it turns
-historical pull request review discussion into a generated review skill with
-`SKILL.md`, `AGENTS.md`, `CLAUDE.md`, `.cursorrules`, and split reference files.
+What if we stopped treating AI as a passive autocomplete helper, and instead treated it as an **adversarial review shield**?
 
-## The core ideas
+By extracting years of historical pull request discussion history and compiling it into a deterministic, local review skill, we can build a protective first-pass filter. Much like a local, repository-specific **CodeRabbit**, this adversarial shield automatically intercepts and pushes back against sub-optimal code _before_ a human maintainer ever has to waste time looking at the patch.
 
-The interesting part is not “use an LLM to summarise comments”. That is
-the easy bit and also the least trustworthy bit. The useful idea is to
-separate extraction, weighting, synthesis, and precedence so the model
-proposes candidate rules, but the repository code decides what survives.
+The tool I built to test this concept is [code-review-skill-creator](https://github.com/William-Blackie/code-review-skill-creator) (accompanying [slides here](https://github.com/William-Blackie/code-review-skill-creator/blob/main/slides.md)).
 
-The slides call this out using four semantic ideas that are more useful
-than they sound:
+## The Core Concept: Defending Codebase Invariants
 
-- Distributional semantics: review comments show how a team actually
-  talks about quality.
-- Directive semantics: review comments are requests and constraints, not
-  just observations.
-- Diachronic semantics: projects change habits over time, so chronology
-  matters.
-- Conflict resolution: when reviewers disagree, authority and recency
-  decide the winner.
+Instead of using an LLM to blindly summarize a source tree, we analyze the actual conversations maintainers had about what was acceptable to merge. This treats historical PR comments not just as feedback, but as a **supervision signal** for quality.
 
-<Excalidraw
-    height="400px"
-    initialData={{
-        elements: [
-            {
-                id: 'rect1',
-                type: 'rectangle',
-                x: 100,
-                y: 100,
-                width: 150,
-                height: 80,
-                backgroundColor: '#fab387',
-                strokeColor: '#1e1e2e',
-                fillStyle: 'hachure',
-                strokeWidth: 2,
-                roughness: 1,
-                opacity: 100,
-                text: 'Extraction',
-            },
-            {
-                id: 'rect2',
-                type: 'rectangle',
-                x: 300,
-                y: 100,
-                width: 150,
-                height: 80,
-                backgroundColor: '#f9e2af',
-                strokeColor: '#1e1e2e',
-                fillStyle: 'hachure',
-                strokeWidth: 2,
-                roughness: 1,
-                opacity: 100,
-                text: 'Weighting',
-            },
-            {
-                id: 'rect3',
-                type: 'rectangle',
-                x: 500,
-                y: 100,
-                width: 150,
-                height: 80,
-                backgroundColor: '#a6e3a1',
-                strokeColor: '#1e1e2e',
-                fillStyle: 'hachure',
-                strokeWidth: 2,
-                roughness: 1,
-                opacity: 100,
-                text: 'Synthesis',
-            },
-            {
-                id: 'arrow1',
-                type: 'arrow',
-                x: 250,
-                y: 140,
-                width: 50,
-                height: 0,
-                strokeColor: '#1e1e2e',
-                points: [
-                    [0, 0],
-                    [50, 0],
-                ],
-            },
-            {
-                id: 'arrow2',
-                type: 'arrow',
-                x: 450,
-                y: 140,
-                width: 50,
-                height: 0,
-                strokeColor: '#1e1e2e',
-                points: [
-                    [0, 0],
-                    [50, 0],
-                ],
-            },
-        ],
-        appState: {
-            currentItemFontFamily: 1,
-        },
-    }}
-/>
+We structure this adversarial review skill around four semantic concepts:
 
-That framing matters because it stops the project from drifting into
-“generate vibes from code”. The input is not the repository source tree.
-The input is the conversation the maintainers had about what should
-merge.
+- **Distributional**: Review comments represent how a team actually defines quality in their codebase.
+- **Directive**: PR feedback consists of explicit constraints and code rules, not just observations.
+- **Diachronic**: Project habits and standards evolve over time, meaning chronology matters.
+- **Conflict Resolution**: Deterministic authority weights and recency resolve rule overlaps when reviewers disagree.
+    <Excalidraw height="360px" initialData={excalidrawInitialData} />
 
-## What the pipeline actually does
+## Building the Pipeline
 
-The repository is intentionally plain Python scripts:
+The pipeline is composed of lightweight, highly inspectable Python scripts:
 
-- `scripts/extract_prs.py` pulls merged pull requests and inline review comments from GitHub GraphQL.
-- `scripts/rank_authors.py` derives reviewer authority from contribution counts and participation.
-- `scripts/process_data.py` sorts pull requests chronologically, batches them, and injects reviewer weights.
-- `scripts/run_synthesis.py` runs batch synthesis through `opencode`.
-- `scripts/merge_rules.py` applies deterministic precedence.
-- `scripts/split_standards.py` renders the final skill files and theme references.
+- `extract_prs.py`: Pulls merged pull requests and inline reviews from the GitHub GraphQL API.
+- `rank_authors.py`: Calculates reviewer authority weights based on active contribution and review counts.
+- `process_data.py`: Sorts pull requests chronologically and injects reviewer weights.
+- `run_synthesis.py`: Processes batch synthesis using an LLM.
+- `merge_rules.py`: Applies deterministic precedence logic to resolve rule conflicts.
+- `split_standards.py`: Generates the final Markdown skill and standard files.
 
-That shape is deliberate. I wanted something inspectable and boring
-enough that you can reason about each stage independently.
+## Extracting Local Context
 
-## Why the extractor keeps diff hunks, not full patches
-
-One of the most important implementation decisions is in
-`extract_prs.py`. The extractor keeps the review comment, the
-file path, line metadata, and the review thread’s `diffHunk`.
-It does not try to ingest every touched file in full.
+In `extract_prs.py`, instead of ingesting entire code files, we extract the comment, the file path, and the review thread's `diffHunk` block:
 
 ```python
 comments.append(
@@ -169,35 +67,16 @@ comments.append(
         "body": comment.get("body", ""),
         "path": comment.get("path"),
         "diff_hunk": comment.get("diffHunk"),
-        "context_patch": comment.get("diffHunk"),
         "created_at": comment.get("createdAt"),
     }
 )
 ```
 
-That is a practical trade-off. You need enough local code context to
-understand what the reviewer is objecting to, but not so much context
-that every batch becomes mostly noise. In review, a small patch hunk is
-often exactly the right unit of evidence.
+This ensures the pipeline receives exactly the local code context necessary to understand the exact constraint the reviewer was enforcing.
 
-This also keeps the project grounded in the real review event. A comment
-is not interpreted in the abstract. It is interpreted alongside the
-exact fragment of code that prompted it.
+## Reviewer Authority and Precedence
 
-## Authority matters, but it cannot be the only thing
-
-Another useful detail is that reviewer authority is not guessed by the
-model. It is computed in code and injected into each batch. The current
-heuristic is simple: more repository contribution and more review
-participation move a reviewer toward a stronger authority weight.
-
-That is obviously imperfect. Contribution count is not the same as
-judgment, and some teams have maintainers who merge a lot without being
-the most careful reviewers. But even a rough authority model is much
-better than flattening every comment into one undifferentiated pile.
-
-More importantly, the final merge policy is deterministic and lives in
-the repository, not inside the model response:
+Rather than letting the LLM guess which guidelines take precedence, we compute reviewer authority weights in Python and apply a deterministic merge policy:
 
 ```python
 if nr["authority_weight"] < existing["authority_weight"]:
@@ -207,120 +86,148 @@ elif nr["authority_weight"] == existing["authority_weight"]:
         crs["rules"][topic_slug] = nr
 ```
 
-Lower authority weight wins. If authority ties, the later batch wins.
-That gives the project two important properties:
+By programmatically favoring the feedback of senior maintainers or newer batches, we make sure that as the project's architecture evolves, the automated review skill adapts accordingly.
 
-- The model does not decide precedence policy.
-- The system can reflect habit changes over time instead of freezing a
-  project at one moment.
+## Why Chronological Batching Matters
 
-## Why batch synthesis is better than one giant prompt
+Summarizing years of pull requests in one massive prompt loses the chronological context of coding style changes.
 
-The pipeline processes pull requests chronologically in batches. That
-sounds like an implementation detail, but it is part of the semantics of
-the system.
+By dividing the review history into chronological batches, we preserve newer norms without ignoring historical context. Smaller batches are also cheaper to run and easier to debug.
 
-If you summarise two years of review history in one pass, you lose
-change over time. A project that once allowed a pattern and later
-tightened its standards ends up looking internally inconsistent. By
-batching chronologically and carrying forward a consolidated rule state,
-the system can preserve newer norms without pretending the older ones
-never existed.
+## Practical Demo: Generating a Django Review Skill
 
-There is also a plain engineering reason: smaller batches are easier to
-inspect, cheaper to rerun, and much easier to debug when the synthesis
-drifts.
+To see the pipeline in action, we can run the creator scripts on a Django project's repository. First, configure your GitHub token and run the extraction and synthesis scripts:
 
-## Django is a good test case
+```bash
+# Extract pull requests and inline reviews
+python scripts/extract_prs.py --repo "William-Blackie/williamblackie.com"
 
-I used Django review history because it is dense with explicit
-maintainer feedback and because the project has a long-standing culture
-of careful review. The examples in the slides are the sort of thing I
-wanted this system to preserve.
+# Compute reviewer weights and run chronological batch synthesis
+python scripts/process_data.py && python scripts/run_synthesis.py
 
-One example is docstring wording for classes. Another is being careful
-with optimisations like `bulk_create()` when they bypass
-signal behaviour and can break assumptions in downstream projects.
-Those are not abstract “best practices”. They are concrete project
-standards enforced in real review conversations.
+# Programmatically merge conflicts and output rulesets
+python scripts/merge_rules.py && python scripts/split_standards.py
+```
 
-That difference matters. A generated skill is only useful if it captures
-what the repository actually treats as important, not what a generic
-coding assistant thinks should matter.
+### 1. Historical Review Input (PR History)
 
-## The output is deliberately simple
+During extraction, the pipeline parses your Git history for specific, recurring review feedback. For example, the tool might identify these two review comments from different points in your PR logs:
 
-The project does not try to invent a complicated runtime. The output is
-a standalone skill repo containing markdown files:
+- **PR #104 (Reviewer: `william`, Weight: 1.0)**:
+    > "Do not use standard `django.db.models.signals` (like `post_save`) to trigger email dispatches. These should be decoupled using an explicit background job queue (e.g. Django Q or Celery) so we don't block the request-response thread."
+- **PR #112 (Reviewer: `alex`, Weight: 0.7)**:
+    > "Use active imperative verbs in docstrings (e.g. 'Return the user profile' instead of 'Returns the user profile') for all form classes to stay consistent with the rest of the app."
 
-- `REVIEW_STANDARDS.md` as the consolidated rendered output
-- `references/index.md` plus split theme files for selective loading
-- `SKILL.md`, `AGENTS.md`, `CLAUDE.md`, and
-  `.cursorrules` for different tool ecosystems
+### 2. Generated Output (`.cursorrules` / `.claude/skills`)
 
-I like this because it keeps the result legible. A human can inspect the
-output, trim it, rewrite bad rules, or throw it away entirely. The
-generated material is not hidden in a database or a proprietary format.
+After processing reviewer authority and merging chronological updates, the pipeline outputs structured JSON configurations suitable for your IDE assistant:
 
-## What I think is actually novel here
+```json
+{
+    "project_rules": [
+        {
+            "topic": "django-signals-decoupling",
+            "rule": "Avoid dispatching external services (e.g., mail, SMS) directly in model signals or request-response flows. Always delegate external actions to a background task queue (Celery/Django Q).",
+            "provenance": ["PR #104"],
+            "enforced_by": "william"
+        },
+        {
+            "topic": "documentation-standards",
+            "rule": "Write class and method docstrings in the active imperative mood (e.g., 'Perform validation' rather than 'Performs validation').",
+            "provenance": ["PR #112"],
+            "enforced_by": "alex"
+        }
+    ]
+}
+```
 
-The novel bit is not the summarisation. It is using review history as a
-repository-specific supervision signal.
+By placing these generated files in your local `.cursorrules` or `.claude/skills/code-review.json`, your local coding assistant will immediately enforce your team's specific, historical coding conventions during development.
 
-Most AI code review tooling starts from static analysis, generic model
-priors, or diff inspection. This project starts from the maintainers’
-own feedback history and asks: what standards did this team repeatedly
-enforce strongly enough that they changed code before merge?
+## Side-by-Side: Human Review vs. Automated Review Skill
 
-That is a much better source of “how this repository wants code to
-look” than a generic style guide, especially for older projects with
-strong local conventions.
+To see the real-world value of this approach, let's look at how the generated skill performs when faced with a newly opened pull request, compared to a manual human code review using an actual Django repository constraint.
 
-## Where it can go wrong
+### The Scenario: Mixing TextField & SQL IN Lookups on Oracle
 
-There are obvious failure modes:
+In Django's ORM, `TextField` columns map to `NCLOB` (National Character Large Object) datatypes on the Oracle database backend. Oracle imposes strict limitations on `LOB` fields: standard comparison operators (like `=`) and lookup clauses (like `IN`) are explicitly forbidden on `LOB` columns in SQL query predicates.
 
-- You can overfit to comments that were situational rather than durable.
-- Reviewer authority is only approximated, not proven.
-- Projects with weak or inconsistent review culture will generate weak
-  standards.
-- Models can still hallucinate rule generality if the prompts are too
-  loose.
+A contributor submits a pull request expanding the Django lookup test suite, adding a test case that filters a model using an `IN` operator on a `TextField` column.
 
-That is why the deterministic merge layer matters, and why the output is
-designed for inspection instead of blind trust.
+#### The Code Change (PR Diff):
 
-## What I would improve next
+```diff
+# In tests/lookup/tests.py
+ class LookupTests(TestCase):
++    def test_in_lookup_in_filter_text_field(self):
++        self.assertSequenceEqual(
++            Season.objects.filter(
++                In(F("nulled_text_field"), [F("nulled_text_field"), "special_value"])
++            ),
++            [self.s2],
++        )
+```
 
-If I keep pushing this project, the next improvements are obvious:
+#### 1. The Human Review
 
-- Better reviewer authority heuristics than contribution counts.
-- More explicit rule provenance so every generated rule links cleanly
-  back to pull requests and comments.
-- Better pruning of one-off comments that should not become durable
-  standards.
-- More confidence scoring around whether a rule is stylistic,
-  architectural, or compatibility-related.
+During the manual code review on GitHub, **Mariusz Felisiak (`@felixxm`)**, Django's lead ORM maintainer, reviews the PR and leaves the following feedback:
 
-I also think there is an obvious follow-up: once you have a generated
-review skill, you can compare it against new review conversations and
-detect where the project’s actual standards have started shifting.
+<SurfaceCard className="my-6 p-6">
+**💬 Comment by @felixxm (ORM Maintainer) on `tests/lookup/tests.py:L1864`:**
 
-## Why I built it this way
+"This test crashes on Oracle because blob fields (e.g. `NCLOB`) are not allowed in the `IN()` clause. As far as I'm aware `TextFields` are unnecessary here, see #20453."
 
-I wanted a system that a first-time engineer could read and argue with.
-That shaped the repository more than anything else. The public version is
-intentionally plain scripts, plain markdown, and explicit precedence
-rules.
+</SurfaceCard>
 
-If this kind of thing is going to be useful inside a real team, it needs
-to be inspectable, boring, and easy to override. Otherwise it just
-becomes another AI-flavoured black box in the path between a reviewer
-and a merge button.
+While Mariusz's review is highly accurate and prevents Oracle pipeline failures, this manual process has clear drawbacks:
 
-For now, that is enough. The repo has already done the important part:
-it proved that historical pull request discussion can be turned into a
-repository-specific review skill without hiding the decision-making in
-the model.
+- It requires a human maintainer's deep knowledge of backend-specific SQL constraints to spot the Oracle-incompatible `TextField` lookup.
+- The issue is found only _after_ the contributor has pushed their changes and requested a review, causing a delay cycle in CI.
+
+#### 2. The Automated Review Skill
+
+When we run our custom review skill agent (configured via `repository-code-review.md`) against this PR diff, it immediately loads the synthesized database standard from `references/database.md` and generates this exact structured review:
+
+<SurfaceCard className="my-6 p-6">
+### 📋 Code Review Report
+
+**1. Change Summary**
+Add a new test case `test_in_lookup_in_filter_text_field` to verify standard `In` lookup queries on a model's `TextField` fields.
+
+**2. Findings**
+
+- **File:** `tests/lookup/tests.py`
+    - ⚠️ **High Priority: Invalid lookup datatype for Oracle backend**
+      The test uses `F("nulled_text_field")` (a `TextField`) within an `In()` lookup clause.
+      Oracle databases explicitly forbid standard query comparisons or `IN` lookup clauses on Large Object (`LOB`/`NCLOB`) columns. This will cause database-specific execution crashes during Oracle test runs.
+        - **Violated Standard:** _Avoid using TextField in IN() clause tests as they are not allowed on Oracle_
+        - **Reference:** [references/database.md](file:///Users/williamblackie/Projects/williamblackie.com/code-review-skill-creator/references/database.md#L3-L30)
+
+**3. Suggestions**
+
+Redefine the test case `test_in_lookup_in_filter_text_field` to filter on a character field (e.g., `name`) instead of a text field to avoid database constraints.
+
+**Corrected Code:**
+
+```python
+    def test_in_lookup_in_filter_char_field(self):
+        self.assertSequenceEqual(
+            Season.objects.filter(
+                In(F("name"), [F("name"), "special_value"])
+            ),
+            [self.s2],
+        )
+```
+
+</SurfaceCard>
+
+### The Takeaway
+
+Automating code review guidelines is not about replacing human reviewers. It is about capturing their institutional knowledge—often lost in years of PR history—and making it active.
+
+Rather than using generative AI to write more code faster, we can use it to build a robust defense layer. An adversarial review skill acts as an automated first-pass reviewer, ensuring that the hard-earned lessons of your senior maintainers are active on every single commit. Maintainers no longer have to spend cognitive energy catching recurring mistakes; the adversarial shield pushes back on the rubbish, leaving humans to focus on the architecture.
+
+## Summary
+
+Extracting code review standards from historical PR discussions provides an inspectable, repository-specific review skill. It is far more useful than a generic style guide because it is grounded in the real constraints your team enforces.
 
 </ArticleLayout>

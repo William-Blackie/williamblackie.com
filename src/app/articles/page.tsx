@@ -1,6 +1,5 @@
 import { type Metadata } from 'next'
 import Link from 'next/link'
-import clsx from 'clsx'
 
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
@@ -141,12 +140,8 @@ function ArticlePreview({
         <Card
             as="article"
             href={article.path}
-            variant={featured ? 'default' : 'ghost'}
-            className={clsx(
-                featured ? 'p-6 sm:p-8' : (
-                    'py-8 border-t border-ctp-surface0/70'
-                ),
-            )}
+            variant="default"
+            className={featured ? 'p-6 sm:p-8' : 'p-6'}
         >
             <header>
                 <ArticleMetadata article={article} />
@@ -187,9 +182,12 @@ function ArticleArchive({
             >
                 All articles
             </h2>
-            <ol className="mt-6" aria-label="Older articles">
+            <ol
+                className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2"
+                aria-label="Older articles"
+            >
                 {articles.map((article) => (
-                    <li key={article.slug}>
+                    <li key={article.slug} className="h-full">
                         <ArticlePreview article={article} />
                     </li>
                 ))}
