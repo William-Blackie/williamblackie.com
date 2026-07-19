@@ -6,12 +6,7 @@ import { useTheme } from 'next-themes'
 import { SectionHeading, SurfaceCard } from '@/components/PagePrimitives'
 
 type GiscusMapping =
-    | 'pathname'
-    | 'url'
-    | 'title'
-    | 'og:title'
-    | 'specific'
-    | 'number'
+    'pathname' | 'url' | 'title' | 'og:title' | 'specific' | 'number'
 
 type GiscusInputPosition = 'top' | 'bottom'
 type BooleanString = '0' | '1'

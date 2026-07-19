@@ -49,8 +49,7 @@ export function CodeBlockPre({
     const [copied, setCopied] = useState(false)
 
     const language = (props as Record<string, unknown>)['data-language'] as
-        | string
-        | undefined
+        string | undefined
 
     const handleCopy = useCallback(async () => {
         if (!preRef.current) return
