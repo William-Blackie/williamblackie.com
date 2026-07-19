@@ -4,16 +4,16 @@ import { Container } from '@/components/Container'
 export default function NotFound(): React.ReactElement {
     return (
         <Container className="flex h-full items-center pt-16 sm:pt-32">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center text-center">
                 <p className="text-ctp-subtext1 text-base font-semibold">404</p>
                 <h1 className="text-ctp-text mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
                     Page not found
                 </h1>
                 <p className="text-ctp-subtext1 mt-4 text-base">
-                    Sorry, we couldn’t find the page you’re looking for.
+                    This page doesn’t exist or has moved.
                 </p>
-                <Button href="/" variant="secondary" className="mt-4">
-                    Go back home
+                <Button href="/" variant="secondary" className="mt-6">
+                    Back to home
                 </Button>
             </div>
         </Container>

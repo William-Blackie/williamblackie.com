@@ -37,14 +37,20 @@ export function InternalExternalLink({
             >
                 {children}
                 {text && text}
-                <ExternalIcon className="h-3 w-3 transition-transform  group-hover:translate-x-0.5" />
+                <ExternalIcon
+                    aria-hidden="true"
+                    className="h-3 w-3 transition-transform group-hover:translate-x-0.5"
+                />
             </a>
         )
     }
     return (
         <Link href={href} className={linkClassName} {...props}>
             {children}
-            <InternalIcon className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+            <InternalIcon
+                aria-hidden="true"
+                className="h-3 w-3 transition-transform group-hover:translate-x-0.5"
+            />
         </Link>
     )
 }

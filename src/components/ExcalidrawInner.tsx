@@ -4,7 +4,6 @@ import { useMemo } from 'react'
 import { Excalidraw } from '@excalidraw/excalidraw'
 import { useTheme } from 'next-themes'
 
-// IMPORTANT: Excalidraw CSS must be imported for correct layout and icons
 import '@excalidraw/excalidraw/index.css'
 
 interface ExcalidrawInnerProps {
@@ -14,10 +13,6 @@ interface ExcalidrawInnerProps {
     [key: string]: unknown
 }
 
-/**
- * ExcalidrawInner - The actual browser-side component that renders the diagram.
- * It detects the site's current theme (Catppuccin Mocha/Latte) and applies it to the canvas.
- */
 export default function ExcalidrawInner({
     height = '500px',
     initialData,
@@ -26,7 +21,6 @@ export default function ExcalidrawInner({
 }: ExcalidrawInnerProps) {
     const { resolvedTheme } = useTheme()
 
-    // Compute theme once using useMemo to avoid hydration mismatches
     const currentTheme = useMemo(() => {
         return propTheme || (resolvedTheme === 'light' ? 'light' : 'dark')
     }, [propTheme, resolvedTheme])

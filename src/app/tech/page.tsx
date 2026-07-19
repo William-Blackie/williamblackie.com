@@ -40,7 +40,7 @@ function Tool({
 
 export const metadata: Metadata = createPageMetadata({
     title: 'Tech',
-    description: 'Tools I use each week to ship product and platform work.',
+    description: 'The tools and local setup I use each week for delivery.',
     path: '/tech',
 })
 
@@ -57,38 +57,35 @@ export default function Tech(): React.ReactElement {
                 })}
             />
             <SimpleLayout
-                title="Tools I use every week."
-                intro="The stack and setup I rely on for day-to-day delivery."
+                title="Tools I use each week."
+                intro="The stack and local setup I rely on for day-to-day delivery."
             >
-                <div className="space-y-20">
+                <div className="space-y-16">
                     <ToolsSection title="Core Stack">
                         <Tool title="Backend: Python, Django, Wagtail and DRF">
-                            Most backend work is Python-first. Django and
-                            Wagtail for product and CMS-heavy systems, with DRF
-                            for API services.
+                            Python-first. Django and Wagtail for product and
+                            CMS-heavy systems, with DRF for API services.
                         </Tool>
                         <Tool title="Frontend: TypeScript, React, Next.js, HTMX and Webpack">
-                            React and Next.js for application work, plus HTMX
-                            when server-rendered interactions are faster and
-                            simpler.
+                            React and Next.js for application work, HTMX when
+                            server-rendered interactions are simpler.
                         </Tool>
                         <Tool title="Data and platform: PostgreSQL, Redis, RQ and Stripe">
                             PostgreSQL and Redis for core data and queue
-                            workflows, plus Stripe for billing systems.
+                            workflows, plus Stripe for billing.
                         </Tool>
                         <Tool title="Quality and delivery: Pytest, Ruff, ESLint, Stylelint, Prettier">
-                            Fast feedback loops through testing, linting, and
-                            formatting checks to keep quality high without
-                            blocking delivery.
+                            Testing, linting, and formatting checks for fast
+                            feedback without blocking delivery.
                         </Tool>
                         <Tool title="Operational tooling: Docker, uv, GitHub Actions, Sentry and Codecov">
                             Docker for local parity, uv for Python environments,
-                            and CI with coverage and error tracking.
+                            CI with coverage and error tracking.
                         </Tool>
                     </ToolsSection>
                     <ToolsSection title="Local Workflow">
                         <Tool title=".dotfiles: Zsh, tmux, Neovim, Starship, fzf and ripgrep">
-                            My local setup is versioned in{' '}
+                            Versioned in{' '}
                             <InternalExternalLink
                                 href="https://github.com/William-Blackie/.dotfiles"
                                 target="_blank"
@@ -96,20 +93,18 @@ export default function Tech(): React.ReactElement {
                             >
                                 github.com/William-Blackie/.dotfiles
                             </InternalExternalLink>
-                            . It keeps shell, editor, and terminal workflows
+                            . Keeps shell, editor, and terminal workflows
                             consistent across projects.
                         </Tool>
-                        <Tool title="Support tools: Storybook, Redocly and Make-driven workflows">
+                        <Tool title="Support tools: Storybook, Redocly and Make">
                             Storybook for component work, Redocly for API
-                            checks, and Make targets for repeatable commands.
+                            checks, Make targets for repeatable commands.
                         </Tool>
                     </ToolsSection>
                     <ToolsSection title="Hardware">
                         <Tool title="14” MacBook Pro, M3 Pro, 18GB RAM (2023)">
-                            I use MacOS for day-to-day work and Linux for server
-                            and container environments. This setup has been a
-                            good balance between local speed and production
-                            parity.
+                            macOS for day-to-day work, Linux for server and
+                            container environments.
                         </Tool>
                     </ToolsSection>
                 </div>

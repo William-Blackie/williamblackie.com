@@ -121,3 +121,51 @@ export function BriefcaseIcon(
         </svg>
     )
 }
+
+export function CalendarIcon(
+    props: React.ComponentPropsWithoutRef<'svg'>,
+): React.ReactElement {
+    return (
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+            <path
+                d="M7.75 3.75v2.5m8.5-2.5v2.5m-11.5 4h14.5m-13.5-5h12.5a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5.75a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    )
+}
+
+export function ClockIcon(
+    props: React.ComponentPropsWithoutRef<'svg'>,
+): React.ReactElement {
+    return (
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+            <path
+                d="M12 6.75V12l3.25 2.25M21.25 12a9.25 9.25 0 1 1-18.5 0 9.25 9.25 0 0 1 18.5 0Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    )
+}
+
+export function RssIcon(
+    props: React.ComponentPropsWithoutRef<'svg'>,
+): React.ReactElement {
+    return (
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+            <path
+                d="M5.75 18.25h.01M5 5.75A13.25 13.25 0 0 1 18.25 19M5 11a8 8 0 0 1 8 8"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    )
+}

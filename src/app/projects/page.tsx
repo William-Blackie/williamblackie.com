@@ -40,13 +40,13 @@ function ProjectGrid({
     return (
         <ul
             role="list"
-            className="grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-3"
         >
             {projects.map((project) => (
                 <Card key={project.name} href={project.href}>
                     <div className="bg-ctp-mantle shadow-ctp-crust/10 ring-ctp-surface0/80 relative z-10 flex h-12 w-12 items-center justify-center rounded-full shadow-md ring-1">
                         {project.logo ?
-                            <div className="dark:bg-ctp-text/90 dark:ring-ctp-text/15 flex h-10 w-10 items-center justify-center rounded-full p-2 dark:ring-1">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-full p-2 dark:bg-ctp-text/90 dark:ring-ctp-text/15 dark:ring-1">
                                 <Image
                                     src={project.logo}
                                     alt=""
@@ -55,7 +55,7 @@ function ProjectGrid({
                                 />
                             </div>
                         : project.icon ?
-                            <project.icon className="fill-ctp-subtext1 h-10 w-10" />
+                            <project.icon className="fill-ctp-subtext1 h-6 w-6" />
                         :   null}
                     </div>
                     <h2 className="text-ctp-text mt-6 text-base font-semibold">
@@ -113,24 +113,24 @@ export default function Projects(): React.ReactElement {
             />
             <SimpleLayout
                 title="Delivery work and open-source projects."
-                intro="A mix of client delivery and open-source work from my public contribution history."
+                intro="Selected client delivery and public repositories from my contribution history."
             >
-                <div className="space-y-20">
+                <div className="space-y-16">
                     <section>
                         <SectionHeading
                             title="Client and Product Work"
                             description="Work across startup, agency, and contract engagements."
                         />
-                        <div className="mt-10 sm:mx-auto sm:w-full">
+                        <div className="mt-8">
                             <ProjectGrid projects={clientProjectItems} />
                         </div>
                     </section>
                     <section>
                         <SectionHeading
                             title="Open-Source Contributions"
-                            description="Repositories from my public GitHub history, including projects I own and projects I contribute to."
+                            description="Repositories I maintain, plus upstream work in the Wagtail and Django ecosystems."
                         />
-                        <div className="mt-10">
+                        <div className="mt-8">
                             <ProjectGrid projects={openSourceProjectItems} />
                         </div>
                     </section>

@@ -28,8 +28,8 @@ export function SectionHeading({
             <h2
                 id={id}
                 className={clsx(
-                    'text-ctp-text font-semibold tracking-tight',
-                    eyebrow ? 'mt-2 text-xl' : 'text-xl',
+                    'text-ctp-text text-xl font-semibold tracking-tight',
+                    eyebrow && 'mt-2',
                 )}
             >
                 {title}

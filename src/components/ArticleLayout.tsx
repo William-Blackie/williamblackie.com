@@ -4,7 +4,11 @@ import { Container } from '@/components/Container'
 import { Prose } from '@/components/Prose'
 import { TableOfContents } from '@/components/TableOfContents'
 import { Comments } from '@/components/Comments'
-import { ArrowLeftIcon } from '@/components/GeneralIcons'
+import {
+    ArrowLeftIcon,
+    CalendarIcon,
+    ClockIcon,
+} from '@/components/GeneralIcons'
 import { JsonLd } from '@/components/JsonLd'
 import { Pill, SurfaceCard } from '@/components/PagePrimitives'
 import {
@@ -24,38 +28,6 @@ interface ArticleMetadata {
     date: string
     path: string
     tags?: Array<string>
-}
-
-function CalendarIcon(
-    props: React.ComponentPropsWithoutRef<'svg'>,
-): React.ReactElement {
-    return (
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-            <path
-                d="M7.75 3.75v2.5m8.5-2.5v2.5m-11.5 4h14.5m-13.5-5h12.5a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5.75a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2Z"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    )
-}
-
-function ClockIcon(
-    props: React.ComponentPropsWithoutRef<'svg'>,
-): React.ReactElement {
-    return (
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-            <path
-                d="M12 6.75V12l3.25 2.25M21.25 12a9.25 9.25 0 1 1-18.5 0 9.25 9.25 0 0 1 18.5 0Z"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    )
 }
 
 function ArticleMeta({
@@ -226,7 +198,7 @@ export async function ArticleLayout({
         :   undefined
 
     return (
-        <Container className="mt-16 lg:mt-32">
+        <Container className="mt-12 lg:mt-20">
             <JsonLd
                 id={`article-schema-${article.date}`}
                 data={createArticleSchema({
@@ -247,17 +219,17 @@ export async function ArticleLayout({
                     Blog
                 </Link>
 
-                <div className="mt-12 grid gap-16 lg:grid-cols-[1fr_minmax(auto,250px)] lg:items-start">
+                <div className="mt-10 grid gap-12 lg:grid-cols-[1fr_minmax(auto,16rem)] lg:items-start lg:gap-x-12">
                     <article className="min-w-0">
                         <header>
                             <ArticleMeta
                                 article={article}
                                 readingTime={readingTime}
                             />
-                            <h1 className="text-ctp-text mt-8 text-4xl font-extrabold tracking-tight sm:text-6xl">
+                            <h1 className="text-ctp-text mt-6 text-4xl font-bold tracking-tight sm:text-5xl">
                                 {article.title}
                             </h1>
-                            <p className="text-ctp-subtext1 mt-6 text-xl leading-relaxed">
+                            <p className="text-ctp-subtext1 mt-5 text-lg leading-relaxed sm:text-xl">
                                 {article.description}
                             </p>
                             <ArticleTags tags={article.tags} />
@@ -268,21 +240,21 @@ export async function ArticleLayout({
                             />
                         </header>
 
-                        <Prose className="mt-16">{children}</Prose>
+                        <Prose className="mt-12">{children}</Prose>
 
-                        <div className="mt-20 pt-20">
+                        <div className="mt-16 pt-16">
                             <ArticleNavigation
                                 newerArticle={newerArticle}
                                 olderArticle={olderArticle}
                             />
-                            <div className="mt-16">
+                            <div className="mt-12">
                                 <Comments />
                             </div>
                         </div>
                     </article>
 
                     <aside className="hidden lg:sticky lg:top-24 lg:block">
-                        <div className="space-y-10">
+                        <div className="space-y-8">
                             <ArticleFacts
                                 article={article}
                                 readingTime={readingTime}

@@ -12,7 +12,7 @@ export default function Home(): React.ReactElement {
                 data={createPageSchema({
                     title: 'Home',
                     description:
-                        'Introduction, current role, and delivery focus.',
+                        'William Blackie, a full-stack engineer based in Bristol and London.',
                     path: '/',
                     type: 'ProfilePage',
                     mainEntity: {
@@ -27,6 +27,7 @@ export default function Home(): React.ReactElement {
 
 export const metadata: Metadata = createPageMetadata({
     title: 'Home',
-    description: 'Introduction, current role, and delivery focus.',
+    description:
+        'William Blackie, a full-stack engineer based in Bristol and London.',
     path: '/',
 })

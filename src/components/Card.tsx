@@ -134,14 +134,16 @@ Card.Cta = function CardCta({
 }): React.ReactElement {
     return (
         <div
-            aria-hidden="true"
             className={clsx(
-                'text-ctp-blue dark:text-ctp-pink relative z-10 mt-auto pt-4 flex items-center text-sm font-medium',
+                'text-ctp-blue dark:text-ctp-pink relative z-10 mt-auto flex items-center pt-4 text-sm font-medium',
                 className,
             )}
         >
-            {children}
-            <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current transition-transform duration-300 group-hover:translate-x-1" />
+            <span>{children}</span>
+            <ChevronRightIcon
+                aria-hidden="true"
+                className="ml-1 h-4 w-4 stroke-current transition-transform duration-300 group-hover:translate-x-1"
+            />
         </div>
     )
 }

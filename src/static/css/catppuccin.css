@@ -1,8 +1,3 @@
-/*
- * Vendored from @catppuccin/tailwindcss@1.0.0/mocha.css.
- * Copyright (c) Catppuccin Org. Licensed under MIT.
- */
-
 @theme inline {
     --color-ctp-rosewater: var(--catppuccin-color-rosewater);
     --color-ctp-rosewater-500: var(--catppuccin-color-rosewater-500);

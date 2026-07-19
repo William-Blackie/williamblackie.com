@@ -3,8 +3,6 @@
 
 @import './typography.css';
 @import './catppuccin.css';
-@custom-variant dark (&:where(.mocha, .mocha *));
-@custom-variant light (&:where(.latte, .latte *));
 
 @layer base {
     :root {

@@ -28,6 +28,10 @@ export const workExperience: ExperienceItem[] = [
         endLabel: 'Present',
         endDateTime: new Date().getFullYear().toString(),
         location: 'London Area, UK',
+        bullets: [
+            'Lead delivery quality and release engineering for product work.',
+            'Reduce engineering friction across the stack.',
+        ],
     },
     {
         key: 'developerfy',
@@ -38,6 +42,7 @@ export const workExperience: ExperienceItem[] = [
         endLabel: 'Present',
         endDateTime: new Date().getFullYear().toString(),
         location: 'Greater Bristol Area, UK',
+        bullets: ['Take on selected contract and consulting work.'],
     },
     {
         key: 'google',
@@ -48,6 +53,10 @@ export const workExperience: ExperienceItem[] = [
         endLabel: 'December 2024',
         endDateTime: '2024-12',
         location: 'London Area, UK',
+        bullets: [
+            'Contributed to the DeepMind Django and Wagtail codebase.',
+            'Worked on CMS structure, frontend components, and search.',
+        ],
     },
     {
         key: 'torchbox',
@@ -58,6 +67,10 @@ export const workExperience: ExperienceItem[] = [
         endLabel: 'March 2024',
         endDateTime: '2024-03',
         location: 'Greater Bristol Area, UK',
+        bullets: [
+            'Four years of Django and Wagtail delivery for charities and public-sector teams.',
+            'Long-running work for the NHS and Samaritans across content and donation journeys.',
+        ],
     },
 ]
 
@@ -66,15 +79,15 @@ export const clientProjects: ProjectItem[] = [
         key: 'mabyduck',
         name: 'Mabyduck',
         description:
-            'Product and platform delivery focused on reliability, delivery quality, and steady shipping pace.',
+            'Product and platform work focused on reliability and steady shipping.',
         href: 'https://mabyduck.com',
         label: 'mabyduck.com',
     },
     {
         key: 'google',
-        name: 'Google - DeepMind',
+        name: 'Google DeepMind',
         description:
-            'Worked on Django/Wagtail delivery for deepmind.google, including CMS structure, frontend components, search, and releases.',
+            'Django and Wagtail work on deepmind.google: CMS structure, frontend components, search, and releases.',
         href: 'https://deepmind.google/',
         label: 'deepmind.google',
     },
@@ -82,7 +95,7 @@ export const clientProjects: ProjectItem[] = [
         key: 'valeursport',
         name: 'ValeurSport',
         description:
-            "Built a Django and Next.js platform supporting fair-pay advocacy in women's sport, with practical editorial workflows.",
+            'Django and Next.js platform supporting fair-pay advocacy in women’s sport, with practical editorial workflows.',
         href: 'http://www.app.valeursport.com',
         label: 'app.valeursport.com',
     },
@@ -90,7 +103,7 @@ export const clientProjects: ProjectItem[] = [
         key: 'docsociety',
         name: 'The Doc Society',
         description:
-            'Delivered Django/Wagtail CMS work to make publishing workflows smoother for content teams.',
+            'Django and Wagtail CMS work to smooth out publishing workflows.',
         href: 'https://docsociety.org/',
         label: 'docsociety.org',
     },
@@ -98,7 +111,7 @@ export const clientProjects: ProjectItem[] = [
         key: 'rff',
         name: 'Resource for the Future',
         description:
-            'Led Django/Wagtail delivery for a policy and research platform with complex publishing requirements.',
+            'Django and Wagtail delivery for a policy and research platform with complex publishing requirements.',
         href: 'https://rff.org/',
         label: 'rff.org',
     },
@@ -106,15 +119,15 @@ export const clientProjects: ProjectItem[] = [
         key: 'tna',
         name: 'The National Archives',
         description:
-            'Contributed to ds-wagtail delivery for nationalarchives.gov.uk across frontend behaviour, CMS features, and content modelling.',
+            'Frontend behaviour, CMS features, and content modelling on nationalarchives.gov.uk.',
         href: 'https://www.nationalarchives.gov.uk/',
         label: 'nationalarchives.gov.uk',
     },
     {
         key: 'samaritans',
-        name: 'Torchbox - Samaritans UK',
+        name: 'Samaritans UK (Torchbox)',
         description:
-            'Delivered long-running Django/Wagtail improvements across content operations, donation journeys, and platform maintenance.',
+            'Long-running Django and Wagtail work across content operations, donation journeys, and platform maintenance.',
         href: 'https://www.samaritans.org/',
         label: 'www.samaritans.org',
     },
@@ -125,7 +138,7 @@ export const openSourceContributions: ProjectItem[] = [
         key: 'lazydjango',
         name: 'lazydjango',
         description:
-            'Keyboard-first TUI for Django projects focused on day-to-day workflows, data operations, and local tooling.',
+            'Keyboard-first TUI for Django projects, focused on day-to-day workflows and data operations.',
         href: 'https://github.com/William-Blackie/lazydjango',
         label: 'github.com/William-Blackie/lazydjango',
     },
@@ -133,7 +146,7 @@ export const openSourceContributions: ProjectItem[] = [
         key: 'chromeappcap',
         name: 'chromeappcap',
         description:
-            'CLI for clean app-window screenshots, using native macOS capture with Playwright fallback for cross-platform use.',
+            'CLI for clean app-window screenshots: native macOS capture with a Playwright fallback for other platforms.',
         href: 'https://github.com/William-Blackie/chromeappcap',
         label: 'github.com/William-Blackie/chromeappcap',
     },
@@ -149,7 +162,7 @@ export const openSourceContributions: ProjectItem[] = [
         key: 'wagtail-org',
         name: 'wagtail/wagtail.org',
         description:
-            "Contributed feature and frontend work to Wagtail's main website repository.",
+            'Feature and frontend contributions to Wagtail’s main website repository.',
         href: 'https://github.com/wagtail/wagtail.org',
         label: 'github.com/wagtail/wagtail.org',
     },
@@ -157,7 +170,7 @@ export const openSourceContributions: ProjectItem[] = [
         key: 'wagtail-torchbox',
         name: 'torchbox/wagtail-torchbox',
         description:
-            'Contributed to Wagtail delivery and frontend behaviour on the Torchbox website codebase.',
+            'Wagtail delivery and frontend behaviour on the Torchbox website codebase.',
         href: 'https://github.com/torchbox/wagtail-torchbox',
         label: 'github.com/torchbox/wagtail-torchbox',
     },
@@ -165,7 +178,7 @@ export const openSourceContributions: ProjectItem[] = [
         key: 'wagtail',
         name: 'wagtail/wagtail',
         description:
-            'Contributed upstream to Wagtail CMS, including search query handling and platform behaviour improvements.',
+            'Upstream contributions to Wagtail CMS, including search query handling and platform behaviour.',
         href: 'https://github.com/wagtail/wagtail',
         label: 'github.com/wagtail/wagtail',
     },
@@ -173,7 +186,7 @@ export const openSourceContributions: ProjectItem[] = [
         key: 'django-pattern-library',
         name: 'torchbox/django-pattern-library',
         description:
-            'Contributed to Django template tooling and pattern-library workflows used by content teams.',
+            'Django template tooling and pattern-library workflows used by content teams.',
         href: 'https://github.com/torchbox/django-pattern-library',
         label: 'github.com/torchbox/django-pattern-library',
     },

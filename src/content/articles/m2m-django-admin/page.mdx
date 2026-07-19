@@ -2,9 +2,9 @@ import { ArticleLayout } from '@/components/ArticleLayout'
 import { createArticleMetadata } from '@/lib/metadata'
 
 export const article = {
-    title: 'Many-to-Many Relationships and the Django Admin',
+    title: 'Many-to-Many relationships and the Django admin',
     description:
-        'Why default Django M2M admin settings often feel like a database dump—and how to fix them with semantic relationships and high-fidelity admin UI patterns.',
+        'Notes on why default Django M2M admin widgets often feel like a database dump, and how to make them readable with semantic relationships and the right admin UI.',
     author: 'William Blackie',
     date: '2026-05-21',
     path: '/articles/m2m-django-admin',
@@ -22,29 +22,38 @@ export const metadata = createArticleMetadata({
 
 <ArticleLayout article={article}>
 
-If you’ve been managing many-to-many relationships in the Django admin, you’ve probably hit a wall. Whether it’s feature flags, project memberships, or complex permission trees, the default render is often a list of raw IDs or a giant, unmanageable select box. It's the classic "admin usability" trap.
+I have been spending time in the Django admin recently, and the default
+many-to-many widget keeps catching my eye for the wrong reasons. Whether
+it is feature flags, project membership, or permission trees, the default
+render is usually a list of raw IDs or a giant, unmanageable select box.
+It feels like a database tool wearing the mask of an admin interface.
 
-When you link `User` or `Project` models to a Waffle `Flag`, the default admin behavior is usually a basic vertical select—or worse, a raw ID field if you aren't careful. It forces your admins to scan rows of IDs, which is against every best practice of Tabular/Inline model administration.
+This is a short note on the two changes that have made the biggest
+difference for me: being explicit about the reverse relationship in the
+model, and switching the admin to widgets that respect how people
+actually scan a screen.
 
-## The Problem: The "Raw ID" Trap
+## The problem
 
-Django’s default M2M handling for Waffle flags is notoriously clunky. It creates a disconnect where your models have rich relationships, but your admin interface feels like a debugging tool for the database:
+When you link `User` or `Project` to a Waffle `Flag`, the default admin
+behaviour is a vertical select, or a raw ID field if you are unlucky.
+The result is the same either way:
 
-- **No context:** You see an ID, not a name.
-- **Search latency:** Hunting for users or projects requires searching by name elsewhere, copying an ID, and pasting it back.
-- **Visual clutter:** Tabular inlines become unreadable when you have more than a few flags.
+- **No context.** You see an ID, not a name.
+- **Search tax.** Finding the right record means going elsewhere,
+  copying an ID, and pasting it back.
+- **Visual noise.** Tabular inlines become unreadable once you have
+  more than a handful of rows.
 
-## The Fix: Semantic Models & Admin Ergonomics
+It is the kind of friction that gets quietly accepted because the model
+works, until someone on the team starts avoiding the admin entirely.
 
-We recently refactored our flag model to break this pattern. The key was moving away from generic lookups and embracing the Django admin’s power.
+## Make the model say what it means
 
-## The Model Refactor
-
-To get that `user.flags.all()` syntax, we need to explicitly override the M2M relationship in the model.
-
-### The Before (Default Waffle)
-
-By default, Waffle provides an `AbstractUserFlag` that defines the M2M relationship for you, locking you into generic reverse names:
+The first fix is on the model side. Waffle’s `AbstractUserFlag` defines
+the M2M relationships for you, which is convenient, but it locks you
+into generic reverse names like `flag_set` that read poorly in queries
+and even worse in code:
 
 ```python
 from waffle.models import AbstractUserFlag
@@ -54,75 +63,53 @@ class Flag(AbstractUserFlag):
     pass
 ```
 
-### The After (Explicit Redefinition)
-
-By explicitly redefining the fields, you reclaim control over the relationship names and related configurations:
+Re-declaring the fields lets you take back the relationship name and the
+SQL it produces:
 
 ```python
 from django.db import models
 from waffle.models import AbstractUserFlag
 
 class Flag(AbstractUserFlag):
-    # Redefining to add explicit related_name
     users = models.ManyToManyField(
         'auth.User',
-        related_name='flags', # Now user.flags.all() works
+        related_name='flags',  # user.flags.all() now reads cleanly
         blank=True,
     )
 
     projects = models.ManyToManyField(
         'common.Project',
-        related_name='flags', # Now project.flags.all() works
+        related_name='flags',  # project.flags.all() too
         blank=True,
     )
 ```
 
-### The SQL Impact
+The model is the same shape, but the queries get clearer, and the admin
+inherits a more honest name for the relation.
 
-The difference isn't just aesthetic; it’s about query intent.
+## Pick widgets that respect how people read
 
-#### The Generic Approach
-
-Django’s auto-generated `flag_set` often results in less readable queries when debugging, especially when multiple related fields exist:
-
-```sql
--- Often leads to ambiguous join paths in complex models
-SELECT * FROM "waffle_flag"
-INNER JOIN "waffle_flag_users" ON ("waffle_flag"."id" = "waffle_flag_users"."flag_id")
-WHERE "waffle_flag_users"."user_id" = 1;
-```
-
-#### The Explicit Approach
-
-By defining `related_name='flags'` on your model, you create a dedicated pathway in the ORM. This makes your `DEBUG=True` SQL logs much easier to scan:
-
-```python
-# Django interprets this intent clearly
-user.flags.all()
-```
-
-```sql
--- The query path is now explicitly named and easier to trace
-SELECT * FROM "common_flag"
-INNER JOIN "common_flag_users" ON ("common_flag"."id" = "common_flag_users"."flag_id")
-WHERE "common_flag_users"."user_id" = 1;
-```
-
-### 2. Rejecting the Tabular default
-
-Instead of sticking to generic tabular inlines (or default raw ID inputs), configure your `ModelAdmin` to use high-fidelity input tools:
+The second fix is to swap the default widget for something that does
+searching and selection in one place:
 
 ```python
 class FlagAdmin(admin.ModelAdmin):
-    # Replaces the clunky list-select with a searchable dual-box
+    # Searchable dual-box for picking related rows.
     filter_horizontal = ('users', 'projects')
 
-    # Enables AJAX-backed search, avoiding raw ID fields entirely
+    # AJAX-backed search for the long lists.
     autocomplete_fields = ('users', 'projects')
 ```
 
-## The Lesson?
+`filter_horizontal` removes the raw-ID scan and adds a filter box.
+`autocomplete_fields` adds a search-ahead picker for the lists that are
+too long for a dual box. Both are stock Django; nothing here is custom.
 
-Don't settle for Django’s "default" admin view of your Waffle flags. If your admin dashboard looks like a raw data dump, it's a sign that your model relationships aren't properly articulated for the interface. By explicitly defining your M2M fields and using `filter_horizontal` or `autocomplete`, you stop treating your admin like a spreadsheet and start treating it like a management tool.
+## A small change, a quieter admin
+
+Neither change is novel on its own. Together they turn the admin from a
+database dump into something a non-engineer can use without a translator.
+That is usually the difference between an admin that gets used and one
+that gets worked around.
 
 </ArticleLayout>

@@ -21,9 +21,11 @@ export function GooseInteraction() {
                         animate={{ opacity: 1, y: -25, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.5 }}
                         className="absolute -top-8 left-1/2 -translate-x-1/2 pointer-events-none"
+                        role="status"
+                        aria-live="polite"
                     >
                         <div className="bg-ctp-surface0 text-ctp-text px-2 py-1 rounded-lg text-xs font-bold border border-ctp-surface1 shadow-sm whitespace-nowrap">
-                            HONK! 🪿
+                            HONK!
                         </div>
                         <div className="w-2 h-2 bg-ctp-surface0 border-r border-b border-ctp-surface1 rotate-45 absolute -bottom-1 left-1/2 -translate-x-1/2" />
                     </motion.div>
@@ -43,10 +45,10 @@ export function GooseInteraction() {
                     repeatType: 'mirror',
                 }}
                 className="text-2xl cursor-pointer select-none opacity-40 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
-                aria-label="Click for a honk"
+                aria-label="Mabyduck goose. Click for a honk."
                 title="Mabyduck Goose"
             >
-                🪿
+                <span aria-hidden="true">🪿</span>
             </motion.button>
         </div>
     )

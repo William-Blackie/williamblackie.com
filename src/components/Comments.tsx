@@ -53,7 +53,7 @@ export function Comments(): React.ReactElement | null {
         <section className="border-ctp-surface0/70 mt-16 border-t pt-10">
             <SectionHeading
                 title="Comments"
-                description="Join the discussion via GitHub Discussions."
+                description="Discussion is hosted on GitHub Discussions."
             />
             <SurfaceCard className="mt-6 p-4">
                 <Giscus

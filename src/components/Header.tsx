@@ -6,6 +6,7 @@ import type { Route } from 'next'
 import { useState } from 'react'
 import { useTheme } from 'next-themes'
 import clsx from 'clsx'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import { usePathname } from 'next/navigation'
 
@@ -40,8 +41,6 @@ function MobileNavItem({
         </li>
     )
 }
-
-import { motion, AnimatePresence } from 'framer-motion'
 
 function MobileNavigation(
     props: React.ComponentPropsWithoutRef<'div'>,
@@ -145,6 +144,7 @@ function NavItem({
         <li>
             <Link
                 href={href}
+                aria-current={isActive ? 'page' : undefined}
                 className={clsx(
                     'theme-focus relative block rounded-full px-3 py-2 transition-colors duration-300',
                     isActive ?
@@ -152,16 +152,11 @@ function NavItem({
                     :   'hover:text-ctp-blue dark:hover:text-ctp-pink',
                 )}
             >
-                <motion.span
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="relative z-10 block"
-                >
-                    {children}
-                </motion.span>
+                <span className="relative z-10 block">{children}</span>
                 {isActive && (
                     <motion.span
                         layoutId="active-nav-item"
+                        aria-hidden="true"
                         className="from-ctp-blue/0 via-ctp-blue/45 to-ctp-blue/0 dark:from-ctp-pink/0 dark:via-ctp-pink/40 dark:to-ctp-pink/0 absolute inset-x-1 -bottom-px h-px bg-linear-to-r"
                         transition={{
                             type: 'spring',
@@ -269,7 +264,7 @@ function Avatar({
             >
                 <Image
                     src={avatarImage}
-                    alt="Homepage"
+                    alt=""
                     sizes={large ? '4rem' : '2.25rem'}
                     className={clsx(
                         'bg-ctp-surface0 rounded-full object-cover',

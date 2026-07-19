@@ -7,9 +7,9 @@ import { GooseInteraction } from '@/components/GooseInteraction'
 
 export function Footer(): React.ReactElement {
     return (
-        <footer className="mt-16 flex-none sm:mt-20">
+        <footer className="mt-16 flex-none sm:mt-24">
             <ContainerOuter>
-                <div className="border-ctp-surface0/70 border-t pt-10 pb-16">
+                <div className="border-ctp-surface0/70 border-t pt-10 pb-12">
                     <ContainerInner>
                         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
                             <nav aria-label="Footer navigation">
@@ -48,7 +48,7 @@ export function Footer(): React.ReactElement {
                                     </li>
                                 </ul>
                             </nav>
-                            <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-8">
+                            <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
                                 <GooseInteraction />
                                 <p className="text-ctp-subtext1 text-sm">
                                     &copy; {new Date().getFullYear()} William

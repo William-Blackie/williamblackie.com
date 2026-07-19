@@ -7,6 +7,7 @@ import { Card } from '@/components/Card'
 import { JsonLd } from '@/components/JsonLd'
 import { Pill, SectionHeading, SurfaceCard } from '@/components/PagePrimitives'
 import { SimpleLayout } from '@/components/SimpleLayout'
+import { CalendarIcon, ClockIcon, RssIcon } from '@/components/GeneralIcons'
 import { formatDate } from '@/lib/formatDate'
 import { getAllArticles, type ArticleWithSlug } from '@/lib/articles'
 import { createPageMetadata, createPageSchema } from '@/lib/metadata'
@@ -15,60 +16,12 @@ import { absoluteUrl } from '@/lib/site'
 type LinkHref = React.ComponentPropsWithoutRef<typeof Link>['href']
 
 const pageDescription =
-    'Technical writing by William Blackie on software engineering, delivery, Python, Django, TypeScript, AI-assisted workflows, and tooling from production work.'
+    'Writing by William Blackie on software engineering, delivery, Python, Django, TypeScript, and tooling from production work.'
 const feedHref = '/feed.xml' as LinkHref
 
 interface TopicCount {
     name: string
     count: number
-}
-
-function CalendarIcon(
-    props: React.ComponentPropsWithoutRef<'svg'>,
-): React.ReactElement {
-    return (
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-            <path
-                d="M7.75 3.75v2.5m8.5-2.5v2.5m-11.5 4h14.5m-13.5-5h12.5a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5.75a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2Z"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    )
-}
-
-function ClockIcon(
-    props: React.ComponentPropsWithoutRef<'svg'>,
-): React.ReactElement {
-    return (
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-            <path
-                d="M12 6.75V12l3.25 2.25M21.25 12a9.25 9.25 0 1 1-18.5 0 9.25 9.25 0 0 1 18.5 0Z"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    )
-}
-
-function RssIcon(
-    props: React.ComponentPropsWithoutRef<'svg'>,
-): React.ReactElement {
-    return (
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-            <path
-                d="M5.75 18.25h.01M5 5.75A13.25 13.25 0 0 1 18.25 19M5 11a8 8 0 0 1 8 8"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    )
 }
 
 export const metadata: Metadata = createPageMetadata({
@@ -144,7 +97,7 @@ function ArticlePreview({
             variant={featured ? 'default' : 'ghost'}
             className={clsx(
                 featured ? 'p-6 sm:p-8' : (
-                    'py-8 border-t border-ctp-surface0/70'
+                    'border-ctp-surface0/70 border-t py-8'
                 ),
             )}
         >
@@ -153,7 +106,7 @@ function ArticlePreview({
                 <Card.Title
                     as="h3"
                     className={
-                        featured ? 'mt-4 text-2xl sm:text-3xl' : 'mt-2 text-xl'
+                        featured ? 'mt-4 text-2xl sm:text-3xl' : 'mt-3 text-xl'
                     }
                 >
                     {article.title}
@@ -262,7 +215,7 @@ function BlogSidebar({
                         </ul>
                     :   <p className="text-ctp-subtext1 mt-4 text-sm">
                             Python, TypeScript, tooling, and delivery notes will
-                            be indexed here.
+                            appear here once articles are published.
                         </p>
                     }
                 </section>
@@ -300,11 +253,11 @@ function EmptyState(): React.ReactElement {
     return (
         <SurfaceCard className="p-6 sm:p-8">
             <h2 className="text-ctp-text text-xl font-semibold tracking-tight">
-                Articles are being drafted.
+                No articles published yet.
             </h2>
             <p className="text-ctp-subtext1 mt-3 max-w-2xl text-sm">
-                Published writing will appear here with dates, reading time,
-                topic indexing, and feed support.
+                Drafts are in progress. Published writing will appear here with
+                dates, reading time, topic indexing, and an RSS feed.
             </p>
         </SurfaceCard>
     )
@@ -341,11 +294,11 @@ export default async function Articles(): Promise<React.ReactElement> {
         <>
             <JsonLd id="articles-page-schema" data={collectionSchema} />
             <SimpleLayout
-                title="Technical notes for working software."
-                intro="Deep dives on Python, Django, TypeScript, AI-assisted workflows, and the delivery habits that keep production systems maintainable."
+                title="Writing on delivery and the work."
+                intro="Notes from production work: Python, Django, TypeScript, and the small habits that keep shipping steady."
             >
-                <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_17rem] lg:items-start">
-                    <main className="min-w-0 space-y-14">
+                <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_17rem] lg:items-start lg:gap-x-16">
+                    <div className="min-w-0 space-y-12">
                         {latestArticle ?
                             <>
                                 <section aria-labelledby="latest-article">
@@ -363,7 +316,7 @@ export default async function Articles(): Promise<React.ReactElement> {
                                 <ArticleArchive articles={archiveArticles} />
                             </>
                         :   <EmptyState />}
-                    </main>
+                    </div>
                     <BlogSidebar articles={articles} topics={topics} />
                 </div>
             </SimpleLayout>

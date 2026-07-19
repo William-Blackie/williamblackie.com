@@ -14,7 +14,10 @@ export function ScrollGoose() {
     // and it avoids the setState-in-effect error.
 
     return (
-        <div className="fixed top-0 left-0 right-0 h-1 z-[100] pointer-events-none">
+        <div
+            className="fixed top-0 left-0 right-0 h-1 z-[100] pointer-events-none"
+            aria-hidden="true"
+        >
             <motion.div
                 className="h-full bg-ctp-blue dark:bg-ctp-pink origin-left"
                 style={{ scaleX }}
